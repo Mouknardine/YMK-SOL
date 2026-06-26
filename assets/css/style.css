@@ -381,8 +381,8 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 /* ---- dock mobile ---- */
 .dock {
   position:fixed; left:0; right:0; bottom:0; z-index:90;
-  display:flex; align-items:center; justify-content:space-between; gap:16px;
-  padding:13px 20px calc(13px + env(safe-area-inset-bottom));
+  display:flex; align-items:center; gap:10px;
+  padding:12px 16px calc(12px + env(safe-area-inset-bottom));
   background:rgba(12,9,6,.97);
   backdrop-filter:blur(24px); -webkit-backdrop-filter:blur(24px);
   border-top:1px solid rgba(255,255,255,.09);
@@ -393,18 +393,15 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   border-top:1px solid rgba(0,0,0,.1);
   box-shadow:0 -4px 24px rgba(0,0,0,.12);
 }
-.dock-info { display:flex; flex-direction:column; gap:2px; min-width:0; }
-.dock-label {
-  font-family:var(--fh); font-weight:600;
-  font-size:.62rem; letter-spacing:.18em; text-transform:uppercase;
-  color:var(--muted); white-space:nowrap;
+.dock-cta { flex:1; padding:14px 20px; font-size:.95rem; gap:.5em; justify-content:center; box-shadow:0 4px 18px rgba(224,161,43,.3); }
+.dock-mail-btn {
+  flex:none; display:flex; align-items:center; justify-content:center;
+  width:52px; height:52px; border-radius:50%;
+  background:var(--bg-2); color:var(--fg);
+  border:1px solid var(--line);
+  transition:background .2s, color .2s;
 }
-.dock-num {
-  font-family:var(--fh); font-weight:800;
-  font-size:1.2rem; letter-spacing:-.025em;
-  color:var(--fg); white-space:nowrap;
-}
-.dock-cta { flex:none; padding:13px 22px; font-size:.88rem; gap:.45em; box-shadow:0 4px 18px rgba(224,161,43,.3); }
+.dock-mail-btn:hover { background:var(--gold); color:#fff; }
 
 /* ---- lightbox ---- */
 .lb { position:fixed; inset:0; z-index:300; display:flex; align-items:center; justify-content:center; padding:24px; background:rgba(10,8,6,.92); backdrop-filter:blur(6px); animation:fade .25s ease; }
