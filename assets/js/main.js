@@ -24,19 +24,27 @@
     });
   }
 
-  /* ---- menu mobile ---- */
-  var burger = document.querySelector(".burger");
-  var mmenu  = document.getElementById("mmenu");
+  /* ---- menu (toutes tailles) ---- */
+  var burger   = document.querySelector(".burger");
+  var mmenu    = document.getElementById("mmenu");
+  var backdrop = document.getElementById("mmenuBackdrop");
   if (burger && mmenu) {
     var menuToggle = function (open) {
       burger.setAttribute("aria-expanded", String(open));
+      burger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
       mmenu.hidden = !open;
+      if (backdrop) backdrop.hidden = !open;
+      document.body.style.overflow = open ? "hidden" : "";
     };
     burger.addEventListener("click", function () {
       menuToggle(burger.getAttribute("aria-expanded") !== "true");
     });
     mmenu.addEventListener("click", function (e) {
       if (e.target.closest("a")) menuToggle(false);
+    });
+    if (backdrop) backdrop.addEventListener("click", function () { menuToggle(false); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && burger.getAttribute("aria-expanded") === "true") menuToggle(false);
     });
   }
 
