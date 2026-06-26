@@ -76,7 +76,7 @@
         </nav>
         <div class="mmenu-side">
           <p class="mmenu-label">Appelez-nous · sans engagement</p>
-          <a href="tel:+41763316292" class="btn btn-gold btn-lg">Appeler maintenant</a>
+          <button class="btn btn-gold btn-lg" data-phone-picker>Appeler maintenant</button>
           <a href="https://wa.me/41763316292?text=Bonjour%20YMK%20SOL%2C%20je%20souhaite%20un%20devis%20pour%20mon%20sol." target="_blank" rel="noopener" class="btn btn-wa btn-lg">WhatsApp</a>
           <a href="mailto:ymksols.info@gmail.com?subject=Demande%20de%20devis%20-%20YMK%20SOL" class="btn btn-line btn-lg">Écrire un e-mail</a>
         </div>
@@ -105,10 +105,10 @@
           artisans qui signent chaque chantier.
         </p>
         <div class="hero-actions">
-          <a href="tel:+41763316292" class="btn btn-gold btn-lg">
+          <button class="btn btn-gold btn-lg" data-phone-picker>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
             Appeler
-          </a>
+          </button>
           <a href="mailto:ymksols.info@gmail.com?subject=Demande%20de%20devis%20-%20YMK%20SOL&body=Bonjour%2C%20je%20souhaite%20un%20devis%20pour%20mon%20projet%20de%20sol%20%3A" class="btn btn-glass btn-lg">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
             Écrire un e-mail
@@ -179,15 +179,15 @@
             </a>
           </div>
         </div>
-        <div class="svc-extras reveal">
-          <div class="svc-extra">
+        <div class="svc-extras">
+          <div class="svc-extra reveal">
             <span class="svc-extra-no">05</span>
             <div>
               <h3>Rénovation complète</h3>
               <p>Ragréage, préparation des supports et reprise d'un revêtement existant.</p>
             </div>
           </div>
-          <div class="svc-extra">
+          <div class="svc-extra reveal">
             <span class="svc-extra-no">06</span>
             <div>
               <h3>Ponçage &amp; finitions</h3>
@@ -327,12 +327,37 @@
 
   <!-- dock mobile -->
   <div class="dock">
-    <a href="tel:+41763316292" class="btn btn-gold dock-cta">
+    <button class="btn btn-gold dock-cta" data-phone-picker>
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
       Appeler maintenant
-    </a>
+    </button>
     <a href="mailto:ymksols.info@gmail.com" class="dock-mail-btn" aria-label="Envoyer un e-mail">
       <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    </a>
+  </div>
+
+  <!-- phone picker -->
+  <div class="ppick-backdrop" id="ppickBackdrop" aria-hidden="true"></div>
+  <div class="ppick" id="ppick" role="dialog" aria-modal="true" aria-label="Choisir un numéro" hidden>
+    <div class="ppick-handle" aria-hidden="true"></div>
+    <p class="ppick-title">Appeler YMK SOL</p>
+    <a href="tel:+41763316292" class="ppick-opt" id="ppickOpt1">
+      <span class="ppick-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+      </span>
+      <span class="ppick-info">
+        <span class="ppick-num">076 331 62 92</span>
+        <span class="ppick-name">Murat Saydan</span>
+      </span>
+    </a>
+    <a href="tel:+41782583432" class="ppick-opt" id="ppickOpt2">
+      <span class="ppick-icon">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>
+      </span>
+      <span class="ppick-info">
+        <span class="ppick-num">078 258 34 32</span>
+        <span class="ppick-name">Mehmet Hanifi Kaçiran</span>
+      </span>
     </a>
   </div>
 

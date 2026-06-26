@@ -100,6 +100,43 @@
     });
   }
 
+  /* ---- phone picker ---- */
+  var ppick         = document.getElementById("ppick");
+  var ppickBackdrop = document.getElementById("ppickBackdrop");
+
+  function openPick() {
+    if (!ppick) return;
+    ppick.hidden = false;
+    requestAnimationFrame(function () {
+      ppick.classList.add("open");
+      ppickBackdrop.classList.add("open");
+    });
+    document.body.style.overflow = "hidden";
+  }
+  function closePick() {
+    if (!ppick) return;
+    ppick.classList.remove("open");
+    ppickBackdrop.classList.remove("open");
+    document.body.style.overflow = "";
+    ppick.addEventListener("transitionend", function h() {
+      ppick.hidden = true;
+      ppick.removeEventListener("transitionend", h);
+    });
+  }
+
+  document.querySelectorAll("[data-phone-picker]").forEach(function (btn) {
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      openPick();
+    });
+  });
+  if (ppickBackdrop) ppickBackdrop.addEventListener("click", closePick);
+  if (ppick) {
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closePick();
+    });
+  }
+
   /* ---- lightbox galerie ---- */
   var lb    = document.getElementById("lb");
   var lbImg = document.getElementById("lbImg");
