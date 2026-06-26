@@ -383,7 +383,6 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 }
 @media (min-width:920px) {
   .nav, .hdr-cta { display:flex; }
-  .burger, .mmenu { display:none !important; }
   .svc-grid { grid-template-columns:repeat(3,1fr); }
   .svc-lg { grid-column:span 3; grid-template-columns:1.3fr 1fr; }
 }
