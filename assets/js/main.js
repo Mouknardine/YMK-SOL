@@ -76,24 +76,34 @@
   /* ---- enable :active CSS states on iOS Safari ---- */
   document.addEventListener("touchstart", function () {}, { passive: true });
 
-  /* ---- step cards actives au scroll (mobile) ---- */
+  /* ---- step cards actives au scroll (mobile seulement) ---- */
   var stepCards = document.querySelectorAll(".steps li");
-  if (stepCards.length && "IntersectionObserver" in window && !reduce) {
-    var stepObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          stepCards.forEach(function (li) { li.classList.remove("step-active"); });
-          e.target.classList.add("step-active");
-        }
+  if (stepCards.length && !reduce) {
+    function markStep(li) {
+      stepCards.forEach(function (l) { l.classList.remove("step-active"); });
+      li.classList.add("step-active");
+    }
+
+    /* scroll : la carte dont le centre est le plus proche du milieu d'écran devient active */
+    function updateActiveStep() {
+      if (window.innerWidth > 599) return;
+      var mid = window.scrollY + window.innerHeight * 0.52;
+      var closest = null, minDist = Infinity;
+      stepCards.forEach(function (li) {
+        var r = li.getBoundingClientRect();
+        var center = r.top + window.scrollY + r.height / 2;
+        var dist = Math.abs(mid - center);
+        if (dist < minDist) { minDist = dist; closest = li; }
       });
-    }, { threshold: 0.4 });
+      if (closest && !closest.classList.contains("step-active")) markStep(closest);
+    }
+
+    window.addEventListener("scroll", updateActiveStep, { passive: true });
+    updateActiveStep();
+
+    /* toucher léger : feedback immédiat dès le premier contact */
     stepCards.forEach(function (li) {
-      /* instant highlight on first touch (light touch = immediate feedback) */
-      li.addEventListener("touchstart", function () {
-        stepCards.forEach(function (l) { l.classList.remove("step-active"); });
-        li.classList.add("step-active");
-      }, { passive: true });
-      stepObs.observe(li);
+      li.addEventListener("touchstart", function () { markStep(li); }, { passive: true });
     });
   }
 
