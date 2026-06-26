@@ -7,22 +7,21 @@ ponçage et rénovation.
 HTML / CSS / JS pur, aucune dépendance, aucun build → chargement quasi instantané.
 DA noir / or dans l'esprit de l'agence [We Are Brothers](https://wearebrothers.ch).
 
-## ⚠️ À FAIRE : ajouter les 4 photos
+## ⚠️ À FAIRE : déposer les photos
 
-Le site est câblé pour 4 images. Tant qu'elles ne sont pas là, des **dégradés de
-secours** (bois / gris) s'affichent automatiquement. Dès que tu déposes les fichiers
-**au bon nom** dans `assets/img/`, les vraies photos apparaissent partout — zéro
-autre modification nécessaire.
+Dès que les fichiers sont déposés **au bon nom** dans `assets/img/`, ils s'affichent
+automatiquement — zéro autre modification nécessaire. En attendant, des dégradés
+de secours s'affichent.
 
-| Fichier à déposer dans `assets/img/` | Photo correspondante                         |
-|--------------------------------------|----------------------------------------------|
-| `hero-pose.jpg`                      | Parquet chêne posé sur encollage peigné      |
-| `moquette.jpg`                       | Rouleau de moquette                          |
-| `realisation-1.jpg`                  | Open-space / bureau vide, moquette grise     |
-| `realisation-2.jpg`                  | Bureau équipé de postes, moquette grise      |
+| Fichier dans `assets/img/`  | Photo correspondante                              |
+|-----------------------------|---------------------------------------------------|
+| `salon-parquet.jpg`         | Salon moderne — parquet chêne clair (résidentiel) |
+| `office-vide.jpg`           | Open-space vide — sol commercial gris             |
+| `office-equipe.jpg`         | Bureau équipé de postes — moquette grise           |
+| `moquette.jpg`              | Rouleau de moquette prêt à poser                  |
+| `hero-pose.jpg`             | Parquet chêne posé sur encollage peigné (optionnel)|
 
-> Conseil : format **JPG**, largeur ~1600–2000 px, compressé (< 400 Ko/image) pour
-> garder le site rapide. Le `hero-pose.jpg` idéalement en paysage.
+> Format **JPG**, largeur ~1600–2000 px, compressé (< 400 Ko/image).
 
 ## Structure
 

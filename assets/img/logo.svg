@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 130" fill="none" role="img" aria-label="YMK SOL">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130 120" fill="none" role="img" aria-label="YMK SOL">
   <defs>
     <linearGradient id="ymkY" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#FFD23F"/>
@@ -9,31 +9,25 @@
       <stop offset="1" stop-color="#EC7A08"/>
     </linearGradient>
   </defs>
-  <!-- woven flooring sheet, slightly rolled -->
-  <g stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round">
-    <!-- top-left block: vertical planks yellow -->
-    <rect x="22" y="34" width="38" height="38" rx="2" fill="url(#ymkY)"/>
-    <!-- top-right block: horizontal planks orange -->
-    <rect x="60" y="42" width="40" height="36" rx="2" fill="url(#ymkO)"/>
-    <!-- bottom-left block: horizontal planks orange -->
-    <rect x="24" y="72" width="38" height="30" rx="2" fill="url(#ymkO)"/>
-    <!-- bottom-right block: vertical planks yellow -->
-    <rect x="62" y="78" width="38" height="30" rx="2" fill="url(#ymkY)"/>
+  <g transform="translate(130, 0) rotate(90)">
+    <g stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round">
+      <rect x="22" y="34" width="38" height="38" rx="2" fill="url(#ymkY)"/>
+      <rect x="60" y="42" width="40" height="36" rx="2" fill="url(#ymkO)"/>
+      <rect x="24" y="72" width="38" height="30" rx="2" fill="url(#ymkO)"/>
+      <rect x="62" y="78" width="38" height="30" rx="2" fill="url(#ymkY)"/>
+    </g>
+    <g stroke="#1A1A1A" stroke-width="3" stroke-linecap="round">
+      <line x1="35" y1="34" x2="35" y2="72"/>
+      <line x1="48" y1="34" x2="48" y2="72"/>
+      <line x1="62" y1="53" x2="98" y2="53"/>
+      <line x1="62" y1="65" x2="98" y2="65"/>
+      <line x1="26" y1="84" x2="60" y2="84"/>
+      <line x1="26" y1="94" x2="60" y2="94"/>
+      <line x1="75" y1="78" x2="75" y2="106"/>
+      <line x1="88" y1="78" x2="88" y2="106"/>
+    </g>
+    <path d="M30 34 C30 24 42 22 54 22 L96 22 C108 22 110 32 102 38 C96 42 86 40 80 40 L40 40 C34 40 30 38 30 34 Z"
+          fill="#FFFFFF" stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round"/>
+    <path d="M30 34 C30 24 42 23 50 23 L50 40 L40 40 C34 40 30 38 30 34 Z" fill="url(#ymkO)" stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round"/>
   </g>
-  <!-- plank seams -->
-  <g stroke="#1A1A1A" stroke-width="3" stroke-linecap="round">
-    <line x1="35" y1="34" x2="35" y2="72"/>
-    <line x1="48" y1="34" x2="48" y2="72"/>
-    <line x1="62" y1="53" x2="98" y2="53"/>
-    <line x1="62" y1="65" x2="98" y2="65"/>
-    <line x1="26" y1="84" x2="60" y2="84"/>
-    <line x1="26" y1="94" x2="60" y2="94"/>
-    <line x1="75" y1="78" x2="75" y2="106"/>
-    <line x1="88" y1="78" x2="88" y2="106"/>
-  </g>
-  <!-- rolled white top edge -->
-  <path d="M30 34 C30 24 42 22 54 22 L96 22 C108 22 110 32 102 38 C96 42 86 40 80 40 L40 40 C34 40 30 38 30 34 Z"
-        fill="#FFFFFF" stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round"/>
-  <!-- small orange tab on roll -->
-  <path d="M30 34 C30 24 42 23 50 23 L50 40 L40 40 C34 40 30 38 30 34 Z" fill="url(#ymkO)" stroke="#1A1A1A" stroke-width="5" stroke-linejoin="round"/>
 </svg>
