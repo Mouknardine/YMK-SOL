@@ -90,7 +90,8 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 .ph { position:relative; background-color:var(--bg-3); }
 .ph-wood { background: repeating-linear-gradient(95deg,#6e4a2a 0 14px,#7c5530 14px 28px,#654427 28px 44px),linear-gradient(180deg,#8a623a,#5a3d22); }
 .ph-grey { background: repeating-linear-gradient(45deg,#6f7176 0 3px,#787a7f 3px 6px),linear-gradient(180deg,#82848a,#5c5e63); }
-.ph-moss { background: repeating-linear-gradient(0deg,#9a9282 0 2px,#a59d8c 2px 4px),linear-gradient(180deg,#b3ab99,#857d6c); }
+.ph-moss    { background: repeating-linear-gradient(0deg,#b5a98c 0 2px,#c4b99e 2px 4px),linear-gradient(180deg,#cec3ac,#9e9277); }
+.ph-luxury  { background: repeating-linear-gradient(45deg,#8b1818 0 4px,#a01e1e 4px 9px),linear-gradient(180deg,#b82222,#6b0f0f); }
 .ph > img { width:100%; height:100%; object-fit:cover; }
 .ph > img.img-missing { opacity:0; }
 
