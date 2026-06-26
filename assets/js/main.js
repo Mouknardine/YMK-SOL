@@ -119,7 +119,7 @@
     document.body.style.overflow = "";
   }
 
-  document.querySelectorAll(".gal-item").forEach(function (a) {
+  document.querySelectorAll(".gal-item, .port-item").forEach(function (a) {
     a.addEventListener("click", function (e) {
       if (a.classList.contains("img-missing")) return;
       var img = a.querySelector("img");

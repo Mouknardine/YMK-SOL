@@ -375,6 +375,105 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 .reveal { opacity:0; transform:translateY(34px); transition:opacity .8s var(--ease), transform .8s var(--ease); }
 .reveal.is-in { opacity:1; transform:none; }
 
+
+/* ============================================================
+   PORTFOLIO — réalisations + prestations fusionnés
+   ============================================================ */
+.portfolio { border-block: 1px solid var(--line); }
+
+.port-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 280px;
+  gap: 14px;
+}
+
+.port-item {
+  position: relative;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  display: block;
+  cursor: pointer;
+}
+
+.port-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .7s var(--ease);
+}
+.port-item:hover img { transform: scale(1.05); }
+.port-item.img-missing img { opacity: 0; }
+
+.port-item::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 28%, rgba(20,17,14,.88) 100%);
+  z-index: 1;
+  transition: opacity .4s;
+}
+
+.port-tall { grid-row: span 2; }
+.port-wide { grid-column: span 2; }
+
+.port-info {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  z-index: 2;
+  padding: 22px 22px 24px;
+  transform: translateY(4px);
+  transition: transform .4s var(--ease);
+}
+.port-item:hover .port-info { transform: none; }
+
+.port-cat {
+  display: block;
+  font-family: var(--fh); font-weight: 700;
+  font-size: .74rem; letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold2);
+  margin-bottom: 6px;
+}
+
+.port-desc {
+  color: rgba(247,243,236,.88);
+  font-size: .92rem; line-height: 1.4;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .35s var(--ease) .05s, transform .35s var(--ease) .05s;
+}
+.port-item:hover .port-desc { opacity: 1; transform: none; }
+
+/* services sans photo */
+.svc-extras {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.svc-extra {
+  display: flex; align-items: flex-start; gap: 20px;
+  padding: 28px 24px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--bg-2);
+  transition: transform .4s var(--ease), border-color .4s;
+}
+.svc-extra:hover { transform: translateY(-4px); border-color: var(--gold); }
+
+.svc-extra-no {
+  font-family: var(--fh); font-weight: 800; font-size: 2.4rem; line-height: 1;
+  background: linear-gradient(120deg, var(--gold2) 0%, #EC7A08 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  flex: none;
+}
+.svc-extra h3 { font-size: 1.25rem; margin-bottom: 6px; }
+.svc-extra p  { color: var(--muted); font-size: .94rem; }
+
+/* footer zone */
+.ftr-zone { color: var(--muted); font-size: .82rem; }
+
 /* ============================================================
    RESPONSIVE
    ============================================================ */
@@ -415,6 +514,12 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   .steps li { padding:24px 20px; }
   /* zone : puces plus compactes */
   .zone-list li { padding:9px 16px; font-size:.88rem; }
+  /* portfolio : colonne unique */
+  .port-grid { grid-template-columns:1fr; grid-auto-rows:220px; }
+  .port-tall { grid-row:auto; }
+  .port-wide { grid-column:auto; }
+  .port-desc { opacity:1; transform:none; }
+  .svc-extras { grid-template-columns:1fr; }
   /* contact : 2 lignes propres */
   .cline { grid-template-columns:1fr auto; grid-template-rows:auto auto; gap:4px 12px; padding:22px 0; }
   .cline:hover { padding-left:0; }

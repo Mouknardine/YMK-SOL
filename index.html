@@ -35,7 +35,7 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#services">Aller au contenu</a>
+  <a class="skip-link" href="#realisations">Aller au contenu</a>
   <div class="scroll-bar" id="scrollBar" aria-hidden="true"></div>
 
   <!-- ░░░░░ HEADER ░░░░░ -->
@@ -66,11 +66,9 @@
     <div class="mmenu" id="mmenu" hidden>
       <div class="container mmenu-in">
         <nav class="mmenu-nav" aria-label="Navigation principale">
-          <a href="#services"><span class="mm-no">01</span>Prestations</a>
-          <a href="#realisations"><span class="mm-no">02</span>Réalisations</a>
-          <a href="#methode"><span class="mm-no">03</span>Méthode</a>
-          <a href="#zone"><span class="mm-no">04</span>Zone d'intervention</a>
-          <a href="#contact"><span class="mm-no">05</span>Contact</a>
+          <a href="#realisations"><span class="mm-no">01</span>Réalisations</a>
+          <a href="#methode"><span class="mm-no">02</span>Méthode</a>
+          <a href="#contact"><span class="mm-no">03</span>Contact</a>
         </nav>
         <div class="mmenu-side">
           <p class="mmenu-label">Devis gratuit · sans engagement</p>
@@ -135,92 +133,58 @@
       </div>
     </section>
 
-    <!-- ░░░░░ SERVICES ░░░░░ -->
-    <section class="section services" id="services">
+    <!-- ░░░░░ RÉALISATIONS & PRESTATIONS ░░░░░ -->
+    <section class="section portfolio" id="realisations">
       <div class="container">
         <header class="sec-head reveal">
-          <p class="eyebrow">Nos prestations</p>
-          <h2 class="sec-title">Tout le sol,<br /><span class="gold">un seul artisan.</span></h2>
+          <p class="eyebrow">Nos réalisations</p>
+          <h2 class="sec-title">Des chantiers qui<br /><span class="gold">parlent pour nous.</span></h2>
         </header>
-        <div class="svc-grid">
-          <article class="svc svc-lg reveal">
-            <figure class="svc-media ph ph-wood">
-              <img src="assets/img/salon-parquet.jpg" alt="Parquet géométrique en étoile, vue lac Léman" loading="lazy" onerror="this.classList.add('img-missing')" />
-            </figure>
-            <div class="svc-body">
-              <span class="svc-no">01 — 02</span>
-              <h3>Parquet &amp; Ponçage</h3>
-              <p>Pose de parquet massif, contrecollé et stratifié. Remise à neuf des parquets anciens : ponçage, vitrification, huile ou cire.</p>
+        <div class="port-grid">
+          <a class="port-item port-tall reveal ph ph-wood" href="assets/img/salon-parquet.jpg" data-cap="Parquet géométrique — résidentiel, vue lac Léman">
+            <img src="assets/img/salon-parquet.jpg" alt="Parquet géométrique en étoile avec vue sur le lac Léman" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
+            <div class="port-info">
+              <span class="port-cat">Parquet · Ponçage</span>
+              <p class="port-desc">Pose et rénovation — parquet massif vitrifié, huilé ou ciré.</p>
             </div>
-          </article>
-          <article class="svc reveal">
-            <figure class="svc-media ph ph-moss">
-              <img src="assets/img/moquette.jpg" alt="Chambre résidentielle avec moquette beige sisal" loading="lazy" onerror="this.classList.add('img-missing')" />
-            </figure>
-            <div class="svc-body">
-              <span class="svc-no">03</span>
-              <h3>Moquette</h3>
-              <p>Confort et acoustique, en lés ou en dalles. Idéale pour bureaux, hôtels et chambres.</p>
+          </a>
+          <a class="port-item reveal ph ph-moss" href="assets/img/moquette.jpg" data-cap="Chambre résidentielle — moquette beige sisal">
+            <img src="assets/img/moquette.jpg" alt="Chambre résidentielle avec moquette beige sisal" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
+            <div class="port-info">
+              <span class="port-cat">Moquette</span>
+              <p class="port-desc">En lés ou en dalles — confort, acoustique, chaleur.</p>
             </div>
-          </article>
-          <article class="svc reveal">
-            <figure class="svc-media ph ph-grey">
-              <img src="assets/img/office-vide.jpg" alt="Pose de dalles moquette sur chantier commercial" loading="lazy" onerror="this.classList.add('img-missing')" />
-            </figure>
-            <div class="svc-body">
-              <span class="svc-no">04</span>
-              <h3>PVC &amp; Vinyle</h3>
-              <p>Lames et dalles résistantes à l'eau et au passage intensif. Rendu moderne, entretien minimal.</p>
+          </a>
+          <a class="port-item reveal ph ph-luxury" href="assets/img/office-equipe.jpg" data-cap="Boutique Omega — moquette rouge prestige, Lausanne">
+            <img src="assets/img/office-equipe.jpg" alt="Boutique Omega avec moquette rouge prestige et sol blanc" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
+            <div class="port-info">
+              <span class="port-cat">Linoléum · Prestige</span>
+              <p class="port-desc">Revêtements haut de gamme pour espaces commerciaux et luxe.</p>
             </div>
-          </article>
-          <article class="svc reveal">
-            <figure class="svc-media ph ph-luxury">
-              <img src="assets/img/office-equipe.jpg" alt="Boutique Omega — moquette rouge prestige et sol blanc" loading="lazy" onerror="this.classList.add('img-missing')" />
-            </figure>
-            <div class="svc-body">
-              <span class="svc-no">05</span>
-              <h3>Linoléum</h3>
-              <p>Revêtement naturel, durable et hygiénique pour l'habitat comme les espaces professionnels.</p>
+          </a>
+          <a class="port-item port-wide reveal ph ph-grey" href="assets/img/office-vide.jpg" data-cap="Pose de dalles moquette — chantier commercial">
+            <img src="assets/img/office-vide.jpg" alt="Pose de dalles moquette sur chantier commercial" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
+            <div class="port-info">
+              <span class="port-cat">PVC · Vinyle · Commercial</span>
+              <p class="port-desc">Dalles résistantes au passage intensif — pose rapide sur chantier.</p>
             </div>
-          </article>
-          <article class="svc reveal">
-            <figure class="svc-media ph ph-wood">
-              <img src="assets/img/hero-pose.jpg" alt="Pose de parquet — rénovation complète" loading="lazy" onerror="this.classList.add('img-missing')" />
-            </figure>
-            <div class="svc-body">
-              <span class="svc-no">06</span>
-              <h3>Rénovation</h3>
-              <p>Ragréage, préparation des supports et reprise complète d'un revêtement existant.</p>
-            </div>
-          </article>
+          </a>
         </div>
-      </div>
-    </section>
-
-    <!-- ░░░░░ REALISATIONS ░░░░░ -->
-    <section class="section realisations" id="realisations">
-      <div class="container">
-        <header class="sec-head reveal">
-          <p class="eyebrow">Réalisations</p>
-          <h2 class="sec-title">Des chantiers<br /><span class="gold">qui parlent pour nous.</span></h2>
-        </header>
-        <div class="gal">
-          <a class="gal-item gal-tall reveal ph ph-wood" href="assets/img/salon-parquet.jpg" data-cap="Parquet étoile géométrique — résidentiel, vue lac Léman">
-            <img src="assets/img/salon-parquet.jpg" alt="Parquet géométrique en étoile avec vue sur le lac Léman" loading="lazy" onerror="this.closest('.gal-item').classList.add('img-missing')" />
-            <span class="gal-cap">Résidentiel · Parquet</span>
-          </a>
-          <a class="gal-item reveal ph ph-luxury" href="assets/img/office-equipe.jpg" data-cap="Boutique Omega — moquette rouge prestige, Lausanne">
-            <img src="assets/img/office-equipe.jpg" alt="Boutique Omega avec moquette rouge luxe et sol blanc" loading="lazy" onerror="this.closest('.gal-item').classList.add('img-missing')" />
-            <span class="gal-cap">Prestige · Moquette rouge</span>
-          </a>
-          <a class="gal-item reveal ph ph-grey" href="assets/img/office-vide.jpg" data-cap="Pose de dalles moquette — chantier commercial">
-            <img src="assets/img/office-vide.jpg" alt="Pose de dalles moquette sur chantier commercial" loading="lazy" onerror="this.closest('.gal-item').classList.add('img-missing')" />
-            <span class="gal-cap">Chantier · Moquette dalles</span>
-          </a>
-          <a class="gal-item gal-wide reveal ph ph-moss" href="assets/img/moquette.jpg" data-cap="Chambre résidentielle — moquette beige sisal">
-            <img src="assets/img/moquette.jpg" alt="Chambre résidentielle avec moquette beige sisal et rideaux blancs" loading="lazy" onerror="this.closest('.gal-item').classList.add('img-missing')" />
-            <span class="gal-cap">Chambre · Moquette beige</span>
-          </a>
+        <div class="svc-extras reveal">
+          <div class="svc-extra">
+            <span class="svc-extra-no">05</span>
+            <div>
+              <h3>Rénovation complète</h3>
+              <p>Ragréage, préparation des supports et reprise d'un revêtement existant.</p>
+            </div>
+          </div>
+          <div class="svc-extra">
+            <span class="svc-extra-no">06</span>
+            <div>
+              <h3>Ponçage &amp; finitions</h3>
+              <p>Remise à neuf des parquets anciens : ponçage, vitrification, huile ou cire.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -241,18 +205,7 @@
       </div>
     </section>
 
-    <!-- ░░░░░ ZONE ░░░░░ -->
-    <section class="section zone" id="zone">
-      <div class="container zone-in reveal">
-        <p class="eyebrow center">Zone d'intervention</p>
-        <h2 class="sec-title">Basés à Pully, actifs<br /><span class="gold">dans tout le canton de Vaud.</span></h2>
-        <ul class="zone-list">
-          <li>Pully</li><li>Lausanne</li><li>Lutry</li><li>Renens</li>
-          <li>Morges</li><li>Vevey</li><li>Montreux</li><li>Lavaux</li><li>Échallens</li>
-        </ul>
-        <p class="muted">Un projet ailleurs en Suisse romande&nbsp;? Appelez-nous, on en discute.</p>
-      </div>
-    </section>
+
 
     <!-- ░░░░░ CONTACT — typographie éditoriale ░░░░░ -->
     <section class="section contact" id="contact">
@@ -318,6 +271,7 @@
     <div class="container ftr-in">
       <div class="ftr-brand"><img src="assets/img/logo.svg" alt="" width="46" height="31" /><span class="brand-txt">YMK&nbsp;SOL<em>SàRL</em></span></div>
       <p class="ftr-meta">Chemin du Château-Sec 19 · 1009 Pully · VD · Suisse</p>
+      <p class="ftr-zone">Pully · Lausanne · Lutry · Vevey · Morges · Montreux · tout le canton de Vaud</p>
       <p class="ftr-credit">© <span id="year"></span> YMK SOL SàRL — design &amp; code <a href="https://wearebrothers.ch" target="_blank" rel="noopener">We Are Brothers</a></p>
     </div>
   </footer>
