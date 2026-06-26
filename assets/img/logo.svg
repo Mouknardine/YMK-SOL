@@ -1,68 +1,68 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 108" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 102" fill="none">
   <defs>
-    <clipPath id="cc">
-      <path d="M32 15 L118 7 L118 91 L28 95 Z"/>
+    <clipPath id="b">
+      <path d="M26 7 L108 7 L108 78 L20 80 Z"/>
     </clipPath>
-    <clipPath id="rc">
-      <circle cx="26" cy="90" r="13"/>
+    <clipPath id="r">
+      <circle cx="22" cy="76" r="12"/>
     </clipPath>
   </defs>
 
-  <!-- Carpet body: black base -->
-  <path d="M29 12 L121 4 L121 94 L25 98 Z" fill="#1C1200"/>
+  <!-- Carpet body black outline base -->
+  <path d="M23 4 L111 4 L111 81 L17 83 Z" fill="#1C1200"/>
 
   <!-- Yellow surface -->
-  <rect x="28" y="3" width="95" height="96" fill="#F2BC4A" clip-path="url(#cc)"/>
+  <rect x="22" y="3" width="90" height="80" fill="#F2BC4A" clip-path="url(#b)"/>
 
   <!-- Orange horizontal stripes -->
-  <rect x="28" y="14" width="95" height="12" fill="#EC7A08" clip-path="url(#cc)"/>
-  <rect x="28" y="39" width="95" height="12" fill="#EC7A08" clip-path="url(#cc)"/>
-  <rect x="28" y="64" width="95" height="12" fill="#EC7A08" clip-path="url(#cc)"/>
+  <rect x="22" y="6"  width="90" height="11" fill="#EC7A08" clip-path="url(#b)"/>
+  <rect x="22" y="30" width="90" height="11" fill="#EC7A08" clip-path="url(#b)"/>
+  <rect x="22" y="54" width="90" height="11" fill="#EC7A08" clip-path="url(#b)"/>
 
   <!-- Orange vertical stripes -->
-  <rect x="54" y="3" width="12" height="96" fill="#EC7A08" clip-path="url(#cc)"/>
-  <rect x="79" y="3" width="12" height="96" fill="#EC7A08" clip-path="url(#cc)"/>
-  <rect x="104" y="3" width="12" height="96" fill="#EC7A08" clip-path="url(#cc)"/>
+  <rect x="48" y="3" width="11" height="80" fill="#EC7A08" clip-path="url(#b)"/>
+  <rect x="72" y="3" width="11" height="80" fill="#EC7A08" clip-path="url(#b)"/>
+  <rect x="96" y="3" width="11" height="80" fill="#EC7A08" clip-path="url(#b)"/>
 
-  <!-- Grid lines horizontal -->
-  <line x1="27" y1="26" x2="121" y2="26" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
-  <line x1="27" y1="39" x2="121" y2="39" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
-  <line x1="27" y1="51" x2="121" y2="51" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
-  <line x1="27" y1="64" x2="121" y2="64" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
-  <line x1="27" y1="76" x2="121" y2="76" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
-
-  <!-- Grid lines vertical -->
-  <line x1="54" y1="3" x2="54" y2="98" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
-  <line x1="66" y1="3" x2="66" y2="98" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
-  <line x1="79" y1="3" x2="79" y2="98" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
-  <line x1="91" y1="3" x2="91" y2="98" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
-  <line x1="104" y1="3" x2="104" y2="98" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
-  <line x1="116" y1="3" x2="116" y2="98" stroke="#1C1200" stroke-width="2.5" clip-path="url(#cc)"/>
+  <!-- Grid lines — horizontal -->
+  <line x1="21" y1="17"  x2="110" y2="17"  stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
+  <line x1="21" y1="30"  x2="110" y2="30"  stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
+  <line x1="21" y1="41"  x2="110" y2="41"  stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
+  <line x1="21" y1="54"  x2="110" y2="54"  stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
+  <line x1="21" y1="65"  x2="110" y2="65"  stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
+  <!-- Vertical -->
+  <line x1="48"  y1="3" x2="48"  y2="83" stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
+  <line x1="59"  y1="3" x2="59"  y2="83" stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
+  <line x1="72"  y1="3" x2="72"  y2="83" stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
+  <line x1="83"  y1="3" x2="83"  y2="83" stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
+  <line x1="96"  y1="3" x2="96"  y2="83" stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
+  <line x1="107" y1="3" x2="107" y2="83" stroke="#1C1200" stroke-width="2" clip-path="url(#b)"/>
 
   <!-- Carpet outer stroke -->
-  <path d="M29 12 L121 4 L121 94 L25 98 Z" stroke="#1C1200" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M23 4 L111 4 L111 81 L17 83 Z" stroke="#1C1200" stroke-width="4.5" stroke-linejoin="round"/>
 
-  <!-- Roll cylinder arc (left side) -->
-  <path d="M29 12 Q7 34 7 53 Q7 72 25 96" stroke="#1C1200" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <!-- Roll: outer left arc -->
+  <path d="M23 4 Q3 26 3 44 Q3 62 17 83" stroke="#1C1200" stroke-width="4.5" stroke-linecap="round"/>
   <!-- Roll body fill (light grey) -->
-  <path d="M29 12 Q14 33 13 53 Q13 72 25 96 Q16 73 16 53 Q16 34 29 12 Z" fill="#EDE8E0"/>
-  <!-- Roll shine -->
-  <path d="M24 18 Q14 37 14 53 Q14 69 22 87" stroke="rgba(255,255,255,0.7)" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M23 4 Q7 25 7 44 Q7 62 17 83 Q11 62 11 44 Q11 26 23 4 Z" fill="#EDE8E0"/>
+  <!-- Roll sheen -->
+  <path d="M19 10 Q9 29 9 44 Q9 59 17 78" stroke="rgba(255,255,255,0.65)" stroke-width="4" stroke-linecap="round" fill="none"/>
 
   <!-- Roll top rounded cap -->
-  <path d="M19 17 Q29 8 39 14 L32 15 Q26 11 19 17 Z" fill="#EDE8E0" stroke="#1C1200" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M15 8 Q23 1 33 6 L26 7 Q21 4 15 8 Z" fill="#EDE8E0" stroke="#1C1200" stroke-width="2.5" stroke-linejoin="round"/>
 
-  <!-- Roll bottom circle (cross-section end) -->
-  <circle cx="26" cy="90" r="16" fill="#1C1200"/>
-  <circle cx="26" cy="90" r="13" fill="#F2BC4A"/>
-  <rect x="13" y="87" width="26" height="6" fill="#EC7A08" clip-path="url(#rc)"/>
-  <rect x="13" y="81" width="6" height="18" fill="#EC7A08" clip-path="url(#rc)"/>
-  <rect x="33" y="81" width="6" height="18" fill="#EC7A08" clip-path="url(#rc)"/>
-  <line x1="13" y1="87" x2="39" y2="87" stroke="#1C1200" stroke-width="1.5" clip-path="url(#rc)"/>
-  <line x1="13" y1="93" x2="39" y2="93" stroke="#1C1200" stroke-width="1.5" clip-path="url(#rc)"/>
-  <line x1="19" y1="77" x2="19" y2="103" stroke="#1C1200" stroke-width="1.5" clip-path="url(#rc)"/>
-  <line x1="26" y1="77" x2="26" y2="103" stroke="#1C1200" stroke-width="1.5" clip-path="url(#rc)"/>
-  <line x1="33" y1="77" x2="33" y2="103" stroke="#1C1200" stroke-width="1.5" clip-path="url(#rc)"/>
-  <!-- Roll core white highlight inside circle -->
-  <path d="M19 82 Q26 77 33 82 Q26 79 19 82 Z" fill="#EDE8E0"/>
+  <!-- Roll bottom cross-section circle -->
+  <circle cx="22" cy="76" r="15" fill="#1C1200"/>
+  <circle cx="22" cy="76" r="12" fill="#F2BC4A"/>
+  <!-- Cross-section pattern -->
+  <rect x="10" y="73" width="24" height="6"  fill="#EC7A08" clip-path="url(#r)"/>
+  <rect x="10" y="67" width="6"  height="18" fill="#EC7A08" clip-path="url(#r)"/>
+  <rect x="28" y="67" width="6"  height="18" fill="#EC7A08" clip-path="url(#r)"/>
+  <line x1="10" y1="73" x2="34" y2="73" stroke="#1C1200" stroke-width="1.5" clip-path="url(#r)"/>
+  <line x1="10" y1="79" x2="34" y2="79" stroke="#1C1200" stroke-width="1.5" clip-path="url(#r)"/>
+  <line x1="16" y1="64" x2="16" y2="88" stroke="#1C1200" stroke-width="1.5" clip-path="url(#r)"/>
+  <line x1="22" y1="64" x2="22" y2="88" stroke="#1C1200" stroke-width="1.5" clip-path="url(#r)"/>
+  <line x1="28" y1="64" x2="28" y2="88" stroke="#1C1200" stroke-width="1.5" clip-path="url(#r)"/>
+  <!-- Core highlight -->
+  <path d="M16 69 Q22 65 28 69" stroke="#EDE8E0" stroke-width="2.5" fill="none" stroke-linecap="round"/>
 </svg>
