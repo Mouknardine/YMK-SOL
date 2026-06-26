@@ -73,6 +73,9 @@
     els.forEach(function (el) { el.classList.add("is-in"); });
   }
 
+  /* ---- enable :active CSS states on iOS Safari ---- */
+  document.addEventListener("touchstart", function () {}, { passive: true });
+
   /* ---- step cards actives au scroll (mobile) ---- */
   var stepCards = document.querySelectorAll(".steps li");
   if (stepCards.length && "IntersectionObserver" in window && !reduce) {
@@ -83,8 +86,15 @@
           e.target.classList.add("step-active");
         }
       });
-    }, { threshold: 0.65, rootMargin: "-15% 0px -15% 0px" });
-    stepCards.forEach(function (li) { stepObs.observe(li); });
+    }, { threshold: 0.4 });
+    stepCards.forEach(function (li) {
+      /* instant highlight on first touch (light touch = immediate feedback) */
+      li.addEventListener("touchstart", function () {
+        stepCards.forEach(function (l) { l.classList.remove("step-active"); });
+        li.classList.add("step-active");
+      }, { passive: true });
+      stepObs.observe(li);
+    });
   }
 
   /* ---- compteurs animés ---- */
@@ -171,7 +181,7 @@
     document.body.style.overflow = "";
   }
 
-  document.querySelectorAll(".gal-item, .port-item").forEach(function (a) {
+  document.querySelectorAll(".gal-item, .port-item:not(.port-svc)").forEach(function (a) {
     a.addEventListener("click", function (e) {
       if (a.classList.contains("img-missing")) return;
       var img = a.querySelector("img");
