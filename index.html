@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#14110E" />
   <title>YMK SOL SàRL — Parquet · Linoléum · PVC · Moquette · Ponçage | Pully &amp; Vaud</title>
-  <meta name="description" content="YMK SOL SàRL — artisans du sol à Pully. Pose et rénovation de parquet, linoléum, PVC, moquette et ponçage dans tout le canton de Vaud. Travail soigné, devis gratuit par téléphone ou e-mail." />
+  <meta name="description" content="YMK SOL SàRL — artisans du sol à Pully. Pose et rénovation de parquet, linoléum, PVC, moquette et ponçage dans tout le canton de Vaud. Travail soigné, devis gratuit." />
   <meta name="keywords" content="parquet Pully, pose parquet Lausanne, ponçage parquet Vaud, linoléum, sol PVC, moquette bureau, revêtement de sol, rénovation sol, YMK SOL, parqueteur Vaud" />
   <meta name="robots" content="index, follow, max-image-preview:large" />
   <link rel="canonical" href="https://ymksol.ch/" />
-
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="YMK SOL SàRL" />
   <meta property="og:title" content="YMK SOL SàRL — L'art du sol, à Pully" />
   <meta property="og:description" content="Parquet, linoléum, PVC, moquette, ponçage et rénovation dans tout le canton de Vaud." />
   <meta property="og:locale" content="fr_CH" />
-  <meta property="og:image" content="https://ymksol.ch/assets/img/hero-pose.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
-
   <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg" />
   <link rel="apple-touch-icon" href="assets/img/logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,32 +24,13 @@
 
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "HomeAndConstructionBusiness",
-    "@id": "https://ymksol.ch/#business",
-    "name": "YMK SOL SàRL",
-    "image": "https://ymksol.ch/assets/img/hero-pose.jpg",
-    "description": "Spécialiste des revêtements de sol : parquet, linoléum, PVC, moquette, ponçage et travaux de rénovation à Pully et dans le canton de Vaud.",
-    "url": "https://ymksol.ch/",
-    "telephone": "+41763316292",
-    "email": "ymksols.info@gmail.com",
-    "priceRange": "$$",
-    "address": { "@type": "PostalAddress", "streetAddress": "Chemin du Château-Sec 19", "postalCode": "1009", "addressLocality": "Pully", "addressRegion": "VD", "addressCountry": "CH" },
-    "geo": { "@type": "GeoCoordinates", "latitude": 46.5089, "longitude": 6.6611 },
-    "areaServed": [
-      { "@type": "City", "name": "Pully" }, { "@type": "City", "name": "Lausanne" },
-      { "@type": "City", "name": "Lutry" }, { "@type": "City", "name": "Morges" },
-      { "@type": "City", "name": "Vevey" }, { "@type": "AdministrativeArea", "name": "Canton de Vaud" }
-    ],
-    "knowsLanguage": ["fr", "tr"],
-    "makesOffer": [
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pose de parquet" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pose de linoléum" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pose de sol PVC" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pose de moquette" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ponçage de parquet" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rénovation de sols" } }
-    ]
+    "@context":"https://schema.org","@type":"HomeAndConstructionBusiness","@id":"https://ymksol.ch/#business",
+    "name":"YMK SOL SàRL","description":"Spécialiste des revêtements de sol : parquet, linoléum, PVC, moquette, ponçage et travaux de rénovation à Pully et dans le canton de Vaud.",
+    "url":"https://ymksol.ch/","telephone":"+41763316292","email":"ymksols.info@gmail.com","priceRange":"$$",
+    "address":{"@type":"PostalAddress","streetAddress":"Chemin du Château-Sec 19","postalCode":"1009","addressLocality":"Pully","addressRegion":"VD","addressCountry":"CH"},
+    "geo":{"@type":"GeoCoordinates","latitude":46.5089,"longitude":6.6611},
+    "areaServed":[{"@type":"City","name":"Pully"},{"@type":"City","name":"Lausanne"},{"@type":"City","name":"Lutry"},{"@type":"City","name":"Morges"},{"@type":"City","name":"Vevey"},{"@type":"AdministrativeArea","name":"Canton de Vaud"}],
+    "knowsLanguage":["fr","tr"]
   }
   </script>
 </head>
@@ -67,18 +45,27 @@
         <img src="assets/img/logo.svg" alt="" width="36" height="40" />
         <span class="brand-txt">YMK&nbsp;SOL<em>SàRL</em></span>
       </a>
+
       <nav class="nav" aria-label="Navigation principale">
         <a href="#services">Prestations</a>
         <a href="#realisations">Réalisations</a>
         <a href="#methode">Méthode</a>
         <a href="#zone">Zone</a>
       </nav>
+
       <div class="hdr-cta">
+        <!-- toggle mode -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Basculer le mode clair / sombre">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
         <a href="mailto:ymksols.info@gmail.com?subject=Demande%20de%20devis%20-%20YMK%20SOL" class="btn btn-line">E-mail</a>
         <a href="tel:+41763316292" class="btn btn-gold">Devis gratuit</a>
       </div>
+
       <button class="burger" aria-label="Menu" aria-expanded="false" aria-controls="mmenu"><span></span><span></span></button>
     </div>
+
     <div class="mmenu" id="mmenu" hidden>
       <a href="#services">Prestations</a>
       <a href="#realisations">Réalisations</a>
@@ -94,10 +81,14 @@
   <main>
     <!-- ░░░░░ HERO ░░░░░ -->
     <section class="hero">
-      <figure class="hero-media ph ph-wood">
-        <img src="assets/img/hero-pose.jpg" alt="Pose de parquet en chêne sur encollage peigné" loading="eager" onerror="this.classList.add('img-missing')" />
-      </figure>
+      <!-- Moquette qui se déroule -->
+      <div class="hero-carpet" aria-hidden="true">
+        <div class="carpet-texture"></div>
+        <div class="carpet-roll"></div>
+        <div class="carpet-shadow"></div>
+      </div>
       <div class="hero-shade" aria-hidden="true"></div>
+
       <div class="container hero-in">
         <p class="eyebrow light">Pully · Canton de Vaud</p>
         <h1 class="hero-title">L'art de poser<br />le sol <span class="u">parfait.</span></h1>
@@ -146,7 +137,6 @@
           <p class="eyebrow">Nos prestations</p>
           <h2 class="sec-title">Tout le sol,<br /><span class="gold">un seul artisan.</span></h2>
         </header>
-
         <div class="svc-grid">
           <article class="svc svc-lg reveal">
             <figure class="svc-media ph ph-wood">
@@ -158,7 +148,6 @@
               <p>Pose de parquet massif, contrecollé et stratifié. Remise à neuf des parquets anciens : ponçage, vitrification, huile ou cire.</p>
             </div>
           </article>
-
           <article class="svc reveal">
             <figure class="svc-media ph ph-moss">
               <img src="assets/img/moquette.jpg" alt="Rouleau de moquette" loading="lazy" onerror="this.classList.add('img-missing')" />
@@ -169,7 +158,6 @@
               <p>Confort et acoustique, en lés ou en dalles. Idéale pour bureaux, hôtels et chambres.</p>
             </div>
           </article>
-
           <article class="svc reveal">
             <figure class="svc-media ph ph-grey">
               <img src="assets/img/realisation-1.jpg" alt="Sol PVC en open-space" loading="lazy" onerror="this.classList.add('img-missing')" />
@@ -180,7 +168,6 @@
               <p>Lames et dalles résistantes à l'eau et au passage intensif. Rendu moderne, entretien minimal.</p>
             </div>
           </article>
-
           <article class="svc reveal">
             <figure class="svc-media ph ph-wood">
               <img src="assets/img/realisation-2.jpg" alt="Linoléum naturel" loading="lazy" onerror="this.classList.add('img-missing')" />
@@ -191,7 +178,6 @@
               <p>Revêtement naturel, durable et hygiénique pour l'habitat comme les espaces professionnels.</p>
             </div>
           </article>
-
           <article class="svc reveal">
             <figure class="svc-media ph ph-grey">
               <img src="assets/img/realisation-1.jpg" alt="Rénovation de sol" loading="lazy" onerror="this.classList.add('img-missing')" />
@@ -273,28 +259,59 @@
       </div>
     </section>
 
-    <!-- ░░░░░ CTA ░░░░░ -->
-    <section class="section cta" id="contact">
-      <figure class="cta-media ph ph-wood">
-        <img src="assets/img/hero-pose.jpg" alt="" loading="lazy" onerror="this.classList.add('img-missing')" />
-      </figure>
-      <div class="cta-shade" aria-hidden="true"></div>
-      <div class="container cta-in reveal">
-        <p class="eyebrow light center">Contact direct</p>
-        <h2 class="cta-title">Parlons de votre sol.</h2>
-        <p class="cta-sub">Un appel ou un e-mail suffit. On se déplace, on vous fait un devis gratuit.</p>
-        <div class="cta-actions">
-          <a href="tel:+41763316292" class="cta-card">
-            <span class="cta-ico">📞</span><span class="cta-label">Murat Saydan</span><span class="cta-val">076 331 62 92</span>
+    <!-- ░░░░░ CONTACT — typographie éditoriale ░░░░░ -->
+    <section class="section contact" id="contact">
+      <div class="container">
+        <div class="contact-head reveal">
+          <p class="eyebrow">Contact direct</p>
+          <h2 class="sec-title">Un projet de sol&nbsp;?<br /><span class="gold">On en parle.</span></h2>
+          <p class="contact-sub muted">Un appel ou un e-mail suffit. On se déplace, devis gratuit.</p>
+        </div>
+
+        <div class="clines">
+          <a href="tel:+41763316292" class="cline reveal">
+            <span class="cline-type">Téléphone</span>
+            <span class="cline-main">076 331 62 92</span>
+            <span class="cline-meta">Murat Saydan</span>
+            <span class="cline-arr" aria-hidden="true">
+              <svg viewBox="0 0 24 6" width="48" height="12" fill="none"><path d="M0 3h44M39 0l5 3-5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
           </a>
-          <a href="https://wa.me/41763316292?text=Bonjour%20YMK%20SOL%2C%20je%20souhaite%20un%20devis%20pour%20mon%20sol." target="_blank" rel="noopener" class="cta-card cta-wa">
-            <span class="cta-ico">💬</span><span class="cta-label">WhatsApp</span><span class="cta-val">Discuter maintenant</span>
+
+          <a href="tel:+41782583432" class="cline reveal">
+            <span class="cline-type">Téléphone</span>
+            <span class="cline-main">078 258 34 32</span>
+            <span class="cline-meta">Mehmet Hanifi Kaçiran</span>
+            <span class="cline-arr" aria-hidden="true">
+              <svg viewBox="0 0 24 6" width="48" height="12" fill="none"><path d="M0 3h44M39 0l5 3-5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
           </a>
-          <a href="mailto:ymksols.info@gmail.com?subject=Demande%20de%20devis%20-%20YMK%20SOL&body=Bonjour%2C%0A%0AJe%20souhaite%20un%20devis%20pour%20un%20projet%20de%20sol%20%3A%0A-%20Type%20%28parquet%2C%20PVC...%29%20%3A%0A-%20Surface%20approximative%20%3A%0A-%20Localité%20%3A%0A%0AMerci%21" class="cta-card cta-mail">
-            <span class="cta-ico">✉️</span><span class="cta-label">E-mail</span><span class="cta-val">ymksols.info@gmail.com</span>
+
+          <a href="https://wa.me/41763316292?text=Bonjour%20YMK%20SOL%2C%20je%20souhaite%20un%20devis%20pour%20mon%20sol." target="_blank" rel="noopener" class="cline cline-wa reveal">
+            <span class="cline-type">WhatsApp</span>
+            <span class="cline-main">Discuter maintenant</span>
+            <span class="cline-meta">Réponse rapide</span>
+            <span class="cline-arr" aria-hidden="true">
+              <svg viewBox="0 0 24 6" width="48" height="12" fill="none"><path d="M0 3h44M39 0l5 3-5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
           </a>
-          <a href="https://maps.google.com/?q=Chemin+du+Château-Sec+19+1009+Pully" target="_blank" rel="noopener" class="cta-card">
-            <span class="cta-ico">📍</span><span class="cta-label">Atelier</span><span class="cta-val">Ch. du Château-Sec 19, Pully</span>
+
+          <a href="mailto:ymksols.info@gmail.com?subject=Demande%20de%20devis%20-%20YMK%20SOL&body=Bonjour%2C%0A%0AJe%20souhaite%20un%20devis%20pour%20un%20projet%20de%20sol%20%3A%0A-%20Type%20%28parquet%2C%20PVC...%29%20%3A%0A-%20Surface%20approximative%20%3A%0A-%20Localit%C3%A9%20%3A%0A%0AMerci%21" class="cline reveal">
+            <span class="cline-type">E-mail</span>
+            <span class="cline-main">ymksols.info@gmail.com</span>
+            <span class="cline-meta">Réponse dans la journée</span>
+            <span class="cline-arr" aria-hidden="true">
+              <svg viewBox="0 0 24 6" width="48" height="12" fill="none"><path d="M0 3h44M39 0l5 3-5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+
+          <a href="https://maps.google.com/?q=Chemin+du+Château-Sec+19+1009+Pully" target="_blank" rel="noopener" class="cline reveal">
+            <span class="cline-type">Atelier</span>
+            <span class="cline-main">Ch. du Château-Sec 19</span>
+            <span class="cline-meta">1009 Pully, VD</span>
+            <span class="cline-arr" aria-hidden="true">
+              <svg viewBox="0 0 24 6" width="48" height="12" fill="none"><path d="M0 3h44M39 0l5 3-5 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
           </a>
         </div>
       </div>
