@@ -50,8 +50,8 @@
   --carpet-a: #c8c2b4;
   --carpet-b: #b8b2a4;
   --carpet-c: #d0cbbf;
-  --roll-light: rgba(255,250,240,.7);
-  --roll-dark:  rgba(80,60,30,.3);
+  --roll-light: rgba(186,178,164,.55);
+  --roll-dark:  rgba(60,45,25,.32);
 }
 
 /* ---- base ---- */
@@ -169,10 +169,10 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   position:absolute; inset:0;
   will-change:clip-path;
   background:
-    repeating-linear-gradient(0deg,   rgba(0,0,0,.06) 0 1px, transparent 1px 5px),
-    repeating-linear-gradient(90deg,  rgba(0,0,0,.06) 0 1px, transparent 1px 5px),
-    repeating-linear-gradient(45deg,  rgba(255,255,255,.03) 0 2px, transparent 2px 10px),
-    repeating-linear-gradient(-45deg, rgba(255,255,255,.03) 0 2px, transparent 2px 10px),
+    repeating-linear-gradient(0deg,   rgba(0,0,0,.09) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(90deg,  rgba(0,0,0,.09) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(45deg,  rgba(0,0,0,.04) 0 2px, transparent 2px 8px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,.04) 0 2px, transparent 2px 8px),
     linear-gradient(155deg, var(--carpet-c) 0%, var(--carpet-b) 35%, var(--carpet-a) 60%, var(--carpet-b) 100%);
   clip-path: inset(0 100% 0 0);
   animation: carpet-unroll 2.4s var(--ease) .2s forwards;
@@ -192,40 +192,40 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   animation: carpet-unroll 2.4s var(--ease) .2s forwards;
 }
 
-/* cylindre du rouleau — ombré comme un vrai tube, bords arrondis */
+/* cylindre du rouleau — couleurs basées sur la moquette, pas de blanc */
 .carpet-roll {
   position:absolute; top:-3%; bottom:-3%;
-  width: 54px;
+  width: 44px;
   z-index: 2;
   left: 0;
-  transform: translateX(-60px);
+  transform: translateX(-52px);
   will-change: transform;
-  border-radius: 27px / 50%;
+  border-radius: 22px / 50%;
   background: linear-gradient(90deg,
-    rgba(0,0,0,.35) 0%,
-    var(--roll-dark) 18%,
-    var(--roll-light) 46%,
-    #fff 52%,
-    var(--roll-light) 58%,
-    var(--roll-dark) 84%,
-    rgba(0,0,0,.4) 100%
+    rgba(0,0,0,.55) 0%,
+    var(--roll-dark) 14%,
+    var(--carpet-b) 34%,
+    var(--carpet-c) 50%,
+    var(--carpet-b) 66%,
+    var(--roll-dark) 86%,
+    rgba(0,0,0,.55) 100%
   );
   box-shadow:
-    10px 0 34px rgba(0,0,0,.45),
-    -4px 0 14px rgba(0,0,0,.25),
-    inset 0 14px 22px rgba(255,255,255,.18),
-    inset 0 -14px 22px rgba(0,0,0,.28);
+    8px 0 28px rgba(0,0,0,.38),
+    -3px 0 10px rgba(0,0,0,.2),
+    inset 0 10px 18px rgba(255,255,255,.1),
+    inset 0 -10px 18px rgba(0,0,0,.22);
   animation: roll-move 2.4s var(--ease) .2s forwards;
 }
 .carpet-roll::after {
   content:""; position:absolute; inset:0;
   border-radius:inherit;
-  background: repeating-linear-gradient(0deg, rgba(0,0,0,.12) 0 2px, transparent 2px 7px);
-  opacity:.5;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,.14) 0 2px, transparent 2px 6px);
+  opacity:.55;
 }
 @keyframes roll-move {
-  0%   { transform: translateX(-60px); }
-  100% { transform: translateX(calc(100vw + 66px)); }
+  0%   { transform: translateX(-52px); }
+  100% { transform: translateX(calc(100vw + 52px)); }
 }
 
 .hero-shade { position:absolute; inset:0; z-index:3; background:linear-gradient(180deg, rgba(20,17,14,.6) 0%, rgba(20,17,14,.08) 32%, rgba(20,17,14,.55) 72%, var(--bg) 100%); transition:background .35s; }
