@@ -139,11 +139,9 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 .bline-1 { width:21px; }
 .bline-2 { width:13px; }
 .bline-3 { width:21px; }
-.bdot { position:absolute; top:8px; right:8px; width:5px; height:5px; border-radius:50%; background:#EC7A08; box-shadow:0 0 8px rgba(236,122,8,.7); transition:transform .3s var(--ease), opacity .3s; }
 .burger[aria-expanded="true"] .bline-1 { transform:translateY(7px) rotate(45deg); width:21px; }
 .burger[aria-expanded="true"] .bline-2 { opacity:0; width:0; }
 .burger[aria-expanded="true"] .bline-3 { transform:translateY(-7px) rotate(-45deg); width:21px; }
-.burger[aria-expanded="true"] .bdot { transform:scale(0); opacity:0; }
 
 /* panneau menu — plein largeur, toutes tailles */
 .mmenu { position:fixed; top:70px; left:0; right:0; z-index:99; background:var(--bg); border-bottom:1px solid var(--line); box-shadow:0 30px 60px rgba(0,0,0,.4); animation:drop .4s var(--ease); max-height:calc(100vh - 70px); overflow-y:auto; }
