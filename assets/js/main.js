@@ -12,8 +12,7 @@
   var toggle = document.getElementById("themeToggle");
   var PREF   = "ymk-theme";
 
-  var saved = localStorage.getItem(PREF) ||
-    (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  var saved = localStorage.getItem(PREF) || "light";
   root.setAttribute("data-theme", saved);
 
   if (toggle) {
