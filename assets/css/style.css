@@ -497,16 +497,60 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 .steps li:nth-child(3).reveal { transition-delay:180ms; }
 .steps li:nth-child(4).reveal { transition-delay:270ms; }
 
-/* mobile : zig-zag gauche/droite, très visible */
+/* mobile : zig-zag entrée + timeline interactive */
 @media(max-width:599px) {
+  /* entrée zig-zag */
   .steps li.reveal { transform:translateX(64px) scale(.97); opacity:0; }
   .steps li:nth-child(even).reveal { transform:translateX(-64px) scale(.97); }
   .steps li.reveal.is-in { transform:none; opacity:1; }
-  /* décalage de timing pour montrer le stagger (chaque carte entre séquentiellement) */
   .steps li:nth-child(1).reveal { transition-delay:0ms; }
   .steps li:nth-child(2).reveal { transition-delay:60ms; }
   .steps li:nth-child(3).reveal { transition-delay:120ms; }
   .steps li:nth-child(4).reveal { transition-delay:180ms; }
+
+  /* timeline sur la gauche */
+  .steps {
+    padding-left: 6px;
+    position: relative;
+  }
+  .steps::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 28px; bottom: 28px;
+    width: 2px;
+    background: var(--line);
+    border-radius: 1px;
+  }
+  .steps li {
+    border-left: 3px solid transparent;
+    border-radius: 0 var(--r-lg) var(--r-lg) 0;
+    transition: border-color .45s var(--ease), box-shadow .45s var(--ease), transform .45s var(--ease), background .45s;
+  }
+
+  /* carte active au scroll */
+  .steps li.step-active {
+    border-left-color: var(--gold);
+    background: var(--bg);
+    box-shadow: 0 8px 32px rgba(224,161,43,.16);
+    transform: translateX(4px) !important;
+  }
+  .steps li.step-active::before { opacity: 1; }
+  .steps li.step-active .step-no {
+    animation: step-no-pop .55s var(--ease);
+  }
+
+  /* tap feedback */
+  .steps li:active {
+    transform: scale(.97) translateX(2px) !important;
+    transition: transform .1s ease !important;
+  }
+}
+
+@keyframes step-no-pop {
+  0%   { transform: scale(1) translateY(0); }
+  35%  { transform: scale(1.14) translateY(-4px); }
+  65%  { transform: scale(.97) translateY(1px); }
+  100% { transform: scale(1) translateY(0); }
 }
 
 /* Svc-extra cards : entrée slide-up scale */

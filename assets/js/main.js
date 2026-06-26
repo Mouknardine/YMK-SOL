@@ -73,6 +73,20 @@
     els.forEach(function (el) { el.classList.add("is-in"); });
   }
 
+  /* ---- step cards actives au scroll (mobile) ---- */
+  var stepCards = document.querySelectorAll(".steps li");
+  if (stepCards.length && "IntersectionObserver" in window && !reduce) {
+    var stepObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          stepCards.forEach(function (li) { li.classList.remove("step-active"); });
+          e.target.classList.add("step-active");
+        }
+      });
+    }, { threshold: 0.65, rootMargin: "-15% 0px -15% 0px" });
+    stepCards.forEach(function (li) { stepObs.observe(li); });
+  }
+
   /* ---- compteurs animés ---- */
   var counters = document.querySelectorAll("[data-count]");
   if ("IntersectionObserver" in window && !reduce) {
