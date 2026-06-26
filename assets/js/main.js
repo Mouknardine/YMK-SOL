@@ -48,12 +48,14 @@
     });
   }
 
-  /* ---- barre de progression scroll ---- */
+  /* ---- barre de progression scroll + hdr-scrolled ---- */
   var bar = document.getElementById("scrollBar");
-  if (bar) {
+  var hdr = document.querySelector(".hdr");
+  if (bar || hdr) {
     var onScroll = function () {
       var h = document.documentElement;
-      bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight || 1) * 100) + "%";
+      if (bar) bar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight || 1) * 100) + "%";
+      if (hdr) hdr.classList.toggle("hdr-scrolled", h.scrollTop > 40);
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
