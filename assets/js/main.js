@@ -328,6 +328,72 @@
     if (_lbOpener) { _lbOpener.focus(); _lbOpener = null; }
   }
 
+  /* ============================================================
+     GSAP — Portfolio : clip-path reveal + parallax intérieur
+     ============================================================ */
+  (function () {
+    if (!window.gsap || !window.ScrollTrigger || reduce) return;
+    gsap.registerPlugin(ScrollTrigger);
+
+    var portGrid = document.querySelector(".port-grid");
+    if (!portGrid) return;
+
+    var isDesktop = window.matchMedia("(min-width: 640px)").matches;
+
+    /* — Clip-path wipe reveal (desktop uniquement) — */
+    if (isDesktop) {
+      var portItems = portGrid.querySelectorAll(".port-item");
+      if (portItems.length) {
+        gsap.fromTo(portItems,
+          { clipPath: "inset(100% 0% 0% 0% round 20px)" },
+          {
+            clipPath: "inset(0% 0% 0% 0% round 20px)",
+            duration: 1.15,
+            ease: "expo.out",
+            stagger: { each: 0.09, from: "start" },
+            clearProps: "clipPath",
+            scrollTrigger: {
+              trigger: portGrid,
+              start: "top 82%",
+              once: true
+            }
+          }
+        );
+      }
+    }
+
+    /* — Parallax intérieur sur les images (desktop) — */
+    if (isDesktop) {
+      portGrid.querySelectorAll(".pm-img-wrap img").forEach(function (img) {
+        /* Centre l'image 130% dans le conteneur 100% */
+        gsap.set(img, { yPercent: -11.5 });
+        gsap.to(img, {
+          yPercent: -22,
+          ease: "none",
+          scrollTrigger: {
+            trigger: img.closest(".port-item"),
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.7,
+            invalidateOnRefresh: true
+          }
+        });
+      });
+    }
+
+    /* — Micro-lift sur les service cards au hover — */
+    portGrid.querySelectorAll(".port-svc").forEach(function (card) {
+      var body = card.querySelector(".port-svc-body");
+      if (!body) return;
+      card.addEventListener("mouseenter", function () {
+        gsap.to(body, { y: -5, duration: 0.5, ease: "expo.out" });
+      });
+      card.addEventListener("mouseleave", function () {
+        gsap.to(body, { y: 0, duration: 0.5, ease: "expo.out" });
+      });
+    });
+  }());
+
   document.querySelectorAll(".gal-item, .port-item:not(.port-svc)").forEach(function (a) {
     a.addEventListener("click", function (e) {
       if (a.classList.contains("img-missing")) return;

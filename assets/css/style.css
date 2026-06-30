@@ -559,25 +559,6 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   to   { transform: translateX(-50%); }
 }
 
-/* Portfolio items : entrée scale + léger Y */
-.port-item.reveal { transform:translateY(28px) scale(.96); transition:opacity .7s var(--ease), transform .7s var(--ease); }
-.port-item.reveal.is-in { transform:none; }
-.port-item:nth-child(1).reveal { transition-delay:0ms; }
-.port-item:nth-child(2).reveal { transition-delay:80ms; }
-.port-item:nth-child(3).reveal { transition-delay:160ms; }
-.port-item:nth-child(4).reveal { transition-delay:240ms; }
-.port-item:nth-child(5).reveal { transition-delay:300ms; }
-
-/* Hero : clip-path reveal dramatique */
-.port-hero.reveal {
-  clip-path: inset(5% 5% 5% 5% round var(--r-lg));
-  transform: scale(1.04);
-  transition: clip-path .95s cubic-bezier(.16,1,.3,1), transform .95s cubic-bezier(.16,1,.3,1), opacity .6s;
-}
-.port-hero.reveal.is-in {
-  clip-path: inset(0% 0% 0% 0% round var(--r-lg));
-  transform: none;
-}
 
 /* Contact lines : slide gauche/droite alternés */
 .cline.reveal { transform:translateX(-44px); transition:opacity .6s var(--ease), transform .6s var(--ease); }
@@ -601,38 +582,42 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 
 
 /* ============================================================
-   PORTFOLIO — réalisations
+   PORTFOLIO — Masonry Vivant
    ============================================================ */
 .portfolio { border-block: 1px solid var(--line); }
 
-/* ── Base commune ── */
-.port-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+/* ── Image wrapper pour parallax intérieur ── */
+.pm-img-wrap {
+  position: absolute; inset: 0;
+  pointer-events: none;
+  /* Scale hover sur le wrapper (indépendant du yPercent GSAP sur l'img) */
+  transition: transform .85s cubic-bezier(.16,1,.3,1);
+}
+.port-item:not(.port-svc):hover .pm-img-wrap { transform: scale(1.06); }
+.pm-img-wrap img {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  will-change: transform;
+  /* Pas de transition transform ici — GSAP contrôle yPercent en scrub */
+  transition: filter .65s cubic-bezier(.16,1,.3,1);
+}
+.port-item:not(.port-svc):hover .pm-img-wrap img {
+  filter: brightness(1.09) saturate(1.18);
 }
 
+/* ── Base commune ── */
 .port-item {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   display: block;
   cursor: pointer;
-  height: 300px;
   flex-shrink: 0;
 }
+.port-item.img-missing .pm-img-wrap img { opacity: 0; }
 
-.port-hero { height: clamp(210px, 58vw, 480px); }
-
-.port-item img {
-  width: 100%; height: 100%;
-  object-fit: cover; display: block;
-  transition: transform .8s var(--ease), filter .6s var(--ease);
-}
-.port-item:not(.port-svc):hover img { transform: scale(1.08); filter: brightness(1.08) saturate(1.18); }
-.port-item.img-missing img { opacity: 0; }
-
-/* Bordure or au survol — photo items only */
+/* Or inset border au survol */
 .port-item:not(.port-svc)::before {
   content: "";
   position: absolute; inset: 0; z-index: 3;
@@ -643,27 +628,25 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 }
 .port-item:not(.port-svc):hover::before { box-shadow: inset 0 0 0 2px var(--gold2); }
 
-/* Gradient overlay du bas — photo items only */
+/* Gradient overlay bas */
 .port-item:not(.port-svc)::after {
   content: "";
-  position: absolute; inset: 0;
+  position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(180deg,
-    rgba(0,0,0,.08) 0%,
-    transparent 30%,
-    rgba(8,6,3,.72) 72%,
-    rgba(8,6,3,.92) 100%);
-  z-index: 1;
+    rgba(0,0,0,.04) 0%,
+    transparent 26%,
+    rgba(8,6,3,.6) 65%,
+    rgba(8,6,3,.88) 100%);
   transition: opacity .4s var(--ease);
 }
-.port-item:not(.port-svc):hover::after { opacity: 1; }
 
 /* Badge numéro */
 .port-num {
   position: absolute; top: 16px; right: 16px; z-index: 3;
   font-family: var(--fh); font-weight: 800;
-  font-size: .68rem; letter-spacing: .14em;
-  color: rgba(247,243,236,.8);
-  background: rgba(255,255,255,.13);
+  font-size: .66rem; letter-spacing: .14em;
+  color: rgba(247,243,236,.85);
+  background: rgba(255,255,255,.12);
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   padding: 5px 10px; border-radius: 99px;
   border: 1px solid rgba(255,255,255,.2);
@@ -672,70 +655,70 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 /* Info au bas */
 .port-info {
   position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
-  padding: 20px 22px 24px;
+  padding: 22px 24px 26px;
 }
-
 .port-cat {
   display: block;
   font-family: var(--fh); font-weight: 700;
-  font-size: .68rem; letter-spacing: .24em; text-transform: uppercase;
-  color: var(--gold2); margin-bottom: 5px;
+  font-size: .64rem; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--gold2); margin-bottom: 7px;
 }
-
 .port-title {
   font-family: var(--fh); font-weight: 800;
-  font-size: 1.15rem; letter-spacing: -.02em;
-  color: #fff; margin-bottom: 4px; line-height: 1.2;
+  font-size: clamp(1.1rem, 2vw, 1.5rem); letter-spacing: -.025em;
+  color: #fff; line-height: 1.12;
 }
-
 .port-desc {
-  color: rgba(247,243,236,.75);
-  font-size: .88rem; line-height: 1.4;
-  opacity: 0; transform: translateY(6px);
-  transition: opacity .35s var(--ease) .06s, transform .35s var(--ease) .06s;
+  color: rgba(247,243,236,.72);
+  font-size: .87rem; line-height: 1.45;
+  margin-top: 7px;
+  opacity: 0; transform: translateY(7px);
+  transition: opacity .38s var(--ease) .06s, transform .38s var(--ease) .06s;
 }
 .port-item:not(.port-svc):hover .port-desc { opacity: 1; transform: none; }
-
 @media (hover: none) {
   .port-item:not(.port-svc) .port-desc { opacity: 1; transform: none; }
 }
 
-/* ── Service cards dans le bento ── */
+/* ── Service cards ── */
 .port-svc {
-  background: #1A1510;
+  background: #181310;
+  border: 1px solid rgba(224,161,43,.14);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 24px 24px 28px;
+  padding: 28px 26px 30px;
   color: #F5F0E8;
   cursor: default;
+  transition: border-color .4s var(--ease), transform .4s var(--ease), box-shadow .4s var(--ease);
+  overflow: hidden;
 }
-.port-svc::before {
-  content: "";
-  position: absolute; inset: 0; z-index: 1;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px rgba(224,161,43,.18);
-  transition: box-shadow .4s var(--ease);
-  pointer-events: none;
+.port-svc:hover {
+  border-color: rgba(224,161,43,.5);
+  transform: translateY(-4px);
+  box-shadow: 0 22px 56px rgba(0,0,0,.55);
 }
-.port-svc:hover::before { box-shadow: inset 0 0 0 2px rgba(224,161,43,.6); }
 .port-svc::after {
   content: attr(data-no);
-  position: absolute;
-  right: -10px; bottom: -22px;
+  position: absolute; right: -8px; bottom: -18px;
   font-family: var(--fh); font-weight: 900;
   font-size: 9rem; line-height: 1;
-  color: var(--gold); opacity: .07;
+  color: var(--gold); opacity: .06;
   pointer-events: none; user-select: none;
 }
-.port-svc:hover { transform: translateY(-4px); box-shadow: 0 20px 52px rgba(0,0,0,.55); }
-.port-svc .svc-extra-no { position: relative; z-index: 2; }
-.port-svc-body { position: relative; z-index: 2; }
-.port-svc h3 { font-size: 1.1rem; margin-bottom: 6px; line-height: 1.25; color: #F5F0E8; }
-.port-svc p  { color: rgba(245,240,232,.5); font-size: .82rem; line-height: 1.5; }
+.svc-extra-no {
+  font-family: var(--fh); font-weight: 700;
+  font-size: .62rem; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--gold2); display: block; margin-bottom: 14px;
+  background: none; -webkit-text-fill-color: var(--gold2);
+  position: relative; z-index: 1;
+}
+.port-svc-body { position: relative; z-index: 1; }
+.port-svc h3 { font-size: 1.15rem; margin-bottom: 8px; line-height: 1.2; color: #F5F0E8; }
+.port-svc p  { color: rgba(245,240,232,.46); font-size: .83rem; line-height: 1.52; }
 
-/* ── Galerie horizontale snap sur mobile ── */
-.port-row {
+/* ── Layout mobile : carousel snap horizontal ── */
+.port-grid {
   display: flex;
   flex-direction: row;
   overflow-x: auto;
@@ -743,61 +726,43 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   gap: 10px;
+  /* Déborde du container pour aller bord à bord */
+  margin-inline: calc(-1 * var(--pad));
+  padding-inline: var(--pad);
+  padding-bottom: 6px;
 }
-.port-row::-webkit-scrollbar { display: none; }
-.port-row .port-item {
-  flex: 0 0 78%;
-  height: 270px;
-  scroll-snap-align: start;
-}
-.port-row .port-svc {
-  flex: 0 0 74%;
-  height: auto;
-  min-height: 200px;
-  scroll-snap-align: start;
+.port-grid::-webkit-scrollbar { display: none; }
+.pm-featured { flex: 0 0 88%; height: 340px; scroll-snap-align: start; }
+.pm-tall     { flex: 0 0 78%; height: 300px; scroll-snap-align: start; }
+.pm-mid      { flex: 0 0 78%; height: 280px; scroll-snap-align: start; }
+.pm-wide     { flex: 0 0 84%; height: 280px; scroll-snap-align: start; }
+.pm-svc-a, .pm-svc-b {
+  flex: 0 0 72%; height: auto; min-height: 210px; scroll-snap-align: start;
 }
 
-/* ── Bento grid : 640px+ ── */
+/* ── Masonry asymétrique : 640px+ ── */
 @media (min-width: 640px) {
   .port-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr 1.15fr;
-    grid-template-rows: 380px 310px 280px;
-    gap: 12px;
-  }
-  .port-hero {
-    grid-area: 1 / 1 / 2 / 4;
-    height: auto;
-    border-radius: var(--r-lg);
-  }
-
-  /* port-row becomes layout-transparent so children participate in port-grid */
-  .port-row {
-    display: contents;
+    grid-template-columns: 2.2fr 1fr 1.5fr;
+    grid-template-rows: 520px 300px 290px;
+    gap: 14px;
     overflow: visible;
-    padding: 0; margin: 0;
+    margin-inline: 0; padding-inline: 0; padding-bottom: 0;
   }
-  .port-row > :nth-child(1) { grid-area: 2 / 1; }          /* parquet */
-  .port-row > :nth-child(2) { grid-area: 2 / 3; }          /* moquette */
-  .port-row > :nth-child(3) { grid-area: 3 / 1 / 4 / 3; }  /* chantier wide */
-  .port-row > :nth-child(4) { grid-area: 2 / 2; }          /* svc-05 */
-  .port-row > :nth-child(5) { grid-area: 3 / 3; }          /* svc-06 */
+  .pm-featured { grid-column: 1 / 3; grid-row: 1; flex: none; height: auto; }
+  .pm-tall     { grid-column: 3;     grid-row: 1 / 3; flex: none; height: auto; }
+  .pm-mid      { grid-column: 1;     grid-row: 2; flex: none; height: auto; }
+  .pm-svc-a    { grid-column: 2;     grid-row: 2; flex: none; height: auto; min-height: 0; }
+  .pm-wide     { grid-column: 1 / 3; grid-row: 3; flex: none; height: auto; }
+  .pm-svc-b    { grid-column: 3;     grid-row: 3; flex: none; height: auto; min-height: 0; }
 
-  .port-row > .port-item {
-    flex: none; height: auto;
-    border-radius: var(--r-lg);
-    scroll-snap-align: unset;
-  }
+  /* Image parallax : hauteur étendue sur desktop */
+  .pm-img-wrap img { height: 130%; }
+
+  /* Port-title plus grande sur desktop */
+  .port-title { font-size: clamp(1.2rem, 1.8vw, 1.55rem); }
   .port-num { display: none; }
-}
-
-.svc-extra-no {
-  font-family: var(--fh); font-weight: 700;
-  font-size: .6rem; letter-spacing: .22em; text-transform: uppercase;
-  color: var(--gold2);
-  background: none; -webkit-background-clip: unset; background-clip: unset;
-  -webkit-text-fill-color: var(--gold2);
-  display: block; margin-bottom: 12px;
 }
 
 
@@ -883,9 +848,6 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
     pointer-events:none; user-select:none;
   }
 
-  /* Portfolio : titre du survol plus grand */
-  .port-title { font-size:1.35rem; }
-
   /* Hero : plus de hauteur sur grand écran */
   .hero { min-height:clamp(620px,92vh,980px); }
   .hero-in { padding-bottom:clamp(80px,12vw,140px); }
@@ -901,13 +863,11 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   /* intro lead plus grand */
   .intro-lead { font-size:clamp(1.6rem,2.6vw,2.8rem); }
 
-  /* port-svc avec accent hover */
-  .port-svc::after { font-size: 11rem; }
 }
 
 /* ultra-wide */
 @media (min-width:1440px) {
-  .port-grid { grid-template-rows: 480px 400px 340px; gap: 18px; }
+  .port-grid { grid-template-rows: 600px 360px 320px; gap: 18px; }
   .intro-lead { font-size:2.8rem; }
 }
 /* ---- ajustements mobile ---- */

@@ -143,60 +143,77 @@
           <h2 class="sec-title">Des chantiers qui<br /><span class="gold">parlent pour nous.</span></h2>
         </header>
         <div class="port-grid">
-          <!-- Featured — pleine largeur, en premier dans le DOM -->
-          <a class="port-item port-hero reveal ph ph-luxury" href="assets/img/office-equipe.jpg" data-cap="Boutique Omega — moquette rouge prestige, Lausanne">
-            <img src="assets/img/office-equipe.jpg" alt="Boutique Omega avec moquette rouge prestige et sol blanc" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
+
+          <!-- 01 — Hero large (2 cols desktop) -->
+          <a class="port-item pm-featured ph ph-luxury" href="assets/img/office-equipe.jpg" data-cap="Boutique Omega — moquette rouge prestige, Lausanne">
+            <div class="pm-img-wrap">
+              <img src="assets/img/office-equipe.jpg" alt="Boutique Omega avec moquette rouge prestige et sol blanc" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
+            </div>
             <span class="port-num">01</span>
             <div class="port-info">
               <span class="port-cat">Linoléum · Prestige</span>
-              <p class="port-title">Espace commercial prestige</p>
+              <p class="port-title">Espace commercial<br />prestige</p>
               <p class="port-desc">Revêtements haut de gamme pour espaces commerciaux et luxe.</p>
             </div>
           </a>
-          <!-- Photos + services — carousel sur mobile, bento sur desktop -->
-          <div class="port-row">
-            <a class="port-item reveal ph ph-wood" href="assets/img/salon-parquet.jpg" data-cap="Parquet géométrique — résidentiel, vue lac Léman">
+
+          <!-- 02 — Parquet vertical (span 2 rows desktop) -->
+          <a class="port-item pm-tall ph ph-wood" href="assets/img/salon-parquet.jpg" data-cap="Parquet géométrique — résidentiel, vue lac Léman">
+            <div class="pm-img-wrap">
               <img src="assets/img/salon-parquet.jpg" alt="Parquet géométrique en étoile avec vue sur le lac Léman" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
-              <span class="port-num">02</span>
-              <div class="port-info">
-                <span class="port-cat">Parquet · Ponçage</span>
-                <p class="port-title">Résidentiel vue lac</p>
-                <p class="port-desc">Pose et rénovation — parquet massif vitrifié, huilé ou ciré.</p>
-              </div>
-            </a>
-            <a class="port-item reveal ph ph-moss" href="assets/img/moquette.jpg" data-cap="Chambre résidentielle — moquette beige sisal">
-              <img src="assets/img/moquette.jpg" alt="Chambre résidentielle avec moquette beige sisal" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
-              <span class="port-num">03</span>
-              <div class="port-info">
-                <span class="port-cat">Moquette</span>
-                <p class="port-title">Chambre résidentielle</p>
-                <p class="port-desc">En lés ou en dalles — confort, acoustique, chaleur.</p>
-              </div>
-            </a>
-            <a class="port-item reveal ph ph-grey" href="assets/img/office-vide.jpg" data-cap="Pose de dalles moquette — chantier commercial">
-              <img src="assets/img/office-vide.jpg" alt="Pose de dalles moquette sur chantier commercial" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
-              <span class="port-num">04</span>
-              <div class="port-info">
-                <span class="port-cat">PVC · Vinyle · Commercial</span>
-                <p class="port-title">Chantier commercial</p>
-                <p class="port-desc">Dalles résistantes au passage intensif — pose rapide sur chantier.</p>
-              </div>
-            </a>
-            <div class="port-item port-svc reveal" data-no="05">
-              <span class="svc-extra-no">05</span>
-              <div class="port-svc-body">
-                <h3>Rénovation complète</h3>
-                <p>Ragréage, préparation des supports et reprise d'un revêtement existant.</p>
-              </div>
             </div>
-            <div class="port-item port-svc reveal" data-no="06">
-              <span class="svc-extra-no">06</span>
-              <div class="port-svc-body">
-                <h3>Ponçage &amp; finitions</h3>
-                <p>Remise à neuf des parquets anciens : ponçage, vitrification, huile ou cire.</p>
-              </div>
+            <span class="port-num">02</span>
+            <div class="port-info">
+              <span class="port-cat">Parquet · Ponçage</span>
+              <p class="port-title">Résidentiel<br />vue lac</p>
+              <p class="port-desc">Pose et rénovation — parquet massif vitrifié, huilé ou ciré.</p>
+            </div>
+          </a>
+
+          <!-- 03 — Chambre moquette -->
+          <a class="port-item pm-mid ph ph-moss" href="assets/img/moquette.jpg" data-cap="Chambre résidentielle — moquette beige sisal">
+            <div class="pm-img-wrap">
+              <img src="assets/img/moquette.jpg" alt="Chambre résidentielle avec moquette beige sisal" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
+            </div>
+            <span class="port-num">03</span>
+            <div class="port-info">
+              <span class="port-cat">Moquette</span>
+              <p class="port-title">Chambre<br />résidentielle</p>
+              <p class="port-desc">En lés ou en dalles — confort, acoustique, chaleur.</p>
+            </div>
+          </a>
+
+          <!-- 04 — Service : Rénovation -->
+          <div class="port-item port-svc pm-svc-a" data-no="04">
+            <span class="svc-extra-no">04</span>
+            <div class="port-svc-body">
+              <h3>Rénovation complète</h3>
+              <p>Ragréage, préparation des supports et reprise d'un revêtement existant.</p>
             </div>
           </div>
+
+          <!-- 05 — Chantier commercial (wide, 2 cols desktop) -->
+          <a class="port-item pm-wide ph ph-grey" href="assets/img/office-vide.jpg" data-cap="Pose de dalles moquette — chantier commercial">
+            <div class="pm-img-wrap">
+              <img src="assets/img/office-vide.jpg" alt="Pose de dalles moquette sur chantier commercial" loading="lazy" onerror="this.classList.add('img-missing'); this.closest('.port-item').classList.add('img-missing')" />
+            </div>
+            <span class="port-num">05</span>
+            <div class="port-info">
+              <span class="port-cat">PVC · Vinyle · Commercial</span>
+              <p class="port-title">Chantier<br />commercial</p>
+              <p class="port-desc">Dalles résistantes au passage intensif — pose rapide sur chantier.</p>
+            </div>
+          </a>
+
+          <!-- 06 — Service : Ponçage -->
+          <div class="port-item port-svc pm-svc-b" data-no="06">
+            <span class="svc-extra-no">06</span>
+            <div class="port-svc-body">
+              <h3>Ponçage &amp; finitions</h3>
+              <p>Remise à neuf des parquets anciens : ponçage, vitrification, huile ou cire.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -390,6 +407,8 @@
     <figure class="lb-fig ph ph-grey"><img id="lbImg" src="" alt="" /><figcaption id="lbCap"></figcaption></figure>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
   <script src="assets/js/main.js" defer></script>
 </body>
 </html>
