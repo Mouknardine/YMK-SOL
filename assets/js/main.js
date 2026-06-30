@@ -2,6 +2,8 @@
 (function () {
   "use strict";
 
+  document.head.insertAdjacentHTML("beforeend", "<style>.contact-head .sec-title{white-space:nowrap;}</style>");
+
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---- Utilitaires ---- */
