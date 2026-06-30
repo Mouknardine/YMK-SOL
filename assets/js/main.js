@@ -2,7 +2,7 @@
 (function () {
   "use strict";
 
-  document.head.insertAdjacentHTML("beforeend", "<style>.contact-head .sec-title{white-space:nowrap;}</style>");
+  document.head.insertAdjacentHTML("beforeend", "<style>:root{--hdr-h:70px;}body{padding-top:var(--hdr-h);}.hdr{position:fixed;top:0;left:0;right:0;z-index:180;background:rgba(20,17,14,.82);backdrop-filter:saturate(170%) blur(18px);-webkit-backdrop-filter:saturate(170%) blur(18px);}.hdr-in{height:var(--hdr-h);}.mmenu{top:var(--hdr-h);max-height:calc(100dvh - var(--hdr-h));}.contact-head .sec-title{white-space:nowrap;}[data-theme=light] .hdr{background:rgba(245,240,232,.86);}@media(max-width:599px){:root{--hdr-h:64px;}.brand{gap:9px;}.brand img{height:26px;}.brand-txt{font-size:.94rem;}.theme-toggle,.burger{width:42px;height:42px;border-radius:12px;}.contact-head .sec-title{font-size:clamp(3rem,14.5vw,4.5rem);line-height:.92;letter-spacing:-.045em;}}@media(min-width:600px){.theme-toggle,.burger{width:46px;height:46px;}.hdr-in{gap:18px;}.brand img{height:32px;}}</style>");
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
