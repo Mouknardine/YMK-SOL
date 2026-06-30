@@ -541,30 +541,41 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   overflow: hidden;
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
-  padding: 20px 0;
+  padding: 0;
   background: var(--bg-2);
+  /* Fondu sur les bords */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, white 10%, white 90%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, white 10%, white 90%, transparent 100%);
 }
 .marquee-track {
   display: flex;
   align-items: center;
   width: max-content;
-  animation: marquee-scroll 30s linear infinite;
+  padding: 18px 0;
+  animation: marquee-scroll 22s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+.marquee-track--rev {
+  animation-direction: reverse;
+  animation-duration: 28s;
 }
 .marquee-track span {
   font-family: var(--fh);
   font-weight: 700;
-  font-size: .95rem;
-  letter-spacing: .22em;
+  font-size: 1rem;
+  letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--muted);
-  padding: 0 30px;
+  padding: 0 26px;
   white-space: nowrap;
 }
 .marquee-track .m-sep {
   color: var(--gold);
   padding: 0;
-  font-size: .72rem;
+  font-size: .82rem;
   flex-shrink: 0;
+  opacity: .7;
 }
 @keyframes marquee-scroll {
   from { transform: translateX(0); }
@@ -917,7 +928,11 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 
 }
 
-.marquee-wrap:hover .marquee-track { animation-play-state: paused; }
+/* Feedback tactile steps : pas de padding-shift, juste la couleur */
+@media (hover:none) and (pointer:coarse) {
+  .steps li:hover { padding-left: 0; }
+  .steps li::after { display: none; }
+}
 
 /* ---- reduced motion ---- */
 @media (prefers-reduced-motion:reduce) {
