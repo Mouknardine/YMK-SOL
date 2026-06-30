@@ -204,8 +204,8 @@
         }
       });
     }, {
-      threshold: 0.12,
-      rootMargin: "0px 0px -60px 0px"
+      threshold: 0.05,
+      rootMargin: "0px 0px 80px 0px"
     });
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
@@ -288,6 +288,54 @@
      ACTIVE :active sur iOS Safari
      ============================================================ */
   document.addEventListener("touchstart", function () {}, { passive: true });
+
+  /* ============================================================
+     MARQUEE DRAG — pointer events (souris + tactile)
+     ============================================================ */
+  (function () {
+    var wrap = document.querySelector(".marquee-wrap");
+    if (!wrap) return;
+    var tracks = Array.from(wrap.querySelectorAll(".marquee-track"));
+    if (!tracks.length) return;
+
+    var dragging = false;
+    var lastX = 0;
+
+    function getAnim(t) { var a = t.getAnimations(); return a[0] || null; }
+
+    wrap.addEventListener("pointerdown", function (e) {
+      if (e.button && e.button !== 0) return;
+      dragging = true;
+      lastX = e.clientX;
+      try { wrap.setPointerCapture(e.pointerId); } catch (ex) {}
+      tracks.forEach(function (t) { var a = getAnim(t); if (a) a.pause(); });
+      wrap.style.cursor = "grabbing";
+    });
+
+    wrap.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      var dx = e.clientX - lastX;
+      lastX = e.clientX;
+      tracks.forEach(function (t) {
+        var a = getAnim(t);
+        if (!a) return;
+        var dur = (a.effect && a.effect.getTiming().duration) || 22000;
+        var half = t.scrollWidth / 2 || 1;
+        var dt = t.classList.contains("marquee-track--rev") ? dx * dur / half : -dx * dur / half;
+        a.currentTime = (((a.currentTime || 0) + dt) % dur + dur) % dur;
+      });
+    });
+
+    function onEnd() {
+      if (!dragging) return;
+      dragging = false;
+      wrap.style.cursor = "";
+      tracks.forEach(function (t) { var a = getAnim(t); if (a) a.play(); });
+    }
+
+    wrap.addEventListener("pointerup", onEnd);
+    wrap.addEventListener("pointercancel", onEnd);
+  }());
 
 
   /* ============================================================
