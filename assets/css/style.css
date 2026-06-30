@@ -914,6 +914,12 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   .step-no { font-size:2.6rem; }
 
   /* contact */
+  .contact-head .sec-title {
+    font-size: clamp(3rem, 14.5vw, 4.5rem);
+    line-height: .92;
+    letter-spacing: -.045em;
+    white-space: nowrap;
+  }
   .cline { grid-template-columns:1fr auto; grid-template-rows:auto auto; gap:4px 12px; padding:22px 0; }
   .cline:hover { padding-left:0; }
   .cline-type { grid-column:1; grid-row:1; font-size:.66rem; }
