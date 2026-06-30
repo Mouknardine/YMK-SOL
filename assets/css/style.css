@@ -57,7 +57,7 @@
 /* ---- base ---- */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 [hidden] { display:none !important; }
-html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
+html { scroll-behavior:smooth; -webkit-text-size-adjust:100%; overflow-x:clip; }
 body {
   font-family:var(--fb); background:var(--bg); color:var(--fg);
   line-height:1.6; overflow-x:hidden; -webkit-font-smoothing:antialiased;
@@ -607,7 +607,7 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 /* ============================================================
    PORTFOLIO — Masonry Vivant
    ============================================================ */
-.portfolio { border-block: 1px solid var(--line); }
+.portfolio { border-block: 1px solid var(--line); overflow-x: clip; }
 
 /* ── Image wrapper pour parallax intérieur ── */
 .pm-img-wrap {
