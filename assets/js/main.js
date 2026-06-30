@@ -213,6 +213,78 @@
   }
 
   /* ============================================================
+     INTRO LEAD — word reveal au scroll
+     ============================================================ */
+  if (!reduce) {
+    var introLead = document.querySelector(".intro-lead");
+    if (introLead) {
+      var leadFrag = document.createDocumentFragment();
+
+      introLead.childNodes.forEach(function (node) {
+        if (node.nodeType === 3) {
+          node.textContent.split(/(\s+)/).forEach(function (part) {
+            if (!part) return;
+            if (/^\s+$/.test(part)) {
+              leadFrag.appendChild(document.createTextNode(part));
+            } else {
+              var sw = document.createElement("span");
+              sw.className = "sw";
+              var swi = document.createElement("span");
+              swi.className = "swi";
+              swi.textContent = part;
+              sw.appendChild(swi);
+              leadFrag.appendChild(sw);
+            }
+          });
+        } else if (node.nodeType === 1) {
+          /* Inline element (ex: <span class="hl">) — conserver la classe, splitter les mots internes */
+          var hlWrap = document.createElement("span");
+          hlWrap.className = node.className;
+          node.childNodes.forEach(function (child) {
+            if (child.nodeType === 3) {
+              child.textContent.split(/(\s+)/).forEach(function (part) {
+                if (!part) return;
+                if (/^\s+$/.test(part)) {
+                  hlWrap.appendChild(document.createTextNode(part));
+                } else {
+                  var sw = document.createElement("span");
+                  sw.className = "sw";
+                  var swi = document.createElement("span");
+                  swi.className = "swi";
+                  swi.textContent = part;
+                  sw.appendChild(swi);
+                  hlWrap.appendChild(sw);
+                }
+              });
+            } else {
+              hlWrap.appendChild(child.cloneNode(true));
+            }
+          });
+          leadFrag.appendChild(hlWrap);
+        }
+      });
+
+      introLead.innerHTML = "";
+      introLead.appendChild(leadFrag);
+
+      var leadSwis = introLead.querySelectorAll(".swi");
+      leadSwis.forEach(function (swi, i) {
+        swi.style.transitionDelay = (i * 22) + "ms";
+      });
+
+      var leadIO = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            leadSwis.forEach(function (swi) { swi.classList.add("swi-in"); });
+            leadIO.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      leadIO.observe(introLead);
+    }
+  }
+
+  /* ============================================================
      ACTIVE :active sur iOS Safari
      ============================================================ */
   document.addEventListener("touchstart", function () {}, { passive: true });

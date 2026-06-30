@@ -264,33 +264,55 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 
 /* ---- méthode ---- */
 .methode { background:var(--bg-2); border-block:1px solid var(--line); }
-.steps { display:grid; gap:16px; }
+
+/* ── Steps : éditorial vertical — mobile first ── */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--line);
+  margin-top: 8px;
+}
 .steps li {
-  padding:30px 26px; border:1px solid var(--line); border-radius:var(--r-lg);
-  background:var(--bg); position:relative; overflow:hidden;
-  transition:transform .4s var(--ease), border-color .4s, box-shadow .4s var(--ease);
+  display: grid;
+  grid-template-columns: 54px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 18px;
+  align-items: center;
+  padding: 26px 0;
+  border: none;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  position: relative;
+  overflow: visible;
+  transition: padding .35s var(--ease), border-color .3s;
 }
-.steps li::before {
-  content:""; position:absolute; inset:0;
-  background: linear-gradient(135deg, rgba(224,161,43,.06) 0%, transparent 60%);
-  opacity:0; transition:opacity .4s var(--ease);
-}
-.steps li:hover { transform:translateY(-6px); border-color:var(--gold); box-shadow:0 16px 40px rgba(0,0,0,.18); }
-.steps li:hover::before { opacity:1; }
+.steps li:hover { transform: none; box-shadow: none; border-bottom-color: var(--gold); padding-left: 10px; }
+.steps li::before { display: none; }
 .steps li::after {
   content: attr(data-no);
   position: absolute;
-  right: 8px; bottom: -20px;
+  right: 0; bottom: -8px;
   font-family: var(--fh); font-weight: 800;
-  font-size: clamp(7rem, 16vw, 11rem);
-  line-height: 1;
-  color: var(--gold2); opacity: .06;
+  font-size: 5rem; line-height: 1;
+  color: var(--gold2); opacity: .07;
   pointer-events: none; user-select: none;
   z-index: 0;
 }
-.step-no { font-family:var(--fh); font-weight:800; font-size:3.2rem; line-height:1; display:block; margin-bottom:12px; background:linear-gradient(120deg, var(--gold2) 0%, #EC7A08 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; position:relative; z-index:1; }
-.steps li h3 { font-size:1.35rem; margin-bottom:8px; position:relative; z-index:1; }
-.steps li p { color:var(--muted); font-size:.96rem; position:relative; z-index:1; }
+.step-no {
+  grid-column: 1; grid-row: 1 / 3;
+  font-family: var(--fh); font-weight: 800;
+  font-size: 1.7rem; line-height: 1;
+  margin-bottom: 0;
+  align-self: center; text-align: right;
+  background: linear-gradient(120deg, var(--gold2) 0%, #EC7A08 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  position: relative; z-index: 1;
+}
+.steps li h3 { grid-column: 2; grid-row: 1; font-size: 1.15rem; margin-bottom: 0; align-self: end; padding-bottom: 5px; position: relative; z-index: 1; }
+.steps li p { grid-column: 2; grid-row: 2; align-self: start; color: var(--muted); font-size: .88rem; position: relative; z-index: 1; }
 
 /* ============================================================
    CONTACT — typographie éditoriale, sans carte, sans emoji
@@ -503,26 +525,16 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 .reveal { opacity:0; transform:translateY(48px); transition:opacity .85s cubic-bezier(0.22, 1, 0.36, 1), transform .85s cubic-bezier(0.22, 1, 0.36, 1); will-change:opacity,transform; }
 .reveal.is-in { opacity:1; transform:none; will-change:auto; }
 
-/* ---- animations cartes mobile ---- */
-
-/* Step cards : entrée scale + translateY, en cascade */
-/* desktop : stagger classique */
-.steps li.reveal { transform:translateY(40px) scale(.94); transition:opacity .6s var(--ease), transform .6s var(--ease); }
-.steps li.reveal.is-in { transform:none; }
+/* ---- animations steps (éditorial) ---- */
+.steps li.reveal { transform:translateY(22px); opacity:0; transition:opacity .5s var(--ease), transform .5s var(--ease); }
+.steps li.reveal.is-in { transform:none; opacity:1; }
 .steps li:nth-child(1).reveal { transition-delay:0ms; }
-.steps li:nth-child(2).reveal { transition-delay:90ms; }
-.steps li:nth-child(3).reveal { transition-delay:180ms; }
-.steps li:nth-child(4).reveal { transition-delay:270ms; }
+.steps li:nth-child(2).reveal { transition-delay:80ms; }
+.steps li:nth-child(3).reveal { transition-delay:160ms; }
+.steps li:nth-child(4).reveal { transition-delay:240ms; }
 
-/* mobile : entrée simple */
-@media(max-width:599px) {
-  .steps li.reveal { transform:translateY(32px); opacity:0; }
-  .steps li.reveal.is-in { transform:none; opacity:1; }
-  .steps li:nth-child(1).reveal { transition-delay:0ms; }
-  .steps li:nth-child(2).reveal { transition-delay:70ms; }
-  .steps li:nth-child(3).reveal { transition-delay:140ms; }
-  .steps li:nth-child(4).reveal { transition-delay:210ms; }
-}
+/* ---- intro-lead : mots légèrement plus rapides que le hero ---- */
+.intro-lead .swi { transition-duration: .6s; }
 
 /* ---- marquee services ---- */
 .marquee-wrap {
@@ -573,7 +585,7 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 /* Feedback tactile mobile */
 @media (hover:none) and (pointer:coarse) {
   .steps li { -webkit-tap-highlight-color:transparent; }
-  .steps li:active { transform:scale(.97) translateY(2px) !important; transition:transform .12s ease !important; }
+  .steps li:active { border-bottom-color: var(--gold) !important; }
   .port-item:not(.port-svc):active img { transform:scale(1.03); transition:transform .15s ease !important; }
   .port-svc:active { transform:scale(.97) !important; transition:transform .12s ease !important; }
   .cline:active { transform:translateX(4px) !important; transition:transform .12s ease !important; }
@@ -773,7 +785,9 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   .dock { display:none; }
   body { padding-bottom:0; }
   .hero-scroll { display:flex; }
-  .steps { grid-template-columns:repeat(2,1fr); }
+  .steps li { grid-template-columns: 70px 1fr; column-gap: 24px; padding: 32px 0; }
+  .step-no { font-size: 2.2rem; }
+  .steps li h3 { font-size: 1.25rem; }
   /* menu : 2 colonnes */
   .mmenu-in { grid-template-columns:1.4fr 1fr; gap:48px; align-items:start; padding-block:40px 48px; }
   .mmenu-side { border-left:1px solid var(--line); padding-left:48px; }
