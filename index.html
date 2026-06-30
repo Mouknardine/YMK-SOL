@@ -21,7 +21,7 @@
   <link rel="apple-touch-icon" href="assets/img/logo.png" />
   <!-- Anti-FOUC : applique le thème sauvegardé (ou la préférence OS) avant le rendu CSS -->
   <script>!function(){var t=localStorage.getItem('ymk-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',t)}();</script>
-  <link href="https://api.fontshare.com/v2/css?f[]=boska@400,500,700,900&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700,800&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
 
   <!-- Google Analytics 4 — remplacer G-XXXXXXXXXX par votre Measurement ID -->
@@ -135,24 +135,25 @@
     </section>
 
     <!-- ░░░░░ CHIFFRES ░░░░░ -->
-    <!-- ⚠ TODO client : vérifier ces valeurs avant mise en ligne -->
     <section class="section stats" aria-label="YMK SOL en chiffres">
-      <div class="container stats-in">
-        <div class="stat-item reveal">
-          <span class="stat-num" data-count="10" data-suffix="+">10+</span>
-          <span class="stat-label">Ans d'expérience</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-num" data-count="200" data-suffix="+">200+</span>
-          <span class="stat-label">Chantiers réalisés</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-num" data-count="6">6</span>
-          <span class="stat-label">Districts du canton</span>
-        </div>
-        <div class="stat-item reveal">
-          <span class="stat-num" data-count="48" data-suffix="h">48h</span>
-          <span class="stat-label">Réponse max.</span>
+      <div class="container">
+        <div class="stats-in">
+          <div class="stat-item reveal">
+            <span class="stat-num" data-count="10" data-suffix="+">10+</span>
+            <span class="stat-label">Ans d'expérience</span>
+          </div>
+          <div class="stat-item reveal">
+            <span class="stat-num" data-count="200" data-suffix="+">200+</span>
+            <span class="stat-label">Chantiers réalisés</span>
+          </div>
+          <div class="stat-item reveal">
+            <span class="stat-num" data-count="6">6</span>
+            <span class="stat-label">Districts du canton</span>
+          </div>
+          <div class="stat-item reveal">
+            <span class="stat-num" data-count="48" data-suffix="h">48h</span>
+            <span class="stat-label">Réponse max.</span>
+          </div>
         </div>
       </div>
     </section>

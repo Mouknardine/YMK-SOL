@@ -218,34 +218,6 @@
   document.addEventListener("touchstart", function () {}, { passive: true });
 
   /* ============================================================
-     STEP CARDS — active au scroll (mobile)
-     ============================================================ */
-  var stepCards = document.querySelectorAll(".steps li");
-  if (stepCards.length && !reduce) {
-    function markStep(li) {
-      stepCards.forEach(function (l) { l.classList.remove("step-active"); });
-      li.classList.add("step-active");
-    }
-    function updateActiveStep() {
-      if (window.innerWidth > 599) return;
-      var mid = window.scrollY + window.innerHeight * 0.52;
-      var closest = null, minDist = Infinity;
-      stepCards.forEach(function (li) {
-        var r = li.getBoundingClientRect();
-        var center = r.top + window.scrollY + r.height / 2;
-        var dist = Math.abs(mid - center);
-        if (dist < minDist) { minDist = dist; closest = li; }
-      });
-      if (closest && !closest.classList.contains("step-active")) markStep(closest);
-    }
-    window.addEventListener("scroll", updateActiveStep, { passive: true });
-    updateActiveStep();
-    stepCards.forEach(function (li) {
-      li.addEventListener("touchstart", function () { markStep(li); }, { passive: true });
-    });
-  }
-
-  /* ============================================================
      COMPTEURS ANIMÉS — easeOutExpo
      ============================================================ */
   var counters = document.querySelectorAll("[data-count]");
