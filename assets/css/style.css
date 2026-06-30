@@ -285,9 +285,20 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 }
 .steps li:hover { transform:translateY(-6px); border-color:var(--gold); box-shadow:0 16px 40px rgba(0,0,0,.18); }
 .steps li:hover::before { opacity:1; }
-.step-no { font-family:var(--fh); font-weight:800; font-size:3.2rem; line-height:1; display:block; margin-bottom:12px; background:linear-gradient(120deg, var(--gold2) 0%, #EC7A08 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
-.steps li h3 { font-size:1.35rem; margin-bottom:8px; }
-.steps li p { color:var(--muted); font-size:.96rem; }
+.steps li::after {
+  content: attr(data-no);
+  position: absolute;
+  right: 8px; bottom: -20px;
+  font-family: var(--fh); font-weight: 800;
+  font-size: clamp(7rem, 16vw, 11rem);
+  line-height: 1;
+  color: var(--gold2); opacity: .06;
+  pointer-events: none; user-select: none;
+  z-index: 0;
+}
+.step-no { font-family:var(--fh); font-weight:800; font-size:3.2rem; line-height:1; display:block; margin-bottom:12px; background:linear-gradient(120deg, var(--gold2) 0%, #EC7A08 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; position:relative; z-index:1; }
+.steps li h3 { font-size:1.35rem; margin-bottom:8px; position:relative; z-index:1; }
+.steps li p { color:var(--muted); font-size:.96rem; position:relative; z-index:1; }
 
 /* ============================================================
    CONTACT — typographie éditoriale, sans carte, sans emoji
@@ -521,6 +532,41 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   .steps li:nth-child(4).reveal { transition-delay:210ms; }
 }
 
+/* ---- marquee services ---- */
+.marquee-wrap {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+  background: var(--bg-2);
+}
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marquee-scroll 30s linear infinite;
+}
+.marquee-track span {
+  font-family: var(--fh);
+  font-weight: 700;
+  font-size: .95rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 30px;
+  white-space: nowrap;
+}
+.marquee-track .m-sep {
+  color: var(--gold);
+  padding: 0;
+  font-size: .72rem;
+  flex-shrink: 0;
+}
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
 /* Portfolio items : entrée scale + léger Y */
 .port-item.reveal { transform:translateY(28px) scale(.96); transition:opacity .7s var(--ease), transform .7s var(--ease); }
 .port-item.reveal.is-in { transform:none; }
@@ -696,17 +742,28 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
 .port-svc h3 { font-size: 1.1rem; margin-bottom: 6px; line-height: 1.25; color: #F5F0E8; }
 .port-svc p  { color: rgba(245,240,232,.5); font-size: .82rem; line-height: 1.5; }
 
-/* ── Stack vertical sur mobile (pas de carousel) ── */
+/* ── Galerie horizontale snap sur mobile ── */
 .port-row {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
   gap: 10px;
 }
-.port-row .port-item:not(.port-svc) {
-  width: 100%;
-  height: 240px;
+.port-row::-webkit-scrollbar { display: none; }
+.port-row .port-item {
+  flex: 0 0 78%;
+  height: 270px;
+  scroll-snap-align: start;
 }
-.port-row .port-svc { height: auto; min-height: 160px; }
+.port-row .port-svc {
+  flex: 0 0 74%;
+  height: auto;
+  min-height: 200px;
+  scroll-snap-align: start;
+}
 
 /* ── Bento grid : 640px+ ── */
 @media (min-width: 640px) {
@@ -849,6 +906,8 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   .cline-arr  { grid-column:2; grid-row:1/3; opacity:1; transform:none; align-self:center; }
 
 }
+
+.marquee-wrap:hover .marquee-track { animation-play-state: paused; }
 
 /* ---- reduced motion ---- */
 @media (prefers-reduced-motion:reduce) {
