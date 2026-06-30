@@ -217,35 +217,6 @@
      ============================================================ */
   document.addEventListener("touchstart", function () {}, { passive: true });
 
-  /* ============================================================
-     COMPTEURS ANIMÉS — easeOutExpo
-     ============================================================ */
-  var counters = document.querySelectorAll("[data-count]");
-  if ("IntersectionObserver" in window && !reduce) {
-    var co = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var el  = e.target;
-        var end = +el.getAttribute("data-count");
-        var suf = el.getAttribute("data-suffix") || "";
-        var t0  = null;
-        var dur = 1600;
-        var step = function (ts) {
-          if (!t0) t0 = ts;
-          var k = Math.min((ts - t0) / dur, 1);
-          el.textContent = Math.round(end * easeOutExpo(k)) + suf;
-          if (k < 1) requestAnimationFrame(step);
-        };
-        requestAnimationFrame(step);
-        co.unobserve(el);
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(function (c) { co.observe(c); });
-  } else {
-    counters.forEach(function (c) {
-      c.textContent = c.getAttribute("data-count") + (c.getAttribute("data-suffix") || "");
-    });
-  }
 
   /* ============================================================
      PHONE PICKER

@@ -400,27 +400,6 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   .ftr-bottom-in { flex-direction:row; justify-content:space-between; align-items:center; }
 }
 
-/* ---- stats / chiffres ---- */
-.stats { padding-block:clamp(40px,6vw,72px); border-bottom:1px solid var(--line); }
-.stats-in {
-  display:grid; grid-template-columns:repeat(2,1fr);
-  gap:clamp(20px,4vw,36px); text-align:center;
-}
-.stat-num {
-  display:block;
-  font-family:var(--fh); font-weight:700; font-size:clamp(2.6rem,7vw,4.4rem); letter-spacing:-.04em; line-height:1;
-  background:var(--grad); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
-}
-.stat-label {
-  display:block; margin-top:7px;
-  font-family:var(--fh); font-weight:700; font-size:.72rem; letter-spacing:.2em; text-transform:uppercase;
-  color:var(--muted);
-}
-@media(min-width:600px) { .stats-in { grid-template-columns:repeat(4,1fr); } }
-.stat-item:nth-child(1).reveal { transition-delay:   0ms; }
-.stat-item:nth-child(2).reveal { transition-delay:  80ms; }
-.stat-item:nth-child(3).reveal { transition-delay: 160ms; }
-.stat-item:nth-child(4).reveal { transition-delay: 240ms; }
 
 /* ---- dock mobile ---- */
 .dock {
