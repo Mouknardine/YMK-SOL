@@ -290,7 +290,7 @@
   document.addEventListener("touchstart", function () {}, { passive: true });
 
   /* ============================================================
-     MARQUEE DRAG — pointer events (souris + tactile)
+     MARQUEE — boucle infinie JS + drag
      ============================================================ */
   (function () {
     var wrap = document.querySelector(".marquee-wrap");
@@ -298,17 +298,47 @@
     var tracks = Array.from(wrap.querySelectorAll(".marquee-track"));
     if (!tracks.length) return;
 
+    /* px/frame à 60fps — négatif = vers la gauche, positif = vers la droite */
+    var SPEEDS = [-0.8, 0.6];
+
+    var state = tracks.map(function (track, i) {
+      /* Arrêt de l'animation CSS */
+      track.style.animation = "none";
+
+      /* Clone items jusqu'à ce que la piste remplisse 3× le viewport */
+      var orig = Array.from(track.children);
+      var guard = 0;
+      while (track.scrollWidth < window.innerWidth * 3 && guard++ < 40) {
+        orig.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
+      }
+
+      var halfW = track.scrollWidth / 2;
+      /* La piste droitière commence à mi-chemin pour afficher du contenu d'emblée */
+      var initX = SPEEDS[i] > 0 ? -halfW : 0;
+
+      return { el: track, speed: SPEEDS[i], x: initX, halfW: halfW };
+    });
+
     var dragging = false;
     var lastX = 0;
 
-    function getAnim(t) { var a = t.getAnimations(); return a[0] || null; }
+    (function tick() {
+      state.forEach(function (s) {
+        if (!dragging) s.x += s.speed;
+        /* Normalise x dans (-halfW, 0] pour boucler sans saut visuel */
+        while (s.x < -s.halfW) s.x += s.halfW;
+        while (s.x > 0)        s.x -= s.halfW;
+        s.el.style.transform = "translateX(" + s.x + "px)";
+      });
+      requestAnimationFrame(tick);
+    }());
 
+    /* Drag */
     wrap.addEventListener("pointerdown", function (e) {
       if (e.button && e.button !== 0) return;
       dragging = true;
       lastX = e.clientX;
       try { wrap.setPointerCapture(e.pointerId); } catch (ex) {}
-      tracks.forEach(function (t) { var a = getAnim(t); if (a) a.pause(); });
       wrap.style.cursor = "grabbing";
     });
 
@@ -316,21 +346,13 @@
       if (!dragging) return;
       var dx = e.clientX - lastX;
       lastX = e.clientX;
-      tracks.forEach(function (t) {
-        var a = getAnim(t);
-        if (!a) return;
-        var dur = (a.effect && a.effect.getTiming().duration) || 22000;
-        var half = t.scrollWidth / 2 || 1;
-        var dt = t.classList.contains("marquee-track--rev") ? dx * dur / half : -dx * dur / half;
-        a.currentTime = (((a.currentTime || 0) + dt) % dur + dur) % dur;
-      });
+      state.forEach(function (s) { s.x += dx; });
     });
 
     function onEnd() {
       if (!dragging) return;
       dragging = false;
       wrap.style.cursor = "";
-      tracks.forEach(function (t) { var a = getAnim(t); if (a) a.play(); });
     }
 
     wrap.addEventListener("pointerup", onEnd);

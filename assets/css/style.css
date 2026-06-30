@@ -556,13 +556,8 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   align-items: center;
   width: max-content;
   padding: 18px 0;
-  animation: marquee-scroll 22s linear infinite;
   will-change: transform;
   backface-visibility: hidden;
-}
-.marquee-track--rev {
-  animation-direction: reverse;
-  animation-duration: 28s;
 }
 .marquee-track span {
   font-family: var(--fh);
@@ -580,10 +575,6 @@ h1,h2,h3 { font-family:var(--fh); font-weight:800; line-height:1.02; letter-spac
   font-size: .82rem;
   flex-shrink: 0;
   opacity: .7;
-}
-@keyframes marquee-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
 }
 
 
