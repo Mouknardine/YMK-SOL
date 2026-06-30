@@ -12,8 +12,12 @@
   var toggle = document.getElementById("themeToggle");
   var PREF   = "ymk-theme";
 
-  var saved = localStorage.getItem(PREF) || "light";
-  root.setAttribute("data-theme", saved);
+  /* L'inline script dans <head> a déjà appliqué le bon thème (localStorage → préf OS → dark).
+     On vérifie juste qu'un thème est bien présent (si le script était désactivé). */
+  if (!root.getAttribute("data-theme")) {
+    root.setAttribute("data-theme",
+      window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  }
 
   if (toggle) {
     toggle.addEventListener("click", function () {
@@ -137,13 +141,17 @@
   /* ---- phone picker ---- */
   var ppick         = document.getElementById("ppick");
   var ppickBackdrop = document.getElementById("ppickBackdrop");
+  var _ppickOpener  = null;
 
   function openPick() {
     if (!ppick) return;
+    _ppickOpener = document.activeElement;
     ppick.hidden = false;
     requestAnimationFrame(function () {
       ppick.classList.add("open");
       ppickBackdrop.classList.add("open");
+      var firstOpt = ppick.querySelector(".ppick-opt");
+      if (firstOpt) firstOpt.focus();
     });
     document.body.style.overflow = "hidden";
   }
@@ -155,6 +163,7 @@
     ppick.addEventListener("transitionend", function h() {
       ppick.hidden = true;
       ppick.removeEventListener("transitionend", h);
+      if (_ppickOpener) { _ppickOpener.focus(); _ppickOpener = null; }
     });
   }
 
@@ -166,29 +175,47 @@
   });
   if (ppickBackdrop) ppickBackdrop.addEventListener("click", closePick);
   if (ppick) {
+    /* Focus trap : Tab cycle dans le picker */
+    ppick.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closePick(); return; }
+      if (e.key !== "Tab") return;
+      var focusable = Array.from(ppick.querySelectorAll("a[href], button:not([disabled])"));
+      if (!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+      } else {
+        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closePick();
+      if (e.key === "Escape" && ppick.classList.contains("open")) closePick();
     });
   }
 
   /* ---- lightbox galerie ---- */
-  var lb    = document.getElementById("lb");
-  var lbImg = document.getElementById("lbImg");
-  var lbCap = document.getElementById("lbCap");
+  var lb       = document.getElementById("lb");
+  var lbImg    = document.getElementById("lbImg");
+  var lbCap    = document.getElementById("lbCap");
+  var _lbOpener = null;
 
   function openLb(src, cap) {
     if (!lb) return;
+    _lbOpener = document.activeElement;
     lbImg.src = src;
     lbImg.alt = cap || "";
     lbCap.textContent = cap || "";
     lb.hidden = false;
     document.body.style.overflow = "hidden";
+    var closeBtn = lb.querySelector(".lb-close");
+    if (closeBtn) closeBtn.focus();
   }
   function closeLb() {
     if (!lb) return;
     lb.hidden = true;
     lbImg.src = "";
     document.body.style.overflow = "";
+    if (_lbOpener) { _lbOpener.focus(); _lbOpener = null; }
   }
 
   document.querySelectorAll(".gal-item, .port-item:not(.port-svc)").forEach(function (a) {
@@ -206,7 +233,7 @@
       if (e.target === lb || e.target.closest(".lb-close")) closeLb();
     });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape") closeLb();
+      if (e.key === "Escape" && !lb.hidden) closeLb();
     });
   }
 })();
