@@ -68,6 +68,22 @@
     setInert(true);
   }
 
+  /* Accordéon prestations (interactif, un seul ouvert) */
+  var accItems = Array.prototype.slice.call(document.querySelectorAll(".acc-item"));
+  accItems.forEach(function (item) {
+    var head = item.querySelector(".acc-head");
+    if (!head) return;
+    head.addEventListener("click", function () {
+      var isOpen = item.classList.contains("is-open");
+      accItems.forEach(function (o) {
+        o.classList.remove("is-open");
+        var h = o.querySelector(".acc-head");
+        if (h) h.setAttribute("aria-expanded", "false");
+      });
+      if (!isOpen) { item.classList.add("is-open"); head.setAttribute("aria-expanded", "true"); }
+    });
+  });
+
   /* Lightbox (réalisations) */
   var lb = document.getElementById("lb");
   var lbImg = document.getElementById("lbImg");

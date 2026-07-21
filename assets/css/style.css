@@ -48,13 +48,22 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
    FOND ANIMÉ (simple : deux halos qui dérivent lentement)
    ============================================================ */
 .fx { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--paper); pointer-events: none; }
-.fx .b { position: absolute; width: 60vmax; height: 60vmax; border-radius: 50%; filter: blur(80px); will-change: transform; }
-.fx .b1 { background: radial-gradient(circle, rgba(224,161,43,.40), transparent 68%); top: -20%; left: -12%; animation: fxb1 26s ease-in-out infinite alternate; }
-.fx .b2 { background: radial-gradient(circle, rgba(120,132,134,.42), transparent 70%); bottom: -22%; right: -14%; animation: fxb2 32s ease-in-out infinite alternate; }
-.fx .b3 { background: radial-gradient(circle, rgba(224,161,43,.20), transparent 70%); top: 40%; left: 55%; width: 42vmax; height: 42vmax; animation: fxb3 38s ease-in-out infinite alternate; }
+/* motif parquet / tissage (rappel du logo) qui dérive lentement */
+.fx::before {
+  content: ""; position: absolute; inset: -30%;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(20,20,18,.07) 0 1.5px, transparent 1.5px 52px),
+    repeating-linear-gradient(-45deg, rgba(20,20,18,.05) 0 1.5px, transparent 1.5px 52px);
+  animation: fxweave 24s linear infinite;
+}
+@keyframes fxweave { to { transform: translateX(52px); } }
+.fx .b { position: absolute; width: 62vmax; height: 62vmax; border-radius: 50%; filter: blur(72px); will-change: transform; }
+.fx .b1 { background: radial-gradient(circle, rgba(224,161,43,.6), transparent 64%); top: -16%; left: -8%; animation: fxb1 22s ease-in-out infinite alternate; }
+.fx .b2 { background: radial-gradient(circle, rgba(122,134,136,.55), transparent 66%); bottom: -18%; right: -10%; animation: fxb2 28s ease-in-out infinite alternate; }
+.fx .b3 { background: radial-gradient(circle, rgba(224,161,43,.34), transparent 66%); top: 36%; left: 52%; width: 48vmax; height: 48vmax; animation: fxb3 32s ease-in-out infinite alternate; }
 @keyframes fxb1 { to { transform: translate(26vw, 18vh) scale(1.18); } }
-@keyframes fxb2 { to { transform: translate(-20vw, -14vh) scale(1.14); } }
-@keyframes fxb3 { to { transform: translate(-16vw, 12vh) scale(1.22); } }
+@keyframes fxb2 { to { transform: translate(-22vw, -15vh) scale(1.14); } }
+@keyframes fxb3 { to { transform: translate(-18vw, 13vh) scale(1.22); } }
 
 /* ============================================================
    BOUTONS
@@ -168,16 +177,32 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .phead-sub { margin-top: 22px; max-width: 56ch; font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--ink-2); line-height: 1.65; }
 
 /* ============================================================
-   PRESTATIONS — tuiles (hover noir) + méthode
+   PRESTATIONS — accordéon interactif (image par prestation) + méthode
    ============================================================ */
-.svc-grid { display: grid; grid-template-columns: 1fr; border-top: 2px solid var(--ink); }
-.svc-tile { position: relative; padding: clamp(24px, 3vw, 40px) clamp(20px, 2.5vw, 34px); border-bottom: 1px solid var(--line); transition: background .25s, color .25s; }
-.svc-tile:hover { background: var(--ink); color: var(--surface); }
-.svc-tile .n { font-family: var(--fh); font-weight: 800; font-size: clamp(2rem, 4vw, 2.8rem); color: var(--accent); line-height: 1; }
-.svc-tile:hover .n { color: var(--accent-2); }
-.svc-tile h3 { font-size: clamp(1.4rem, 2.6vw, 2rem); margin-top: 16px; }
-.svc-tile p { margin-top: 10px; color: var(--ink-2); font-size: .96rem; line-height: 1.55; max-width: 46ch; }
-.svc-tile:hover p { color: rgba(244,244,242,.78); }
+.acc { border-top: 2px solid var(--ink); }
+.acc-item { border-bottom: 1px solid var(--line); }
+.acc-head { width: 100%; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px; padding: 22px 4px; background: transparent; border: none; cursor: pointer; text-align: left; transition: padding-left .25s var(--ease); }
+.acc-head:hover { padding-left: 12px; }
+.acc-head .n { font-family: var(--fh); font-weight: 800; font-size: clamp(1.5rem, 3.4vw, 2.3rem); color: var(--accent); line-height: 1; }
+.acc-head .t { font-family: var(--fh); font-weight: 800; font-size: clamp(1.4rem, 3vw, 2.1rem); letter-spacing: -.02em; transition: color .2s; }
+.acc-head:hover .t { color: var(--accent); }
+.acc-item.is-open .acc-head .t { color: var(--accent); }
+.acc-ic { position: relative; width: 26px; height: 26px; flex: none; }
+.acc-ic::before, .acc-ic::after { content: ""; position: absolute; background: var(--ink); transition: transform .3s var(--ease); }
+.acc-ic::before { top: 12px; left: 2px; right: 2px; height: 2px; }
+.acc-ic::after { left: 12px; top: 2px; bottom: 2px; width: 2px; }
+.acc-item.is-open .acc-ic::after { transform: scaleY(0); }
+.acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease); }
+.acc-item.is-open .acc-body { grid-template-rows: 1fr; }
+.acc-body-inner { overflow: hidden; min-height: 0; }
+.acc-content { display: grid; grid-template-columns: 1fr; gap: 18px; padding: 2px 4px 30px; }
+.acc-content p { color: var(--ink-2); font-size: 1rem; line-height: 1.6; max-width: 52ch; }
+.acc-media { border: 2px solid var(--ink); border-radius: 2px; overflow: hidden; align-self: start; }
+.acc-media img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; display: block; }
+@media (min-width: 900px) {
+  .acc-content { grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center; padding-bottom: 40px; }
+  .acc-media img { aspect-ratio: 4 / 3; }
+}
 
 .method2 { margin-top: clamp(56px, 8vw, 96px); }
 .steps2 { display: grid; grid-template-columns: 1fr; gap: 0; }
@@ -190,16 +215,18 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 /* ============================================================
    RÉALISATIONS — grandes lignes alternées + gros index
    ============================================================ */
-.projects { display: flex; flex-direction: column; gap: clamp(44px, 6vw, 80px); }
-.proj { border-top: 2px solid var(--ink); padding-top: clamp(20px, 3vw, 32px); display: grid; grid-template-columns: 1fr; gap: 20px; }
+.projects { display: flex; flex-direction: column; gap: clamp(26px, 4vw, 52px); }
 .proj-media { position: relative; display: block; border: 2px solid var(--ink); border-radius: 2px; overflow: hidden; background: var(--paper-2); }
-.proj-media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transition: transform .5s var(--ease); }
-.proj-media:hover img { transform: scale(1.04); }
-.proj-media .zoom { position: absolute; top: 12px; right: 12px; background: var(--ink); color: var(--surface); font-family: var(--fb); font-weight: 700; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 7px 11px; display: inline-flex; align-items: center; gap: 7px; }
-.proj-idx { font-family: var(--fh); font-weight: 800; font-size: clamp(3rem, 8vw, 5.4rem); color: var(--accent); line-height: .85; }
-.proj-cat { font-family: var(--fb); font-weight: 700; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); margin-top: 14px; }
-.proj h3 { font-size: clamp(1.8rem, 4vw, 3rem); margin-top: 8px; }
-.proj p { margin-top: 12px; color: var(--ink-2); font-size: 1rem; line-height: 1.6; max-width: 44ch; }
+.proj-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; transition: transform .7s var(--ease); }
+.proj-media:hover img { transform: scale(1.05); }
+.proj-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(15,14,12,.18) 0%, transparent 26%, rgba(15,14,12,.74) 100%); pointer-events: none; }
+.proj-num { position: absolute; top: 14px; left: 18px; z-index: 2; font-family: var(--fh); font-weight: 800; font-size: clamp(2.6rem, 6vw, 4.6rem); color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,.85); line-height: 1; }
+.proj-zoom { position: absolute; top: 16px; right: 16px; z-index: 2; background: var(--accent-2); color: var(--ink); font-family: var(--fb); font-weight: 700; font-size: .68rem; letter-spacing: .1em; text-transform: uppercase; padding: 8px 12px; display: inline-flex; align-items: center; gap: 7px; transition: background .2s; }
+.proj-media:hover .proj-zoom { background: #fff; }
+.proj-cap { position: absolute; left: 20px; right: 20px; bottom: 20px; z-index: 2; }
+.proj-cap .cat { font-family: var(--fb); font-weight: 700; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-2); }
+.proj-cap h3 { color: #fff; font-size: clamp(1.6rem, 4vw, 3rem); letter-spacing: -.02em; margin-top: 6px; }
+.proj-cap p { color: rgba(255,255,255,.86); font-size: .96rem; line-height: 1.5; margin-top: 8px; max-width: 48ch; }
 
 /* ============================================================
    CONTACT — bloc massif
@@ -310,12 +337,10 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 
   .steps2 { grid-template-columns: repeat(4, 1fr); column-gap: 36px; }
 
-  /* Réalisations : lignes alternées gauche/droite */
-  .proj { grid-template-columns: 1fr 1fr; gap: clamp(36px, 4vw, 72px); align-items: center; }
-  .proj-media { grid-column: 1; grid-row: 1; }
-  .proj-body { grid-column: 2; grid-row: 1; }
-  .proj.rev .proj-media { grid-column: 2; }
-  .proj.rev .proj-body { grid-column: 1; grid-row: 1; }
+  /* Réalisations : grandes images cinématiques */
+  .proj-media img { aspect-ratio: 21 / 9; }
+  .proj-num { top: 22px; left: 34px; }
+  .proj-cap { left: 34px; right: 34px; bottom: 30px; }
 
   /* Contact 2 colonnes */
   .contact-cols { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(40px, 5vw, 88px); align-items: start; }
@@ -369,20 +394,23 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
   .mini-svc .t { font-size: 1.3rem; }
   .preview img { aspect-ratio: 16 / 10; }
 
-  /* Prestations tuiles */
-  .svc-tile { padding: 22px 2px; }
-  .svc-tile .n { font-size: 1.9rem; }
-  .svc-tile h3 { font-size: 1.35rem; margin-top: 12px; }
+  /* Prestations accordéon */
+  .acc-head { padding: 18px 2px; }
+  .acc-head .n { font-size: 1.55rem; }
+  .acc-head .t { font-size: 1.3rem; }
+  .acc-content { padding-bottom: 24px; }
   .method2 { margin-top: 40px; }
   .step2 { padding: 16px 0 20px; }
   .step2 .n { font-size: 2.4rem; }
   .step2 h4 { font-size: 1.2rem; }
 
-  /* Réalisations */
-  .projects { gap: 38px; }
-  .proj { padding-top: 18px; gap: 16px; }
-  .proj-idx { font-size: 2.8rem; }
-  .proj h3 { font-size: 1.7rem; }
+  /* Réalisations grandes images */
+  .projects { gap: 22px; }
+  .proj-media img { aspect-ratio: 4 / 3; }
+  .proj-num { font-size: 2.6rem; top: 12px; left: 14px; }
+  .proj-cap { left: 16px; right: 16px; bottom: 16px; }
+  .proj-cap h3 { font-size: 1.6rem; }
+  .proj-cap p { font-size: .9rem; }
 
   /* CTA */
   .nextcta-in { padding-block: 42px; }
