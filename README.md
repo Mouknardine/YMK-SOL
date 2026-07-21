@@ -4,8 +4,10 @@ Site vitrine mono-page, **orienté photo**, pour YMK SOL SàRL — spécialiste 
 revêtements de sol à Pully (canton de Vaud) : parquet, linoléum, PVC, moquette,
 ponçage et rénovation.
 
-HTML / CSS / JS pur, aucune dépendance, aucun build → chargement quasi instantané.
-DA noir / or dans l'esprit de l'agence [We Are Brothers](https://wearebrothers.ch).
+HTML / CSS / JS pur, aucune dépendance de build → chargement quasi instantané.
+Direction artistique éditoriale, thème clair unique : neutres chauds tirés des
+matières (chêne miel, sisal, lin), accent ambre repris du logo, typographie
+serif (Sentient) + Satoshi. Site par [We Are Brothers](https://wearebrothers.ch).
 
 ## ⚠️ À FAIRE : déposer les photos
 
