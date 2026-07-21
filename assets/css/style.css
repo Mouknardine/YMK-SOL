@@ -47,23 +47,33 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 /* ============================================================
    FOND ANIMÉ (simple : deux halos qui dérivent lentement)
    ============================================================ */
-.fx { position: fixed; inset: 0; z-index: -1; overflow: hidden; background: var(--paper); pointer-events: none; }
-/* motif parquet / tissage (rappel du logo) qui dérive lentement */
-.fx::before {
-  content: ""; position: absolute; inset: -30%;
-  background-image:
-    repeating-linear-gradient(45deg, rgba(20,20,18,.07) 0 1.5px, transparent 1.5px 52px),
-    repeating-linear-gradient(-45deg, rgba(20,20,18,.05) 0 1.5px, transparent 1.5px 52px);
-  animation: fxweave 24s linear infinite;
+.fx {
+  position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+  background:
+    radial-gradient(58vmax 46vmax at 10% -6%, rgba(224,161,43,.18), transparent 62%),
+    radial-gradient(52vmax 52vmax at 102% 106%, rgba(120,132,134,.16), transparent 62%),
+    var(--paper);
 }
-@keyframes fxweave { to { transform: translateX(52px); } }
-.fx .b { position: absolute; width: 62vmax; height: 62vmax; border-radius: 50%; filter: blur(72px); will-change: transform; }
-.fx .b1 { background: radial-gradient(circle, rgba(224,161,43,.6), transparent 64%); top: -16%; left: -8%; animation: fxb1 22s ease-in-out infinite alternate; }
-.fx .b2 { background: radial-gradient(circle, rgba(122,134,136,.55), transparent 66%); bottom: -18%; right: -10%; animation: fxb2 28s ease-in-out infinite alternate; }
-.fx .b3 { background: radial-gradient(circle, rgba(224,161,43,.34), transparent 66%); top: 36%; left: 52%; width: 48vmax; height: 48vmax; animation: fxb3 32s ease-in-out infinite alternate; }
-@keyframes fxb1 { to { transform: translate(26vw, 18vh) scale(1.18); } }
-@keyframes fxb2 { to { transform: translate(-22vw, -15vh) scale(1.14); } }
-@keyframes fxb3 { to { transform: translate(-18vw, 13vh) scale(1.22); } }
+/* motif parquet losangé, net (rappel du sol / logo tissé) */
+.fx::before {
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(20,20,18,.075) 0 1.5px, transparent 1.5px 46px),
+    repeating-linear-gradient(-45deg, rgba(20,20,18,.075) 0 1.5px, transparent 1.5px 46px);
+}
+/* reflet de lumière qui balaie lentement, comme sur un parquet verni */
+.fx::after {
+  content: ""; position: absolute; top: -25%; bottom: -25%; left: -45%; width: 42%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.34) 44%, rgba(240,185,74,.16) 50%, rgba(255,255,255,.34) 56%, transparent);
+  transform: skewX(-12deg); filter: blur(7px);
+  animation: fxsweep 12s ease-in-out infinite;
+}
+@keyframes fxsweep {
+  0% { left: -45%; opacity: 0; }
+  12% { opacity: 1; }
+  50% { opacity: 1; }
+  62%, 100% { left: 122%; opacity: 0; }
+}
 
 /* ============================================================
    BOUTONS
@@ -98,6 +108,23 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
    ============================================================ */
 .hdr { position: fixed; top: 0; left: 0; right: 0; z-index: 180; background: rgba(234,234,231,.78); backdrop-filter: saturate(140%) blur(14px); -webkit-backdrop-filter: saturate(140%) blur(14px); border-bottom: 1px solid transparent; transition: background .3s, border-color .3s; }
 .hdr.hdr-scrolled { background: rgba(234,234,231,.94); border-bottom-color: var(--ink); }
+
+/* Accueil : header transparent (blanc) sur le hero photo, plein au scroll */
+.hdr-home { background: transparent; backdrop-filter: none; -webkit-backdrop-filter: none; border-bottom-color: transparent; color: #fff; }
+.hdr-home::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(15,14,12,.45), transparent); transition: opacity .3s; }
+.hdr-home .brand, .hdr-home .brand-txt { color: #fff; }
+.hdr-home .nav-desktop a { color: #fff; }
+.hdr-home .bline { background: #fff; }
+.hdr-home.hdr-scrolled { background: rgba(234,234,231,.94); backdrop-filter: saturate(140%) blur(14px); -webkit-backdrop-filter: saturate(140%) blur(14px); border-bottom-color: var(--ink); color: var(--ink); }
+.hdr-home.hdr-scrolled::after { opacity: 0; }
+.hdr-home.hdr-scrolled .brand, .hdr-home.hdr-scrolled .brand-txt { color: var(--ink); }
+.hdr-home.hdr-scrolled .nav-desktop a { color: var(--ink); }
+.hdr-home.hdr-scrolled .bline { background: var(--ink); }
+.hdr-home.hdr-menu-open { color: var(--ink); background: transparent; }
+.hdr-home.hdr-menu-open::after { opacity: 0; }
+.hdr-home.hdr-menu-open .brand, .hdr-home.hdr-menu-open .brand-txt { color: var(--ink); }
+.hdr-home.hdr-menu-open .bline { background: var(--ink); }
+
 .hdr-in { display: flex; align-items: center; gap: 20px; height: var(--hdr-h); }
 .brand { display: inline-flex; align-items: center; gap: 10px; font-family: var(--fh); font-weight: 800; font-size: 1.12rem; letter-spacing: -.02em; }
 .brand img { height: 30px; width: auto; }
@@ -125,20 +152,20 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .navmenu-foot .btn { flex: 1 1 auto; }
 
 /* ============================================================
-   HERO (accueil) — type massif + image encadrée
+   HERO (accueil) — cinématique plein écran
    ============================================================ */
-.hero { padding-top: calc(var(--hdr-h) + clamp(36px, 6vw, 72px)); padding-bottom: clamp(40px, 6vw, 72px); }
-.hero-in { display: grid; grid-template-columns: 1fr; gap: clamp(30px, 4vw, 52px); align-items: center; }
-.hero-eyebrow { font-family: var(--fb); font-weight: 700; font-size: .76rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); display: inline-flex; align-items: center; gap: .7em; }
-.hero-eyebrow::before { content: ""; width: 30px; height: 2px; background: var(--accent-2); }
-.hero-title { font-size: clamp(3rem, 11vw, 6.4rem); letter-spacing: -.04em; margin-top: 20px; }
-.hero-title .amber { color: var(--accent); }
-.hero-sub { margin-top: 22px; max-width: 44ch; font-size: clamp(1.05rem, 1.6vw, 1.24rem); color: var(--ink-2); line-height: 1.6; }
+.hero { position: relative; min-height: 100dvh; display: flex; align-items: flex-end; overflow: hidden; background: var(--dark); }
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
+.hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(15,14,12,.5) 0%, rgba(15,14,12,.05) 20%, rgba(15,14,12,.28) 54%, rgba(15,14,12,.88) 100%); }
+.hero-in { position: relative; z-index: 2; padding-top: calc(var(--hdr-h) + 40px); padding-bottom: clamp(44px, 7vw, 96px); max-width: 940px; color: #fff; }
+.hero-eyebrow { font-family: var(--fb); font-weight: 700; font-size: .76rem; letter-spacing: .2em; text-transform: uppercase; color: #F2C97A; display: inline-flex; align-items: center; gap: .7em; }
+.hero-eyebrow::before { content: ""; width: 30px; height: 2px; background: #F2C97A; }
+.hero-title { color: #fff; font-size: clamp(2.7rem, 9.5vw, 6.6rem); letter-spacing: -.04em; line-height: .98; margin-top: 18px; text-wrap: balance; }
+.hero-title .amber { color: #F2C97A; }
+.hero-sub { margin-top: 20px; max-width: 46ch; font-size: clamp(1.05rem, 1.7vw, 1.28rem); color: rgba(255,255,255,.88); line-height: 1.55; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
-.hero-figure { position: relative; }
-.hero-figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border: 2px solid var(--ink); border-radius: 2px; }
-.hero-figure .tag { position: absolute; left: -2px; bottom: 22px; background: var(--ink); color: var(--surface); font-family: var(--fb); font-weight: 700; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; padding: 9px 16px; }
-.hero-figure .bignum { position: absolute; top: -14px; right: 8px; font-family: var(--fh); font-weight: 800; font-size: clamp(3rem, 8vw, 5rem); color: var(--accent-2); -webkit-text-stroke: 2px var(--ink); line-height: 1; }
+.hero-scroll { position: absolute; left: 50%; bottom: 20px; z-index: 2; transform: translateX(-50%); width: 1px; height: 40px; background: linear-gradient(#F2C97A, transparent); opacity: .7; }
 
 /* ============================================================
    ACCUEIL — bandeau chiffres / mots clés
@@ -375,15 +402,11 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
   .fx .b3 { display: none; }
 
   /* HERO compact, image en premier (lecture "page d'accueil") */
-  .hero { padding-top: calc(var(--hdr-h) + 18px); padding-bottom: 26px; }
-  .hero-in { gap: 20px; }
-  .hero-figure img { aspect-ratio: 16 / 10; }
-  .hero-figure .bignum { display: none; }
-  .hero-figure .tag { bottom: 14px; font-size: .68rem; padding: 7px 13px; }
+  .hero-in { padding-top: calc(var(--hdr-h) + 28px); padding-bottom: 40px; }
   .hero-eyebrow { font-size: .68rem; }
-  .hero-title { font-size: 2.25rem; line-height: 1.02; margin-top: 12px; }
-  .hero-sub { font-size: 1rem; margin-top: 14px; max-width: none; }
-  .hero-actions { margin-top: 20px; gap: 10px; flex-direction: column; align-items: stretch; }
+  .hero-title { font-size: 2.9rem; line-height: 1; margin-top: 14px; }
+  .hero-sub { font-size: 1.02rem; margin-top: 14px; max-width: none; }
+  .hero-actions { margin-top: 24px; gap: 10px; flex-direction: column; align-items: stretch; }
   .hero-actions .btn { width: 100%; }
 
   /* Page headers sous-pages */
@@ -444,6 +467,6 @@ section[id] { scroll-margin-top: calc(var(--hdr-h) + 10px); }
    REDUCED MOTION — fige le fond animé
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  .fx .b { animation: none !important; }
+  .fx::after { animation: none !important; opacity: 0 !important; }
   *, *::before, *::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
