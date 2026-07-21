@@ -54,35 +54,20 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
     radial-gradient(52vmax 52vmax at 102% 106%, rgba(110,124,126,.22), transparent 60%),
     var(--paper);
 }
-/* grillage : grille de dalles (comme une pose de moquette) */
-.fx::before {
-  content: ""; position: absolute; inset: 0;
-  background-image:
-    linear-gradient(rgba(20,20,18,.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20,20,18,.12) 1px, transparent 1px);
-  background-size: 46px 46px;
+/* grillage : vraie grille de dalles (cases construites en JS) */
+.fx-grid { position: absolute; inset: 0; display: grid; }
+.fx-cell { border-right: 1px solid rgba(20,20,18,.12); border-bottom: 1px solid rgba(20,20,18,.12); }
+/* une case du grillage se décolle et se plie de bas en haut, comme un sticker */
+.fx-cell.peel {
+  transform-origin: top center; backface-visibility: hidden; z-index: 1;
+  background: linear-gradient(to bottom, rgba(20,18,14,.02) 0%, rgba(20,18,14,.10) 60%, rgba(20,18,14,.17) 100%);
+  animation: cellpeel 2.6s cubic-bezier(.45,0,.2,1);
 }
-/* plaques qui se soulèvent aléatoirement, comme si on posait des dalles */
-.fx-tile { position: absolute; width: 46px; height: 46px; margin: -6px 0 0 -6px; border-radius: 1px; background: linear-gradient(to bottom, rgba(20,18,14,.11), rgba(20,18,14,.035)); opacity: 0; transform-origin: top center; backface-visibility: hidden; will-change: transform, opacity; animation: tilepeel 11s ease-in-out infinite; }
-/* la plaque se décolle de bas en haut : charnière en haut, le bas se soulève */
-@keyframes tilepeel {
-  0%, 100% { opacity: 0; transform: perspective(150px) rotateX(0deg); box-shadow: 0 0 0 0 rgba(20,15,8,0); }
-  14% { opacity: 1; transform: perspective(150px) rotateX(0deg); box-shadow: 0 0 0 0 rgba(20,15,8,0); }
-  50%, 62% { opacity: 1; transform: perspective(150px) rotateX(62deg); box-shadow: 0 10px 16px rgba(20,15,8,.26); }
-  88% { opacity: .5; }
+@keyframes cellpeel {
+  0%   { transform: perspective(230px) rotateX(0deg); box-shadow: 0 0 0 rgba(20,15,8,0); }
+  44%, 56% { transform: perspective(230px) rotateX(66deg); box-shadow: 0 15px 20px rgba(20,15,8,.26); }
+  100% { transform: perspective(230px) rotateX(0deg); box-shadow: 0 0 0 rgba(20,15,8,0); }
 }
-.fx-tile:nth-child(1) { animation-delay: 0s; }
-.fx-tile:nth-child(2) { animation-delay: 2.1s; animation-duration: 13s; }
-.fx-tile:nth-child(3) { animation-delay: 4.4s; animation-duration: 9.5s; }
-.fx-tile:nth-child(4) { animation-delay: 1.3s; }
-.fx-tile:nth-child(5) { animation-delay: 6.2s; animation-duration: 13s; }
-.fx-tile:nth-child(6) { animation-delay: 3.1s; animation-duration: 9.5s; }
-.fx-tile:nth-child(7) { animation-delay: 5.5s; }
-.fx-tile:nth-child(8) { animation-delay: 0.7s; animation-duration: 13s; }
-.fx-tile:nth-child(9) { animation-delay: 7.3s; animation-duration: 9.5s; }
-.fx-tile:nth-child(10) { animation-delay: 2.8s; }
-.fx-tile:nth-child(11) { animation-delay: 4.9s; animation-duration: 13s; }
-.fx-tile:nth-child(12) { animation-delay: 6.8s; animation-duration: 9.5s; }
 
 /* ============================================================
    BOUTONS
@@ -165,7 +150,7 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 /* ============================================================
    HERO (accueil) — cinématique plein écran
    ============================================================ */
-.hero { position: relative; min-height: 100dvh; display: flex; align-items: flex-end; overflow: hidden; background: var(--dark); }
+.hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; background: var(--dark); }
 .hero-bg { position: absolute; inset: 0; z-index: 0; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 42%; }
 .hero-scrim { position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(15,14,12,.5) 0%, rgba(15,14,12,.05) 20%, rgba(15,14,12,.28) 54%, rgba(15,14,12,.88) 100%); }
@@ -447,7 +432,7 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
   .fx .b3 { display: none; }
 
   /* HERO compact, image en premier (lecture "page d'accueil") */
-  .hero { min-height: 100dvh; }
+  .hero { min-height: 100svh; }
   .hero-bg img { object-position: center; }
   .hero-in { padding-top: calc(var(--hdr-h) + 26px); padding-bottom: 34px; }
   .hero-eyebrow { font-size: .68rem; }
@@ -514,6 +499,6 @@ section[id] { scroll-margin-top: calc(var(--hdr-h) + 10px); }
    REDUCED MOTION — fige le fond animé
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  .fx-tile { animation: none !important; opacity: 0 !important; }
+  .fx-cell.peel { animation: none !important; background: none !important; }
   *, *::before, *::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }

@@ -129,4 +129,43 @@
     lb.addEventListener("click", function (e) { if (e.target === lb || e.target.closest(".lb-close")) closeLb(); });
     document.addEventListener("keydown", function (e) { if (e.key === "Escape" && lbOpen) closeLb(); });
   }
+
+  /* ============================================================
+     FOND : vrai grillage de dalles, des cases se plient au hasard
+     ============================================================ */
+  (function () {
+    var fx = document.querySelector(".fx");
+    if (!fx) return;
+    fx.innerHTML = "";
+    var grid = document.createElement("div");
+    grid.className = "fx-grid";
+    fx.appendChild(grid);
+    var CELL = 48, cells = grid.children;
+    function build() {
+      var cols = Math.ceil(window.innerWidth / CELL) + 1;
+      var rows = Math.ceil(window.innerHeight / CELL) + 1;
+      grid.style.gridTemplateColumns = "repeat(" + cols + "," + CELL + "px)";
+      grid.style.gridTemplateRows = "repeat(" + rows + "," + CELL + "px)";
+      grid.innerHTML = "";
+      var frag = document.createDocumentFragment();
+      for (var i = 0; i < cols * rows; i++) { var c = document.createElement("div"); c.className = "fx-cell"; frag.appendChild(c); }
+      grid.appendChild(frag);
+    }
+    build();
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      (function loop() {
+        var n = cells.length;
+        if (n) {
+          var c = cells[(Math.random() * n) | 0];
+          if (!c.classList.contains("peel")) {
+            c.classList.add("peel");
+            window.setTimeout(function () { c.classList.remove("peel"); }, 2600);
+          }
+        }
+        window.setTimeout(loop, 360 + Math.random() * 640);
+      }());
+    }
+    var rt;
+    window.addEventListener("resize", function () { clearTimeout(rt); rt = window.setTimeout(build, 300); }, { passive: true });
+  }());
 }());
