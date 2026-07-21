@@ -50,23 +50,23 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .fx {
   position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
   background:
-    radial-gradient(58vmax 46vmax at 10% -6%, rgba(224,161,43,.18), transparent 62%),
-    radial-gradient(52vmax 52vmax at 102% 106%, rgba(120,132,134,.16), transparent 62%),
+    radial-gradient(58vmax 46vmax at 10% -6%, rgba(224,161,43,.26), transparent 60%),
+    radial-gradient(52vmax 52vmax at 102% 106%, rgba(110,124,126,.24), transparent 60%),
     var(--paper);
 }
-/* motif parquet losangé, net (rappel du sol / logo tissé) */
+/* motif parquet losangé, net et visible (rappel du sol / logo tissé) */
 .fx::before {
   content: ""; position: absolute; inset: 0;
   background-image:
-    repeating-linear-gradient(45deg, rgba(20,20,18,.075) 0 1.5px, transparent 1.5px 46px),
-    repeating-linear-gradient(-45deg, rgba(20,20,18,.075) 0 1.5px, transparent 1.5px 46px);
+    repeating-linear-gradient(45deg, rgba(20,20,18,.14) 0 2px, transparent 2px 48px),
+    repeating-linear-gradient(-45deg, rgba(20,20,18,.14) 0 2px, transparent 2px 48px);
 }
 /* reflet de lumière qui balaie lentement, comme sur un parquet verni */
 .fx::after {
-  content: ""; position: absolute; top: -25%; bottom: -25%; left: -45%; width: 42%;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.34) 44%, rgba(240,185,74,.16) 50%, rgba(255,255,255,.34) 56%, transparent);
-  transform: skewX(-12deg); filter: blur(7px);
-  animation: fxsweep 12s ease-in-out infinite;
+  content: ""; position: absolute; top: -25%; bottom: -25%; left: -45%; width: 46%;
+  background: linear-gradient(100deg, transparent, rgba(255,255,255,.5) 44%, rgba(240,185,74,.26) 50%, rgba(255,255,255,.5) 56%, transparent);
+  transform: skewX(-12deg); filter: blur(6px);
+  animation: fxsweep 11s ease-in-out infinite;
 }
 @keyframes fxsweep {
   0% { left: -45%; opacity: 0; }
@@ -135,7 +135,6 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .nav-desktop a.is-active { opacity: 1; }
 .nav-desktop a.is-active::after { content: ""; position: absolute; left: 14px; right: 14px; bottom: 5px; height: 2px; background: var(--accent-2); }
 .hdr-actions { display: flex; align-items: center; gap: 12px; margin-left: auto; }
-.nav-desktop ~ .hdr-actions { margin-left: 6px; }
 .hdr-cta { display: none; }
 .burger { width: 40px; height: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: transparent; border: none; cursor: pointer; margin-right: -8px; }
 .bline { width: 24px; height: 2px; background: var(--ink); transition: transform .35s var(--ease), opacity .2s; }
@@ -368,6 +367,7 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 
 @media (min-width: 1024px) {
   .nav-desktop { display: flex; }
+  .nav-desktop ~ .hdr-actions { margin-left: 6px; }
   .hdr-cta { display: inline-flex; }
   .burger { display: none; }
   .navmenu { display: none !important; }
