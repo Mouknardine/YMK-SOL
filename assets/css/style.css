@@ -50,30 +50,38 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .fx {
   position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
   background:
-    radial-gradient(58vmax 46vmax at 10% -6%, rgba(224,161,43,.26), transparent 60%),
-    radial-gradient(52vmax 52vmax at 102% 106%, rgba(110,124,126,.24), transparent 60%),
+    radial-gradient(58vmax 46vmax at 10% -6%, rgba(224,161,43,.24), transparent 60%),
+    radial-gradient(52vmax 52vmax at 102% 106%, rgba(110,124,126,.22), transparent 60%),
     var(--paper);
 }
-/* motif parquet losangé, net et visible (rappel du sol / logo tissé) */
+/* grillage : grille de dalles (comme une pose de moquette) */
 .fx::before {
   content: ""; position: absolute; inset: 0;
   background-image:
-    repeating-linear-gradient(45deg, rgba(20,20,18,.14) 0 2px, transparent 2px 48px),
-    repeating-linear-gradient(-45deg, rgba(20,20,18,.14) 0 2px, transparent 2px 48px);
+    linear-gradient(rgba(20,20,18,.12) 1.5px, transparent 1.5px),
+    linear-gradient(90deg, rgba(20,20,18,.12) 1.5px, transparent 1.5px);
+  background-size: 64px 64px;
 }
-/* reflet de lumière qui balaie lentement, comme sur un parquet verni */
-.fx::after {
-  content: ""; position: absolute; top: -25%; bottom: -25%; left: -45%; width: 46%;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.5) 44%, rgba(240,185,74,.26) 50%, rgba(255,255,255,.5) 56%, transparent);
-  transform: skewX(-12deg); filter: blur(6px);
-  animation: fxsweep 11s ease-in-out infinite;
+/* plaques qui se soulèvent aléatoirement, comme si on posait des dalles */
+.fx-tile { position: absolute; width: 62px; height: 62px; border-radius: 2px; background: rgba(20,18,14,.06); opacity: 0; will-change: transform, opacity; animation: tilelift 11s ease-in-out infinite; }
+@keyframes tilelift {
+  0%, 100% { opacity: 0; transform: translateY(0) scale(1); box-shadow: 0 0 0 0 rgba(20,15,8,0); }
+  12% { opacity: .85; transform: translateY(0) scale(1); box-shadow: 0 0 0 0 rgba(20,15,8,0); }
+  46%, 60% { opacity: .95; transform: translateY(-11px) scale(1.03); box-shadow: 0 16px 26px rgba(20,15,8,.16); }
+  88% { opacity: .5; }
 }
-@keyframes fxsweep {
-  0% { left: -45%; opacity: 0; }
-  12% { opacity: 1; }
-  50% { opacity: 1; }
-  62%, 100% { left: 122%; opacity: 0; }
-}
+.fx-tile:nth-child(1) { animation-delay: 0s; }
+.fx-tile:nth-child(2) { animation-delay: 2.1s; animation-duration: 13s; }
+.fx-tile:nth-child(3) { animation-delay: 4.4s; animation-duration: 9.5s; }
+.fx-tile:nth-child(4) { animation-delay: 1.3s; }
+.fx-tile:nth-child(5) { animation-delay: 6.2s; animation-duration: 13s; }
+.fx-tile:nth-child(6) { animation-delay: 3.1s; animation-duration: 9.5s; }
+.fx-tile:nth-child(7) { animation-delay: 5.5s; }
+.fx-tile:nth-child(8) { animation-delay: 0.7s; animation-duration: 13s; }
+.fx-tile:nth-child(9) { animation-delay: 7.3s; animation-duration: 9.5s; }
+.fx-tile:nth-child(10) { animation-delay: 2.8s; }
+.fx-tile:nth-child(11) { animation-delay: 4.9s; animation-duration: 13s; }
+.fx-tile:nth-child(12) { animation-delay: 6.8s; animation-duration: 9.5s; }
 
 /* ============================================================
    BOUTONS
@@ -491,6 +499,6 @@ section[id] { scroll-margin-top: calc(var(--hdr-h) + 10px); }
    REDUCED MOTION — fige le fond animé
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
-  .fx::after { animation: none !important; opacity: 0 !important; }
+  .fx-tile { animation: none !important; opacity: 0 !important; }
   *, *::before, *::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
