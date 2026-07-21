@@ -5,20 +5,19 @@ sol à Pully (canton de Vaud) : parquet, linoléum, PVC, moquette, ponçage et
 rénovation.
 
 HTML / CSS / JS pur, aucune dépendance de build → chargement quasi instantané.
-Direction artistique claire : base **gris minéral**, accent **ambre** repris du
-logo, typographie Cabinet Grotesk + Satoshi. Transitions animées entre les pages
-(View Transitions API) et scroll fluide (Lenis). Site par
-[We Are Brothers](https://wearebrothers.ch).
+Identité graphique affirmée : base **gris minéral**, **noir** franc (filets
+épais, gros chiffres), accent **ambre** repris du logo, typographie Cabinet
+Grotesk + Satoshi. **Fond animé** léger (halos qui dérivent), aucune animation
+au scroll. Site par [We Are Brothers](https://wearebrothers.ch).
 
-## Pages
+## Pages (4)
 
-| Fichier              | Contenu                                            |
-|----------------------|----------------------------------------------------|
-| `index.html`         | Accueil : hero, intro, accès aux sections, contact |
-| `realisations.html`  | Galerie de réalisations (lightbox)                 |
-| `prestations.html`   | Détail des prestations                             |
-| `methode.html`       | Déroulé d'un chantier en 4 étapes                  |
-| `contact.html`       | Téléphone, WhatsApp, e-mail, atelier               |
+| Fichier              | Contenu                                                  |
+|----------------------|----------------------------------------------------------|
+| `index.html`         | Accueil : hero, aperçu prestations et réalisations       |
+| `realisations.html`  | Réalisations en grandes lignes alternées (lightbox)      |
+| `prestations.html`   | Prestations en tuiles + méthode en 4 étapes              |
+| `contact.html`       | Téléphone, WhatsApp, e-mail, atelier                     |
 
 ## Images (`assets/img/`)
 
