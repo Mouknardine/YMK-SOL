@@ -1,12 +1,16 @@
-/* YMK SOL — interactions, zéro dépendance de build */
+/* YMK SOL — interactions multi-pages, zéro dépendance de build */
 (function () {
   "use strict";
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function lerp(a, b, t) { return a + (b - a) * t; }
 
+  /* ---- Année footer ---- */
+  var y = document.getElementById("year");
+  if (y) y.textContent = new Date().getFullYear();
+
   /* ============================================================
-     SCROLL FLUIDE (Lenis) + ancres
+     SCROLL FLUIDE (Lenis)
      ============================================================ */
   var lenis = null;
   if (!reduce && window.Lenis) {
@@ -16,6 +20,7 @@
       lenis.on("scroll", function () { ScrollTrigger.update(); });
     }
   }
+  /* Ancres internes (skip-link, retour haut) */
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {
     a.addEventListener("click", function (e) {
       var id = a.getAttribute("href");
@@ -28,35 +33,35 @@
     });
   });
 
-  /* ---- Année footer ---- */
-  var y = document.getElementById("year");
-  if (y) y.textContent = new Date().getFullYear();
-
   /* ============================================================
-     MENU
+     MENU PLEIN ÉCRAN (mobile / tablette)
      ============================================================ */
-  var burger    = document.querySelector(".burger");
-  var mmenu     = document.getElementById("mmenu");
-  var mbackdrop = document.getElementById("mmenuBackdrop");
-  var pickOpen  = false;
+  var burger  = document.querySelector(".burger");
+  var navmenu = document.getElementById("navmenu");
+  var menuOpen = false;
 
-  if (burger && mmenu) {
-    var menuOpen = false;
-    var menuToggle = function (open) {
-      menuOpen = open;
-      burger.setAttribute("aria-expanded", String(open));
-      burger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
-      mmenu.hidden = !open;
-      if (mbackdrop) mbackdrop.hidden = !open;
-      if (!open) document.body.style.overflow = "";
-      else if (!pickOpen) document.body.style.overflow = "hidden";
-    };
-    burger.addEventListener("click", function () {
-      menuToggle(burger.getAttribute("aria-expanded") !== "true");
-    });
-    mmenu.addEventListener("click", function (e) { if (e.target.closest("a")) menuToggle(false); });
-    if (mbackdrop) mbackdrop.addEventListener("click", function () { menuToggle(false); });
-    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && menuOpen) menuToggle(false); });
+  function setMenu(open) {
+    if (!burger || !navmenu) return;
+    menuOpen = open;
+    burger.setAttribute("aria-expanded", String(open));
+    burger.setAttribute("aria-label", open ? "Fermer le menu" : "Ouvrir le menu");
+    if (hdr) hdr.classList.toggle("hdr-menu-open", open);
+    if (open) {
+      navmenu.hidden = false;
+      requestAnimationFrame(function () { navmenu.classList.add("open"); });
+      document.body.style.overflow = "hidden";
+      if (lenis) lenis.stop();
+    } else {
+      navmenu.classList.remove("open");
+      document.body.style.overflow = "";
+      if (lenis) lenis.start();
+      window.setTimeout(function () { if (!menuOpen) navmenu.hidden = true; }, 400);
+    }
+  }
+  if (burger && navmenu) {
+    burger.addEventListener("click", function () { setMenu(burger.getAttribute("aria-expanded") !== "true"); });
+    navmenu.addEventListener("click", function (e) { if (e.target.closest("a")) setMenu(false); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && menuOpen) setMenu(false); });
   }
 
   /* ============================================================
@@ -75,7 +80,7 @@
   }
 
   /* ============================================================
-     HERO — révélation du titre mot par mot (masque)
+     HERO — révélation du titre (accueil seulement)
      ============================================================ */
   if (!reduce) {
     var heroTitle = document.querySelector(".hero-title");
@@ -92,29 +97,25 @@
               sw.appendChild(swi); frag.appendChild(sw);
             }
           });
-        } else if (node.nodeName === "BR") {
-          frag.appendChild(document.createElement("br"));
-        } else {
+        } else if (node.nodeName === "BR") { frag.appendChild(document.createElement("br")); }
+        else {
           var sw2 = document.createElement("span"); sw2.className = "sw";
           var swi2 = document.createElement("span"); swi2.className = "swi";
           swi2.appendChild(node.cloneNode(true));
           sw2.appendChild(swi2); frag.appendChild(sw2);
         }
       });
-      heroTitle.innerHTML = "";
-      heroTitle.appendChild(frag);
+      heroTitle.innerHTML = ""; heroTitle.appendChild(frag);
       var swis = heroTitle.querySelectorAll(".swi");
       swis.forEach(function (swi, i) { swi.style.transitionDelay = (260 + i * 70) + "ms"; });
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () {
-          swis.forEach(function (swi) { swi.classList.add("swi-in"); });
-        });
-      });
+      requestAnimationFrame(function () { requestAnimationFrame(function () {
+        swis.forEach(function (swi) { swi.classList.add("swi-in"); });
+      }); });
     }
   }
 
   /* ============================================================
-     HERO — parallaxe souris légère (pointeur fin)
+     HERO — parallaxe souris légère
      ============================================================ */
   if (!reduce && window.matchMedia("(pointer: fine)").matches) {
     var heroIn = document.querySelector(".hero-in");
@@ -125,8 +126,7 @@
         mRaw.y = e.clientY / window.innerHeight - 0.5;
       });
       (function raf() {
-        mL.x = lerp(mL.x, mRaw.x, 0.06);
-        mL.y = lerp(mL.y, mRaw.y, 0.06);
+        mL.x = lerp(mL.x, mRaw.x, 0.06); mL.y = lerp(mL.y, mRaw.y, 0.06);
         var inView = window.scrollY < window.innerHeight;
         heroIn.style.transform = inView ? "translate3d(" + (-mL.x * 12) + "px," + (-mL.y * 8) + "px,0)" : "";
         requestAnimationFrame(raf);
@@ -140,27 +140,23 @@
   var revealEls = document.querySelectorAll(".reveal");
   if (!reduce) {
     var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
-      });
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } });
     }, { threshold: 0.05, rootMargin: "0px 0px -60px 0px" });
     revealEls.forEach(function (el) { io.observe(el); });
   } else {
     revealEls.forEach(function (el) { el.classList.add("is-in"); });
   }
 
-  /* iOS :active */
   document.addEventListener("touchstart", function () {}, { passive: true });
 
   /* ============================================================
-     MARQUEE — boucle infinie + drag
+     MARQUEE (accueil)
      ============================================================ */
   (function () {
     var wrap = document.querySelector(".marquee-wrap");
     if (!wrap) return;
     var track = wrap.querySelector(".marquee-track");
     if (!track) return;
-
     var orig = Array.from(track.children), guard = 0;
     while (track.scrollWidth < window.innerWidth * 2.5 && guard++ < 40) {
       orig.forEach(function (el) { track.appendChild(el.cloneNode(true)); });
@@ -168,7 +164,6 @@
     var halfW = track.scrollWidth / 2;
     var state = { x: 0, speed: -0.6 };
     var dragging = false, lastX = 0;
-
     (function tick() {
       if (!dragging) state.x += state.speed;
       while (state.x < -halfW) state.x += halfW;
@@ -176,17 +171,13 @@
       track.style.transform = "translateX(" + state.x + "px)";
       requestAnimationFrame(tick);
     }());
-
     wrap.addEventListener("pointerdown", function (e) {
       if (e.button && e.button !== 0) return;
       dragging = true; lastX = e.clientX;
       try { wrap.setPointerCapture(e.pointerId); } catch (ex) {}
       wrap.style.cursor = "grabbing";
     });
-    wrap.addEventListener("pointermove", function (e) {
-      if (!dragging) return;
-      state.x += e.clientX - lastX; lastX = e.clientX;
-    });
+    wrap.addEventListener("pointermove", function (e) { if (!dragging) return; state.x += e.clientX - lastX; lastX = e.clientX; });
     function end() { if (!dragging) return; dragging = false; wrap.style.cursor = ""; }
     wrap.addEventListener("pointerup", end);
     wrap.addEventListener("pointercancel", end);
@@ -197,7 +188,7 @@
      ============================================================ */
   var ppick = document.getElementById("ppick");
   var ppickBackdrop = document.getElementById("ppickBackdrop");
-  var _ppickOpener = null;
+  var _ppickOpener = null, pickOpen = false;
 
   function setPickInert(inert) {
     if (!ppick) return;
@@ -226,7 +217,7 @@
     });
   }
   document.querySelectorAll("[data-phone-picker]").forEach(function (btn) {
-    btn.addEventListener("click", function (e) { e.preventDefault(); openPick(); });
+    btn.addEventListener("click", function (e) { e.preventDefault(); if (menuOpen) setMenu(false); openPick(); });
   });
   if (ppickBackdrop) ppickBackdrop.addEventListener("click", closePick);
   if (ppick) {
@@ -244,7 +235,7 @@
   }
 
   /* ============================================================
-     LIGHTBOX
+     LIGHTBOX (réalisations)
      ============================================================ */
   var lb = document.getElementById("lb");
   var lbImg = document.getElementById("lbImg");
@@ -280,7 +271,6 @@
 
   /* ============================================================
      GSAP — parallaxe intérieure sur les images des réalisations
-     Motivation : profondeur éditoriale, la matière du sol "respire" au scroll
      ============================================================ */
   (function () {
     if (!window.gsap || !window.ScrollTrigger || reduce) return;
