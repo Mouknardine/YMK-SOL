@@ -34,6 +34,16 @@
 
   document.addEventListener("touchstart", function () {}, { passive: true });
 
+  /* Dock : caché tant que le hero est visible, apparaît après */
+  var dock = document.querySelector(".dock");
+  var heroEl = document.querySelector(".hero");
+  if (dock && heroEl && "IntersectionObserver" in window) {
+    var dockIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { dock.classList.toggle("is-hidden", e.isIntersecting); });
+    }, { threshold: 0 });
+    dockIO.observe(heroEl);
+  }
+
   /* Phone picker */
   var ppick = document.getElementById("ppick");
   var ppickBackdrop = document.getElementById("ppickBackdrop");
