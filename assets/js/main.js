@@ -102,6 +102,12 @@
   function openLb(src, cap) {
     if (!lb) return;
     lbOpen = true; _lbOpener = document.activeElement;
+    lb.classList.remove("lb-rot");
+    lbImg.onload = function () {
+      var landscape = lbImg.naturalWidth > lbImg.naturalHeight * 1.15;
+      var mobile = window.matchMedia("(max-width: 719px)").matches;
+      lb.classList.toggle("lb-rot", landscape && mobile);
+    };
     lbImg.src = src; lbImg.alt = cap || ""; lbCap.textContent = cap || "";
     lb.hidden = false; document.body.style.overflow = "hidden";
     var c = lb.querySelector(".lb-close"); if (c) c.focus();
