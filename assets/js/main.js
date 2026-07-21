@@ -5,6 +5,29 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   function lerp(a, b, t) { return a + (b - a) * t; }
 
+  /* ============================================================
+     SCROLL FLUIDE (Lenis) + ancres
+     ============================================================ */
+  var lenis = null;
+  if (!reduce && window.Lenis) {
+    lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true, wheelMultiplier: 1 });
+    (function rl(t) { lenis.raf(t); requestAnimationFrame(rl); })();
+    if (window.gsap && window.ScrollTrigger) {
+      lenis.on("scroll", function () { ScrollTrigger.update(); });
+    }
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      var id = a.getAttribute("href");
+      if (!id || id.length < 2) return;
+      var t = document.querySelector(id);
+      if (!t) return;
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(t, { offset: -72 });
+      else t.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
   /* ---- Année footer ---- */
   var y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
