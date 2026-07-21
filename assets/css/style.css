@@ -167,6 +167,10 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .hero-title .amber { color: #F2C97A; }
 .hero-sub { margin-top: 20px; max-width: 46ch; font-size: clamp(1.05rem, 1.7vw, 1.28rem); color: rgba(255,255,255,.88); line-height: 1.55; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+.hero-figure { display: none; position: relative; }
+.hero-figure img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border: 2px solid var(--ink); border-radius: 2px; }
+.hero-figure .tag { position: absolute; left: -2px; bottom: 22px; background: var(--ink); color: var(--surface); font-family: var(--fb); font-weight: 700; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; padding: 9px 16px; }
+.hero-figure .bignum { position: absolute; top: -14px; right: 10px; font-family: var(--fh); font-weight: 800; font-size: clamp(3rem, 6vw, 5rem); color: var(--accent-2); -webkit-text-stroke: 2px var(--ink); line-height: 1; }
 
 /* ============================================================
    ACCUEIL — bandeau chiffres / mots clés
@@ -373,6 +377,24 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
   .hdr-cta { display: inline-flex; }
   .burger { display: none; }
   .navmenu { display: none !important; }
+
+  /* Hero desktop : ancienne mise en page (titre à gauche + photo encadrée à droite) */
+  .hero { min-height: 0; display: block; overflow: visible; background: transparent; }
+  .hero-bg, .hero-scrim { display: none; }
+  .hero-in { display: grid; grid-template-columns: 1.15fr .85fr; gap: clamp(40px, 4vw, 72px); align-items: center; max-width: var(--maxw); padding-top: calc(var(--hdr-h) + clamp(46px, 6vw, 84px)); padding-bottom: clamp(54px, 7vw, 92px); color: var(--ink); }
+  .hero-figure { display: block; }
+  .hero-eyebrow { color: var(--accent); }
+  .hero-eyebrow::before { background: var(--accent-2); }
+  .hero-title { color: var(--ink); font-size: clamp(3rem, 5.4vw, 5.6rem); margin-top: 20px; }
+  .hero-title .amber { color: var(--accent); }
+  .hero-sub { color: var(--ink-2); max-width: 42ch; }
+  .hero .btn-glass { background: transparent; border-color: var(--ink); color: var(--ink); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .hero .btn-glass:hover { background: var(--ink); color: #fff; }
+
+  /* header accueil : plein (sombre) sur desktop, comme les autres pages */
+  .hdr-home { background: rgba(234,234,231,.82); backdrop-filter: saturate(140%) blur(14px); -webkit-backdrop-filter: saturate(140%) blur(14px); color: var(--ink); }
+  .hdr-home::after { opacity: 0; }
+  .hdr-home .brand, .hdr-home .brand-txt, .hdr-home .nav-desktop a { color: var(--ink); }
 
   .hero-in { grid-template-columns: 1.15fr .85fr; }
   .hero-figure img { aspect-ratio: 3 / 4; }
