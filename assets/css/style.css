@@ -89,6 +89,9 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .btn-line:hover { background: var(--ink); color: var(--surface); }
 .btn-wa { background: #1FA855; color: #fff; }
 .btn-wa:hover { background: #178a44; }
+/* bouton clair sur photo (hero) */
+.btn-glass { background: rgba(20,18,14,.42); border: 1.5px solid #fff; color: #fff; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+.btn-glass:hover { background: #fff; color: var(--ink); }
 .on-dark .btn-line, .nextcta .btn-line, .ftr .btn-line { border-color: rgba(255,255,255,.4); color: #F4F4F2; }
 .on-dark .btn-line:hover, .nextcta .btn-line:hover { background: #fff; color: var(--ink); }
 
@@ -164,7 +167,6 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .hero-title .amber { color: #F2C97A; }
 .hero-sub { margin-top: 20px; max-width: 46ch; font-size: clamp(1.05rem, 1.7vw, 1.28rem); color: rgba(255,255,255,.88); line-height: 1.55; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
-.hero-scroll { position: absolute; left: 50%; bottom: 20px; z-index: 2; transform: translateX(-50%); width: 1px; height: 40px; background: linear-gradient(#F2C97A, transparent); opacity: .7; }
 
 /* ============================================================
    ACCUEIL — bandeau chiffres / mots clés
