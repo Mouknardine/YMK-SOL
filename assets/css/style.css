@@ -328,6 +328,67 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 
 @media (max-width: 719px) {
   body { padding-bottom: 82px; }
+
+  /* Espacements resserrés (évite les grands vides) */
+  .section { padding-block: 42px; }
+
+  /* Fond animé allégé pour la performance mobile */
+  .fx .b { filter: blur(52px); }
+  .fx .b3 { display: none; }
+
+  /* HERO compact, image en premier (lecture "page d'accueil") */
+  .hero { padding-top: calc(var(--hdr-h) + 14px); padding-bottom: 28px; }
+  .hero-in { gap: 20px; }
+  .hero-figure { order: -1; }
+  .hero-figure img { aspect-ratio: 5 / 4; }
+  .hero-figure .bignum { display: none; }
+  .hero-figure .tag { bottom: 14px; font-size: .68rem; padding: 7px 13px; }
+  .hero-eyebrow { font-size: .68rem; }
+  .hero-title { font-size: 2.25rem; line-height: 1.02; margin-top: 12px; }
+  .hero-sub { font-size: 1rem; margin-top: 14px; max-width: none; }
+  .hero-actions { margin-top: 20px; gap: 10px; flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { width: 100%; }
+
+  /* Page headers sous-pages */
+  .phead { padding-top: calc(var(--hdr-h) + 20px); padding-bottom: 20px; }
+  .phead-title { font-size: 2.5rem; line-height: 1; }
+  .phead-sub { font-size: 1rem; margin-top: 16px; }
+
+  /* En-têtes de section */
+  .shead { margin-bottom: 24px; }
+  .shead-top { margin-bottom: 12px; }
+  .shead h2 { font-size: 1.85rem; }
+  .shead-sub { font-size: .98rem; }
+
+  /* Bandeau chiffres */
+  .strip-item { padding: 18px var(--pad); }
+  .strip-k { font-size: 1.4rem; }
+
+  /* Aperçu prestations + réalisations */
+  .mini-svc a { padding: 16px 0; }
+  .mini-svc .t { font-size: 1.3rem; }
+  .preview img { aspect-ratio: 16 / 10; }
+
+  /* Prestations tuiles */
+  .svc-tile { padding: 22px 2px; }
+  .svc-tile .n { font-size: 1.9rem; }
+  .svc-tile h3 { font-size: 1.35rem; margin-top: 12px; }
+  .method2 { margin-top: 40px; }
+  .step2 { padding: 16px 0 20px; }
+  .step2 .n { font-size: 2.4rem; }
+  .step2 h4 { font-size: 1.2rem; }
+
+  /* Réalisations */
+  .projects { gap: 38px; }
+  .proj { padding-top: 18px; gap: 16px; }
+  .proj-idx { font-size: 2.8rem; }
+  .proj h3 { font-size: 1.7rem; }
+
+  /* CTA */
+  .nextcta-in { padding-block: 42px; }
+  .nextcta-title { font-size: 1.9rem; }
+
+  /* Contact */
   .cline { grid-template-columns: 1fr auto; grid-template-rows: auto auto auto; gap: 3px 12px; padding: 20px 0; }
   .cline:hover { padding-left: 0; }
   .cline-type { grid-column: 1; grid-row: 1; }
