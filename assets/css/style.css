@@ -61,16 +61,16 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .fx-cell.peel { z-index: 2; }
 .fx-cell.peel::before {
   content: ""; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to bottom, rgba(20,18,14,.04), rgba(20,18,14,.16));
-  transform-origin: top center;
-  animation: stickerpeel 5s cubic-bezier(.34,.02,.24,1) forwards;
+  background: linear-gradient(to bottom, rgba(20,18,14,.16) 0%, rgba(20,18,14,.05) 58%, rgba(255,255,255,.11) 100%);
+  transform-origin: top center; backface-visibility: hidden;
+  animation: stickerpeel var(--dur, 5s) cubic-bezier(.42,.05,.2,1) forwards;
 }
 @keyframes stickerpeel {
-  0%   { opacity: 0; transform: perspective(260px) rotateX(0deg);  box-shadow: 0 0 0 rgba(20,15,8,0); }
-  14%  { opacity: 1; transform: perspective(260px) rotateX(5deg); }
-  46%  { opacity: 1; transform: perspective(260px) rotateX(78deg);  box-shadow: 0 14px 20px rgba(20,15,8,.20); }
-  78%  { opacity: 1; transform: perspective(260px) rotateX(16deg);  box-shadow: 0 6px 12px rgba(20,15,8,.10); }
-  100% { opacity: 0; transform: perspective(260px) rotateX(0deg);   box-shadow: 0 0 0 rgba(20,15,8,0); }
+  0%   { opacity: 0;   transform: perspective(320px) rotateX(0deg);            box-shadow: 0 0 0 rgba(20,15,8,0); }
+  12%  { opacity: 1;   transform: perspective(320px) rotateX(4deg); }
+  46%  { opacity: 1;   transform: perspective(320px) rotateX(var(--pk, 74deg)); box-shadow: 0 16px 22px rgba(20,15,8,.20); }
+  76%  { opacity: .92; transform: perspective(320px) rotateX(14deg);            box-shadow: 0 7px 13px rgba(20,15,8,.10); }
+  100% { opacity: 0;   transform: perspective(320px) rotateX(0deg);            box-shadow: 0 0 0 rgba(20,15,8,0); }
 }
 
 /* ============================================================

@@ -252,16 +252,24 @@
     }
     build();
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      function peelOne() {
+        var n = cells.length; if (!n) return;
+        var c = cells[(Math.random() * n) | 0];
+        if (c.classList.contains("peel")) return;
+        var dur = 4200 + Math.random() * 1800;   // 4,2 à 6 s
+        var pk = 60 + Math.random() * 36;          // pli de 60 à 96 deg
+        c.style.setProperty("--dur", (dur / 1000).toFixed(2) + "s");
+        c.style.setProperty("--pk", pk.toFixed(0) + "deg");
+        c.classList.add("peel");
+        window.setTimeout(function () {
+          c.classList.remove("peel");
+          c.style.removeProperty("--dur");
+          c.style.removeProperty("--pk");
+        }, dur + 70);
+      }
       (function loop() {
-        var n = cells.length;
-        if (n) {
-          var c = cells[(Math.random() * n) | 0];
-          if (!c.classList.contains("peel")) {
-            c.classList.add("peel");
-            window.setTimeout(function () { c.classList.remove("peel"); }, 5200);
-          }
-        }
-        window.setTimeout(loop, 1600 + Math.random() * 1800);
+        peelOne();
+        window.setTimeout(loop, 750 + Math.random() * 1150);
       }());
     }
     var rt;
