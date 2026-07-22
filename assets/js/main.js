@@ -240,9 +240,9 @@
     var grid = document.createElement("div");
     grid.className = "fx-grid";
     fx.appendChild(grid);
-    var CELL = 48, cells = grid.children;
+    var CELL = 48, cells = grid.children, cols = 0;
     function build() {
-      var cols = Math.ceil(window.innerWidth / CELL) + 1;
+      cols = Math.ceil(window.innerWidth / CELL) + 1;
       var rows = Math.ceil(window.innerHeight / CELL) + 1;
       grid.style.gridTemplateColumns = "repeat(" + cols + "," + CELL + "px)";
       grid.style.gridTemplateRows = "repeat(" + rows + "," + CELL + "px)";
@@ -252,26 +252,49 @@
       grid.appendChild(frag);
     }
     build();
+
+    function peelCell(c) {
+      if (!c || c.classList.contains("peel")) return;
+      var dur = 4200 + Math.random() * 1800;   // 4,2 à 6 s
+      var pk = 38 + Math.random() * 28;          // pli de 38 à 66 deg
+      c.style.setProperty("--dur", (dur / 1000).toFixed(2) + "s");
+      c.style.setProperty("--pk", pk.toFixed(0) + "deg");
+      c.classList.add("peel");
+      window.setTimeout(function () {
+        c.classList.remove("peel");
+        c.style.removeProperty("--dur");
+        c.style.removeProperty("--pk");
+      }, dur + 70);
+    }
+
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      function peelOne() {
-        var n = cells.length; if (!n) return;
-        var c = cells[(Math.random() * n) | 0];
-        if (c.classList.contains("peel")) return;
-        var dur = 4200 + Math.random() * 1800;   // 4,2 à 6 s
-        var pk = 38 + Math.random() * 28;          // pli de 38 à 66 deg (reste bien dans la case)
-        c.style.setProperty("--dur", (dur / 1000).toFixed(2) + "s");
-        c.style.setProperty("--pk", pk.toFixed(0) + "deg");
-        c.classList.add("peel");
-        window.setTimeout(function () {
-          c.classList.remove("peel");
-          c.style.removeProperty("--dur");
-          c.style.removeProperty("--pk");
-        }, dur + 70);
-      }
+      /* Ambiance : quelques dalles se plient au hasard */
       (function loop() {
-        peelOne();
-        window.setTimeout(loop, 750 + Math.random() * 1150);
+        var n = cells.length;
+        if (n) peelCell(cells[(Math.random() * n) | 0]);
+        window.setTimeout(loop, 950 + Math.random() * 1350);
       }());
+
+      /* Interactif : sillage sous le curseur (desktop) */
+      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+        var mx = 0, my = 0, lastIdx = -1, lastT = 0, queued = false;
+        function applyCursor() {
+          queued = false;
+          var col = (mx / CELL) | 0, row = (my / CELL) | 0;
+          if (col < 0 || col >= cols) return;
+          var idx = row * cols + col;
+          if (idx === lastIdx) return;
+          lastIdx = idx;
+          var now = (window.performance && performance.now) ? performance.now() : Date.now();
+          if (now - lastT < 55) return;
+          lastT = now;
+          peelCell(cells[idx]);
+        }
+        window.addEventListener("mousemove", function (e) {
+          mx = e.clientX; my = e.clientY;
+          if (!queued) { queued = true; requestAnimationFrame(applyCursor); }
+        }, { passive: true });
+      }
     }
     var rt;
     window.addEventListener("resize", function () { clearTimeout(rt); rt = window.setTimeout(build, 300); }, { passive: true });
