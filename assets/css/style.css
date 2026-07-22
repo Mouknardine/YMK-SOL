@@ -110,7 +110,7 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .shead-top { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
 .shead-label { font-family: var(--fb); font-weight: 700; font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; }
 .shead-idx { font-family: var(--fh); font-weight: 800; font-size: .92rem; color: var(--accent); }
-.shead h2 { font-size: clamp(2.1rem, 5.6vw, 4rem); max-width: 20ch; }
+.shead h2 { font-size: clamp(2.1rem, 5.6vw, 4rem); max-width: 20ch; letter-spacing: -.025em; line-height: 1.0; }
 .shead h2 .amber { color: var(--accent); }
 .shead-sub { margin-top: 16px; max-width: 56ch; color: var(--ink-2); font-size: 1.02rem; line-height: 1.65; }
 
@@ -236,8 +236,8 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
    PAGE HEADER (sous-pages) — massif
    ============================================================ */
 .phead { padding-top: calc(var(--hdr-h) + clamp(40px, 7vw, 90px)); padding-bottom: clamp(28px, 4vw, 48px); }
-.phead-idx { font-family: var(--fh); font-weight: 800; font-size: 1rem; color: var(--accent); }
-.phead-title { font-size: clamp(3rem, 12vw, 7rem); letter-spacing: -.045em; margin-top: 10px; line-height: .92; }
+.phead-idx { display: flex; align-items: center; gap: .6em; font-family: var(--fb); font-weight: 700; font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); padding-bottom: 16px; border-bottom: 1.5px solid var(--ink); }
+.phead-title { font-size: clamp(3rem, 12vw, 7rem); letter-spacing: -.045em; margin-top: 18px; line-height: .92; }
 .phead-title .amber { color: var(--accent); }
 .phead-sub { margin-top: 22px; max-width: 56ch; font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--ink-2); line-height: 1.65; }
 
@@ -580,7 +580,7 @@ section[id] { scroll-margin-top: calc(var(--hdr-h) + 10px); }
    IDENTITÉ — signature "atelier de pose" (motif chevron / parquet)
    ============================================================ */
 /* Marqueur chevron partagé sur les intitulés de section */
-.shead-label, .phead-idx, .nextcta-eyebrow { display: inline-flex; align-items: center; gap: .6em; }
+.shead-label, .nextcta-eyebrow { display: inline-flex; align-items: center; gap: .6em; }
 .shead-label::before, .phead-idx::before { content: ""; width: 16px; height: 11px; background: var(--chev) center/contain no-repeat; flex: none; }
 .nextcta-eyebrow::before { content: ""; width: 16px; height: 11px; background: var(--chev-lite) center/contain no-repeat; flex: none; }
 
