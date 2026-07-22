@@ -135,7 +135,14 @@
   </div>
   <div class="lb" id="lb" hidden>
     <button class="lb-close" aria-label="Fermer">&times;</button>
-    <figure class="lb-fig"><img id="lbImg" src="" alt="" /><figcaption id="lbCap"></figcaption></figure>
+    <div class="lb-stage" id="lbStage">
+      <img id="lbImg" src="" alt="" draggable="false" />
+      <div class="lb-zoom">
+        <button type="button" id="lbOut" aria-label="Réduire">&minus;</button>
+        <button type="button" id="lbIn" aria-label="Agrandir">+</button>
+      </div>
+    </div>
+    <p class="lb-cap" id="lbCap"></p>
   </div>
   <script src="assets/js/main.js" defer></script>
 </body>
