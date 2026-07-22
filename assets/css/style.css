@@ -54,23 +54,29 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
     radial-gradient(52vmax 52vmax at 102% 106%, rgba(110,124,126,.22), transparent 60%),
     var(--paper);
 }
-/* grillage : vraie grille de dalles (cases construites en JS) */
-.fx-grid { position: absolute; inset: 0; display: grid; }
-.fx-cell { position: relative; border-right: 1px solid rgba(20,20,18,.12); border-bottom: 1px solid rgba(20,20,18,.12); }
-/* le grillage reste fixe ; un "sticker" sur la case se décolle, se plie et s'efface */
-.fx-cell.peel { z-index: 2; }
+/* grillage : lignes dessinées en fond (derrière les cases), jamais par-dessus */
+.fx-grid {
+  position: absolute; inset: 0; display: grid;
+  background-image:
+    linear-gradient(to right, rgba(20,20,18,.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(20,20,18,.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.fx-cell { position: relative; }
+/* la case se soulève comme une tuile opaque : elle reste dans son carré et masque tout dessous */
+.fx-cell.peel { z-index: 3; }
 .fx-cell.peel::before {
   content: ""; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to bottom, rgba(20,18,14,.16) 0%, rgba(20,18,14,.05) 58%, rgba(255,255,255,.11) 100%);
+  background: linear-gradient(to bottom, #ECECE9 0%, #E4E4E0 100%);
   transform-origin: top center; backface-visibility: hidden;
   animation: stickerpeel var(--dur, 5s) cubic-bezier(.42,.05,.2,1) forwards;
 }
 @keyframes stickerpeel {
-  0%   { opacity: 0;   transform: perspective(320px) rotateX(0deg);            box-shadow: 0 0 0 rgba(20,15,8,0); }
-  12%  { opacity: 1;   transform: perspective(320px) rotateX(4deg); }
-  46%  { opacity: 1;   transform: perspective(320px) rotateX(var(--pk, 74deg)); box-shadow: 0 16px 22px rgba(20,15,8,.20); }
-  76%  { opacity: .92; transform: perspective(320px) rotateX(14deg);            box-shadow: 0 7px 13px rgba(20,15,8,.10); }
-  100% { opacity: 0;   transform: perspective(320px) rotateX(0deg);            box-shadow: 0 0 0 rgba(20,15,8,0); }
+  0%   { opacity: 0;   transform: perspective(340px) rotateX(0deg);            box-shadow: inset 0 0 0 1px rgba(20,20,18,.06), 0 0 0 rgba(20,15,8,0); }
+  14%  { opacity: 1;   transform: perspective(340px) rotateX(3deg); }
+  48%  { opacity: 1;   transform: perspective(340px) rotateX(var(--pk, 50deg)); box-shadow: inset 0 0 0 1px rgba(20,20,18,.10), 0 14px 18px rgba(20,15,8,.18); }
+  78%  { opacity: .96; transform: perspective(340px) rotateX(11deg);            box-shadow: inset 0 0 0 1px rgba(20,20,18,.08), 0 6px 11px rgba(20,15,8,.09); }
+  100% { opacity: 0;   transform: perspective(340px) rotateX(0deg);            box-shadow: inset 0 0 0 1px rgba(20,20,18,.06), 0 0 0 rgba(20,15,8,0); }
 }
 
 /* ============================================================

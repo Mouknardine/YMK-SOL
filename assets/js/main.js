@@ -257,7 +257,7 @@
         var c = cells[(Math.random() * n) | 0];
         if (c.classList.contains("peel")) return;
         var dur = 4200 + Math.random() * 1800;   // 4,2 à 6 s
-        var pk = 60 + Math.random() * 36;          // pli de 60 à 96 deg
+        var pk = 38 + Math.random() * 28;          // pli de 38 à 66 deg (reste bien dans la case)
         c.style.setProperty("--dur", (dur / 1000).toFixed(2) + "s");
         c.style.setProperty("--pk", pk.toFixed(0) + "deg");
         c.classList.add("peel");
