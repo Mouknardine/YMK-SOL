@@ -550,11 +550,24 @@ section[id] { scroll-margin-top: calc(var(--hdr-h) + 10px); }
 .rv-anim { transition: opacity .7s var(--ease), transform .7s var(--ease); }
 .rv-in { opacity: 1; transform: none; }
 
+/* Titres : révélation mot à mot derrière un masque */
+.wrd { display: inline-block; overflow: hidden; vertical-align: top; padding: .1em .05em .22em; margin: -.1em -.05em -.22em; }
+.wrd-i { display: inline-block; transform: translateY(120%); transition: transform .85s cubic-bezier(.19,.9,.22,1); will-change: transform; }
+.words-in .wrd-i { transform: none; }
+.words-done .wrd { overflow: visible; }
+
+/* Image : dévoilée par un volet vertical (clip sur l'image, sans rogner le reste) */
+.reveal-img img { clip-path: inset(0 0 100% 0); transition: clip-path .95s var(--ease); will-change: clip-path; }
+.reveal-img.rimg-in img { clip-path: inset(0 0 0 0); }
+
 /* ============================================================
    REDUCED MOTION — fige le fond animé
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .fx-cell.peel::before { animation: none !important; opacity: 0 !important; }
   .rv, .rv-anim, .rv-in { opacity: 1 !important; transform: none !important; }
+  .wrd-i { transform: none !important; }
+  .wrd { overflow: visible !important; }
+  .reveal-img img { clip-path: none !important; transform: none !important; }
   *, *::before, *::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }

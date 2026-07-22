@@ -277,34 +277,85 @@
   }());
 
   /* ============================================================
-     ANIMATIONS LÉGÈRES : révélation au scroll (fondu + montée)
+     ANIMATIONS : titres mot à mot, images en volet, fondu au scroll
      ============================================================ */
   (function () {
     if (!("IntersectionObserver" in window)) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    var SEL = ".hero-eyebrow, .hero-title, .hero-sub, .hero-actions, .hero-figure, " +
-      ".phead-idx, .phead-title, .phead-sub, .shead, .navcard, .proj-media, " +
-      ".acc-item, .cline, .nextcta-in > *, .strip-in";
-    var els = Array.prototype.slice.call(document.querySelectorAll(SEL));
-    if (!els.length) return;
-    els.forEach(function (el) {
-      el.classList.add("rv", "rv-anim");
-      var i = 0, p = el.previousElementSibling;
-      while (p) { if (p.classList && p.classList.contains("rv")) i++; p = p.previousElementSibling; }
-      if (i) el.style.transitionDelay = Math.min(i, 6) * 70 + "ms";
-    });
+
+    /* -- Découpe un titre en mots (en préservant les balises internes) -- */
+    function splitWords(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (n) {
+        if (n.nodeType === 3) {
+          var parts = n.textContent.split(/(\s+)/);
+          var frag = document.createDocumentFragment();
+          parts.forEach(function (part) {
+            if (part === "") return;
+            if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(" ")); return; }
+            var w = document.createElement("span"); w.className = "wrd";
+            var wi = document.createElement("span"); wi.className = "wrd-i";
+            wi.textContent = part;
+            w.appendChild(wi); frag.appendChild(w);
+          });
+          node.replaceChild(frag, n);
+        } else if (n.nodeType === 1 && n.nodeName !== "BR") {
+          splitWords(n);
+        }
+      });
+    }
+
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         var el = e.target;
         io.unobserve(el);
-        el.classList.add("rv-in");
-        window.setTimeout(function () {
-          el.classList.remove("rv", "rv-anim", "rv-in");
-          el.style.transitionDelay = "";
-        }, 1300);
+        var mode = el.getAttribute("data-anim");
+        if (mode === "words") {
+          el.classList.add("words-in");
+          var wi = el.querySelectorAll(".wrd-i");
+          var last = (wi.length - 1) * 55 + 900;
+          window.setTimeout(function () { el.classList.add("words-done"); }, last);
+        } else if (mode === "img") {
+          el.classList.add("rimg-in");
+        } else {
+          el.classList.add("rv-in");
+          window.setTimeout(function () {
+            el.classList.remove("rv", "rv-anim", "rv-in");
+            el.style.transitionDelay = "";
+          }, 1300);
+        }
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
-    els.forEach(function (el) { io.observe(el); });
+
+    /* -- Titres : mot à mot -- */
+    Array.prototype.slice.call(document.querySelectorAll(
+      ".hero-title, .phead-title, .shead h2, .nextcta-title"
+    )).forEach(function (h) {
+      splitWords(h);
+      var wi = h.querySelectorAll(".wrd-i");
+      wi.forEach ? wi.forEach(setDelay) : Array.prototype.forEach.call(wi, setDelay);
+      function setDelay(el, i) { el.style.transitionDelay = (i * 55) + "ms"; }
+      h.setAttribute("data-anim", "words");
+      io.observe(h);
+    });
+
+    /* -- Image du hero : volet -- */
+    Array.prototype.slice.call(document.querySelectorAll(".hero-figure")).forEach(function (el) {
+      el.classList.add("reveal-img");
+      el.setAttribute("data-anim", "img");
+      io.observe(el);
+    });
+
+    /* -- Reste : fondu + montée, avec cascade par groupe -- */
+    var SEL = ".hero-eyebrow, .hero-sub, .hero-actions, .phead-idx, .phead-sub, " +
+      ".shead-top, .navcard, .proj-media, .acc-item, .cline, " +
+      ".nextcta-eyebrow, .nextcta-actions, .strip-in";
+    Array.prototype.slice.call(document.querySelectorAll(SEL)).forEach(function (el) {
+      el.classList.add("rv", "rv-anim");
+      var i = 0, p = el.previousElementSibling;
+      while (p) { if (p.classList && p.classList.contains("rv")) i++; p = p.previousElementSibling; }
+      if (i) el.style.transitionDelay = Math.min(i, 6) * 70 + "ms";
+      io.observe(el);
+    });
   }());
 }());
