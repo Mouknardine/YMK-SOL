@@ -188,9 +188,9 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .hero-sub { margin-top: 20px; max-width: 46ch; font-size: clamp(1.05rem, 1.7vw, 1.28rem); color: rgba(255,255,255,.88); line-height: 1.55; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 .hero-figure { display: none; position: relative; }
-.hero-figure img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border: 2px solid var(--ink); border-radius: 2px; }
-.hero-figure .tag { position: absolute; left: -2px; bottom: 22px; background: var(--ink); color: var(--surface); font-family: var(--fb); font-weight: 700; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; padding: 9px 16px; }
-.hero-figure .bignum { position: absolute; top: -14px; right: 10px; font-family: var(--fh); font-weight: 800; font-size: clamp(3rem, 6vw, 5rem); color: var(--accent-2); -webkit-text-stroke: 2px var(--ink); line-height: 1; }
+.hero-figure img { position: relative; z-index: 1; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border: 2px solid var(--ink); border-radius: 2px; }
+.hero-figure .tag { position: absolute; z-index: 2; left: -2px; bottom: 22px; background: var(--ink); color: var(--surface); font-family: var(--fb); font-weight: 700; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; padding: 9px 16px; }
+.hero-figure .bignum { position: absolute; z-index: 2; top: -14px; right: 10px; font-family: var(--fh); font-weight: 800; font-size: clamp(3rem, 6vw, 5rem); color: var(--accent-2); -webkit-text-stroke: 2px var(--ink); line-height: 1; }
 
 /* ============================================================
    ACCUEIL — bandeau chiffres / mots clés
