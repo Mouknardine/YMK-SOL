@@ -275,4 +275,36 @@
     var rt;
     window.addEventListener("resize", function () { clearTimeout(rt); rt = window.setTimeout(build, 300); }, { passive: true });
   }());
+
+  /* ============================================================
+     ANIMATIONS LÉGÈRES : révélation au scroll (fondu + montée)
+     ============================================================ */
+  (function () {
+    if (!("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    var SEL = ".hero-eyebrow, .hero-title, .hero-sub, .hero-actions, .hero-figure, " +
+      ".phead-idx, .phead-title, .phead-sub, .shead, .navcard, .proj-media, " +
+      ".acc-item, .cline, .nextcta-in > *, .strip-in";
+    var els = Array.prototype.slice.call(document.querySelectorAll(SEL));
+    if (!els.length) return;
+    els.forEach(function (el) {
+      el.classList.add("rv", "rv-anim");
+      var i = 0, p = el.previousElementSibling;
+      while (p) { if (p.classList && p.classList.contains("rv")) i++; p = p.previousElementSibling; }
+      if (i) el.style.transitionDelay = Math.min(i, 6) * 70 + "ms";
+    });
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        io.unobserve(el);
+        el.classList.add("rv-in");
+        window.setTimeout(function () {
+          el.classList.remove("rv", "rv-anim", "rv-in");
+          el.style.transitionDelay = "";
+        }, 1300);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.06 });
+    els.forEach(function (el) { io.observe(el); });
+  }());
 }());

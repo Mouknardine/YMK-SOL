@@ -544,9 +544,17 @@ section[id] { scroll-margin-top: calc(var(--hdr-h) + 10px); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* ============================================================
+   ANIMATIONS LÉGÈRES — révélation au scroll (classes posées en JS)
+   ============================================================ */
+.rv { opacity: 0; transform: translateY(18px); }
+.rv-anim { transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.rv-in { opacity: 1; transform: none; }
+
+/* ============================================================
    REDUCED MOTION — fige le fond animé
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .fx-cell.peel::before { animation: none !important; opacity: 0 !important; }
+  .rv, .rv-anim, .rv-in { opacity: 1 !important; transform: none !important; }
   *, *::before, *::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
