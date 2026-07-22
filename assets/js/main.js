@@ -159,10 +159,10 @@
           var c = cells[(Math.random() * n) | 0];
           if (!c.classList.contains("peel")) {
             c.classList.add("peel");
-            window.setTimeout(function () { c.classList.remove("peel"); }, 2600);
+            window.setTimeout(function () { c.classList.remove("peel"); }, 4600);
           }
         }
-        window.setTimeout(loop, 360 + Math.random() * 640);
+        window.setTimeout(loop, 900 + Math.random() * 1100);
       }());
     }
     var rt;
