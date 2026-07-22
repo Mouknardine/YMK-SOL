@@ -484,8 +484,8 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
   .hero-eyebrow { font-size: .68rem; }
   .hero-title { font-size: 2.7rem; line-height: 1.01; margin-top: 14px; }
   .hero-sub { font-size: 1.02rem; margin-top: 14px; max-width: none; }
-  .hero-actions { margin-top: 24px; gap: 10px; flex-direction: column; align-items: stretch; }
-  .hero-actions .btn { width: 100%; }
+  .hero-actions { margin-top: 24px; gap: 10px; flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
+  .hero-actions .btn { width: auto; padding: 12px 20px; font-size: .9rem; }
 
   /* Page headers sous-pages */
   .phead { padding-top: calc(var(--hdr-h) + 20px); padding-bottom: 20px; }
