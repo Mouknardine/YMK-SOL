@@ -162,7 +162,7 @@
             window.setTimeout(function () { c.classList.remove("peel"); }, 4600);
           }
         }
-        window.setTimeout(loop, 900 + Math.random() * 1100);
+        window.setTimeout(loop, 2600 + Math.random() * 3400);
       }());
     }
     var rt;
