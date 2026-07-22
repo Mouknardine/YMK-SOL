@@ -30,6 +30,8 @@
   /* Motif signature : chevron / parquet */
   --chev:      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='10' viewBox='0 0 15 10'%3E%3Cpath d='M1 1L5 5L1 9M7 1L11 5L7 9' fill='none' stroke='%23B07400' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
   --chev-lite: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='10' viewBox='0 0 15 10'%3E%3Cpath d='M1 1L5 5L1 9M7 1L11 5L7 9' fill='none' stroke='%23F2C97A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --chev-down:      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='18' viewBox='0 0 22 18'%3E%3Cpath d='M3 3L11 10L19 3M3 8L11 15L19 8' fill='none' stroke='%23B07400' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  --chev-down-lite: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='18' viewBox='0 0 22 18'%3E%3Cpath d='M3 3L11 10L19 3M3 8L11 15L19 8' fill='none' stroke='%23F2C97A' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 /* ---- Reset ---- */
@@ -191,6 +193,10 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .hero-figure img { position: relative; z-index: 1; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border: 2px solid var(--ink); border-radius: 2px; }
 .hero-figure .tag { position: absolute; z-index: 2; left: -2px; bottom: 22px; background: var(--ink); color: var(--surface); font-family: var(--fb); font-weight: 700; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; padding: 9px 16px; }
 .hero-figure .bignum { position: absolute; z-index: 2; top: -14px; right: 10px; font-family: var(--fh); font-weight: 800; font-size: clamp(3rem, 6vw, 5rem); color: var(--accent-2); -webkit-text-stroke: 2px var(--ink); line-height: 1; }
+/* Indicateur de défilement : un chevron qui bat doucement vers le bas (petit mouvement continu) */
+.hero-scroll { position: absolute; z-index: 3; right: var(--pad); bottom: 22px; display: flex; }
+.hero-scroll-rail { width: 24px; height: 20px; background: var(--chev-down-lite) center/contain no-repeat; animation: heroBob 1.7s ease-in-out infinite; }
+@keyframes heroBob { 0%, 100% { transform: translateY(-3px); opacity: .55; } 50% { transform: translateY(4px); opacity: 1; } }
 
 /* ============================================================
    ACCUEIL — bandeau chiffres / mots clés
@@ -463,6 +469,8 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
   .hero-sub { color: var(--ink-2); max-width: 42ch; }
   .hero .btn-glass { background: transparent; border-color: var(--ink); color: var(--ink); backdrop-filter: none; -webkit-backdrop-filter: none; }
   .hero .btn-glass:hover { background: var(--ink); color: #fff; }
+  .hero-scroll { right: auto; left: var(--pad); bottom: clamp(30px, 4vw, 54px); }
+  .hero-scroll-rail { background: var(--chev-down) center/contain no-repeat; }
 
   /* header accueil : plein (sombre) sur desktop, comme les autres pages */
   .hdr-home { background: rgba(234,234,231,.82); backdrop-filter: saturate(140%) blur(14px); -webkit-backdrop-filter: saturate(140%) blur(14px); color: var(--ink); }
@@ -605,5 +613,6 @@ body::after {
   .wrd-i { transform: none !important; }
   .wrd { overflow: visible !important; }
   .reveal-img img { clip-path: none !important; transform: none !important; }
+  .hero-scroll-rail { animation: none !important; transform: none !important; opacity: 1 !important; }
   *, *::before, *::after { transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
