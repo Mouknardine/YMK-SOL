@@ -536,7 +536,7 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
   .cline-main { font-size: 1.4rem; }
   .cline-meta { white-space: normal; }
   .contact-head .phead-sub { display: none; }
-  .contact-head h2 { font-size: 1.6rem; }
+  .contact-head h2 { font-size: 1.6rem; margin-bottom: 26px; }
 }
 @media (min-width: 720px) { .dock { display: none; } body { padding-bottom: 0; } }
 
