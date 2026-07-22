@@ -280,14 +280,16 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 /* ============================================================
    CONTACT — bloc massif
    ============================================================ */
-.clines { border-top: 2px solid var(--ink); }
-.cline { display: grid; grid-template-columns: 130px 1fr auto; align-items: center; gap: 0 24px; padding: 22px 0; border-bottom: 1px solid var(--line); transition: padding-left .25s var(--ease); }
-.cline:hover { padding-left: 14px; }
-.cline-type { font-family: var(--fb); font-weight: 700; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
-.cline-main { font-family: var(--fh); font-weight: 800; font-size: clamp(1.5rem, 3.4vw, 2.4rem); transition: color .2s; }
+.clines { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 4px 26px; box-shadow: 0 16px 38px rgba(20,20,18,.08); }
+.cline { display: grid; grid-template-columns: 132px 1fr auto; align-items: center; gap: 0 24px; padding: 22px 4px; border-bottom: 1px solid var(--line); transition: padding-left .25s var(--ease); }
+.cline:last-child { border-bottom: 0; }
+.cline:hover { padding-left: 16px; }
+.cline-type { font-family: var(--fb); font-weight: 700; font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+.cline-main { font-family: var(--fh); font-weight: 800; font-size: clamp(1.5rem, 3.4vw, 2.4rem); color: var(--ink); transition: color .2s; }
 .cline:hover .cline-main { color: var(--accent); }
-.cline-meta { font-family: var(--fb); font-weight: 500; color: var(--muted); font-size: .9rem; white-space: nowrap; }
-.cline-wa:hover .cline-main { color: #1FA855; }
+.cline-meta { font-family: var(--fb); font-weight: 500; color: #57564F; font-size: .92rem; white-space: nowrap; }
+.cline-wa .cline-main { color: #1FA855; }
+.cline-wa:hover .cline-main { color: #17903F; }
 
 /* ============================================================
    NEXT-CTA (bas de page → page suivante) — bloc noir
@@ -447,7 +449,7 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
   /* Contact 2 colonnes */
   .contact-cols { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(40px, 5vw, 88px); align-items: start; }
   .contact-cols .contact-head { position: sticky; top: calc(var(--hdr-h) + 34px); }
-  .contact-cols .clines { border-top: 2px solid var(--ink); }
+  .contact-cols .clines { padding: 4px 30px; }
 
   .ftr-in { grid-template-columns: 1.6fr 1fr 1.3fr; gap: 0 60px; }
   .ftr-bottom-in { flex-direction: row; justify-content: space-between; align-items: center; }
@@ -516,9 +518,10 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
   .nextcta-title { font-size: 1.9rem; }
 
   /* Contact */
-  .cline { grid-template-columns: 1fr auto; grid-template-rows: auto auto auto; gap: 3px 12px; padding: 20px 0; }
+  .clines { padding: 2px 18px; border-radius: 14px; }
+  .cline { grid-template-columns: 1fr auto; grid-template-rows: auto auto auto; gap: 3px 12px; padding: 18px 0; }
   .cline:hover { padding-left: 0; }
-  .cline-type { grid-column: 1; grid-row: 1; }
+  .cline-type { grid-column: 1; grid-row: 1; margin-bottom: 2px; }
   .cline-main { grid-column: 1; grid-row: 2; font-size: 1.5rem; }
   .cline-meta { grid-column: 1; grid-row: 3; white-space: normal; }
 }
