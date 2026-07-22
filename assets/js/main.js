@@ -268,33 +268,33 @@
     }
 
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      /* Ambiance : quelques dalles se plient au hasard */
+      /* Ambiance : des dalles se plient au hasard (assez fréquent pour se voir partout) */
       (function loop() {
         var n = cells.length;
         if (n) peelCell(cells[(Math.random() * n) | 0]);
-        window.setTimeout(loop, 950 + Math.random() * 1350);
+        window.setTimeout(loop, 450 + Math.random() * 700);
       }());
 
-      /* Interactif : sillage sous le curseur (desktop) */
-      if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
-        var mx = 0, my = 0, lastIdx = -1, lastT = 0, queued = false;
-        function applyCursor() {
-          queued = false;
-          var col = (mx / CELL) | 0, row = (my / CELL) | 0;
-          if (col < 0 || col >= cols) return;
-          var idx = row * cols + col;
-          if (idx === lastIdx) return;
-          lastIdx = idx;
-          var now = (window.performance && performance.now) ? performance.now() : Date.now();
-          if (now - lastT < 55) return;
-          lastT = now;
-          peelCell(cells[idx]);
-        }
-        window.addEventListener("mousemove", function (e) {
-          mx = e.clientX; my = e.clientY;
-          if (!queued) { queued = true; requestAnimationFrame(applyCursor); }
-        }, { passive: true });
+      /* Interactif : sillage sous le curseur (souris) ET sous le doigt (tactile) */
+      var mx = 0, my = 0, lastIdx = -1, lastT = 0, queued = false;
+      function applyPointer() {
+        queued = false;
+        var col = (mx / CELL) | 0, row = (my / CELL) | 0;
+        if (col < 0 || col >= cols) return;
+        var idx = row * cols + col;
+        if (idx === lastIdx) return;
+        lastIdx = idx;
+        var now = (window.performance && performance.now) ? performance.now() : Date.now();
+        if (now - lastT < 55) return;
+        lastT = now;
+        peelCell(cells[idx]);
       }
+      function schedule() { if (!queued) { queued = true; requestAnimationFrame(applyPointer); } }
+      window.addEventListener("mousemove", function (e) { mx = e.clientX; my = e.clientY; schedule(); }, { passive: true });
+      window.addEventListener("touchmove", function (e) {
+        var t = e.touches && e.touches[0]; if (!t) return;
+        mx = t.clientX; my = t.clientY; schedule();
+      }, { passive: true });
     }
     var rt;
     window.addEventListener("resize", function () { clearTimeout(rt); rt = window.setTimeout(build, 300); }, { passive: true });
