@@ -6,6 +6,15 @@
   var y = document.getElementById("year");
   if (y) y.textContent = new Date().getFullYear();
 
+  /* Signature verticale sur la marge (identité atelier) */
+  if (!document.querySelector(".edge-sig")) {
+    var sig = document.createElement("div");
+    sig.className = "edge-sig";
+    sig.setAttribute("aria-hidden", "true");
+    sig.innerHTML = "YMK SOL <b>&raquo;</b> POSE DE SOL <b>&raquo;</b> CANTON DE VAUD";
+    document.body.appendChild(sig);
+  }
+
   /* Header : état au scroll */
   var hdr = document.querySelector(".hdr");
   if (hdr) {
