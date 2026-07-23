@@ -16,8 +16,10 @@
   --line:  rgba(20,18,14,.13);
   --line-2:rgba(20,18,14,.26);
 
-  --accent:   #F08400;  /* orange du logo (texte/accents sur blanc) */
-  --accent-2: #FCD818;  /* jaune du logo (aplats) */
+  --accent:   #F08400;  /* orange du logo (petits accents) */
+  --accent-2: #FCD818;  /* jaune du logo (petits éléments) */
+  --accent-soft: #DC6D06;  /* orange adouci (grands titres) */
+  --fill-soft:   #F2B70C;  /* jaune adouci (aplats/boutons) */
 
   --fh: "Clash Display", system-ui, -apple-system, sans-serif;
   --fb: "Supreme", system-ui, -apple-system, sans-serif;
@@ -88,10 +90,10 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: .55em; font-family: var(--fb); font-weight: 700; font-size: .95rem; white-space: nowrap; padding: 13px 24px; border-radius: 2px; cursor: pointer; border: 1.5px solid transparent; transition: background .25s, color .25s, border-color .25s, transform .15s; }
 .btn:active { transform: translateY(1px); }
 .btn-lg { padding: 16px 30px; font-size: 1rem; }
-.btn-accent { background: var(--accent-2); color: var(--ink); }
+.btn-accent { background: var(--fill-soft); color: var(--ink); }
 .btn-accent:hover { background: var(--ink); color: var(--surface); }
 .btn-dark { background: var(--ink); color: var(--surface); }
-.btn-dark:hover { background: var(--accent-2); color: var(--ink); }
+.btn-dark:hover { background: var(--fill-soft); color: var(--ink); }
 .btn-line { border-color: var(--ink); color: var(--ink); background: transparent; }
 .btn-line:hover { background: var(--ink); color: var(--surface); }
 .btn-wa { background: #1FA855; color: #fff; }
@@ -110,7 +112,7 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .shead-label { font-family: var(--fb); font-weight: 700; font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; }
 .shead-idx { font-family: var(--fh); font-weight: 800; font-size: .92rem; color: var(--accent); }
 .shead h2 { font-size: clamp(2.1rem, 5.6vw, 4rem); max-width: 20ch; letter-spacing: -.025em; line-height: 1.0; }
-.shead h2 .amber { color: var(--accent); }
+.shead h2 .amber { color: var(--accent-soft); }
 .shead-sub { margin-top: 16px; max-width: 56ch; color: var(--ink-2); font-size: 1.02rem; line-height: 1.65; }
 
 /* ============================================================
@@ -150,13 +152,13 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .btn.hdr-cta {
   font-family: var(--fh); font-weight: 700; font-size: .9rem; letter-spacing: .01em;
   padding: 11px 20px; gap: .55em; color: var(--ink); border-radius: 2px;
-  border: 1.5px solid var(--ink); background-color: var(--accent-2);
-  background-image: linear-gradient(90deg, var(--ink) 0 50%, var(--accent-2) 50% 100%);
+  border: 1.5px solid var(--ink); background-color: var(--fill-soft);
+  background-image: linear-gradient(90deg, var(--ink) 0 50%, var(--fill-soft) 50% 100%);
   background-size: 200% 100%; background-position: 100% 0;
   transition: background-position .5s cubic-bezier(.76,0,.16,1), color .35s ease;
 }
 .btn.hdr-cta::after { content: "\2192"; font-size: 1.05em; transition: transform .3s var(--ease); }
-.btn.hdr-cta:hover { background-position: 0 0; color: var(--accent-2); }
+.btn.hdr-cta:hover { background-position: 0 0; color: var(--fill-soft); }
 .btn.hdr-cta:hover::after { transform: translateX(4px); }
 .burger { width: 40px; height: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: transparent; border: none; cursor: pointer; margin-right: -8px; }
 .bline { width: 24px; height: 2px; background: var(--ink); transition: transform .35s var(--ease), opacity .2s; }
@@ -241,7 +243,7 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
 .phead { padding-top: calc(var(--hdr-h) + clamp(40px, 7vw, 90px)); padding-bottom: clamp(28px, 4vw, 48px); }
 .phead-idx { display: flex; align-items: center; gap: .6em; font-family: var(--fb); font-weight: 700; font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); padding-bottom: 16px; border-bottom: 1.5px solid var(--ink); }
 .phead-title { font-size: clamp(3rem, 12vw, 7rem); letter-spacing: -.045em; margin-top: 18px; line-height: .92; }
-.phead-title .amber { color: var(--accent); }
+.phead-title .amber { color: var(--accent-soft); }
 .phead-sub { margin-top: 22px; max-width: 56ch; font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--ink-2); line-height: 1.65; }
 
 /* ============================================================
@@ -462,7 +464,7 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
   .hero-eyebrow { color: var(--accent); }
   .hero-eyebrow::before { background: var(--accent-2); }
   .hero-title { color: var(--ink); font-size: clamp(3rem, 5.4vw, 5.6rem); margin-top: 20px; }
-  .hero-title .amber { color: var(--accent); }
+  .hero-title .amber { color: var(--accent-soft); }
   .hero-sub { color: var(--ink-2); max-width: 42ch; }
   .hero .btn-glass { background: transparent; border-color: var(--ink); color: var(--ink); backdrop-filter: none; -webkit-backdrop-filter: none; }
   .hero .btn-glass:hover { background: var(--ink); color: #fff; }
