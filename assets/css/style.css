@@ -55,10 +55,7 @@ h1, h2, h3, h4 { font-family: var(--fh); font-weight: 800; line-height: 1; lette
    ============================================================ */
 .fx {
   position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
-  background:
-    radial-gradient(58vmax 46vmax at 8% -8%, rgba(252,216,24,.30), transparent 58%),
-    radial-gradient(52vmax 52vmax at 104% 108%, rgba(240,132,0,.20), transparent 58%),
-    var(--paper);
+  background: var(--paper);
 }
 /* grillage : lignes dessinées en fond (derrière les cases), jamais par-dessus */
 .fx-grid {
